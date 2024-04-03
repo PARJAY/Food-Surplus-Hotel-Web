@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>Welcome to Food Surplus Hotel Web</title>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/10.10.0/firebase-app-compat.js"></script>
@@ -41,23 +41,42 @@
   <body>
     <div id="message">
       <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
+      <h1>Welcome to Food Surplus Hotel Web</h1>
       <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
       <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
 
       <img id="get-image-from-firebase-storage" src="" alt="">
+      <img src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600">
     </div>
     <p id="load">Firebase SDK Loading&hellip;</p>
 
     
-    <script>
+    <script type="module"`>
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
+        authDomain: "nofwa-indonesia.firebaseapp.com",
+        projectId: "nofwa-indonesia",
+        storageBucket: "nofwa-indonesia.appspot.com",
+        messagingSenderId: "608371446284",
+        appId: "1:608371446284:web:ec6af0cba6c012bf599429",
+        measurementId: "G-HE92R15VSY"
+      };
+
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
         // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
         // // The Firebase SDK is initialized and available here!
         //
         // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        firebase.database().ref('/path/to/ref').on('value', snapshot => { });
         // firebase.firestore().doc('/foo/bar').get().then(() => { });
         // firebase.functions().httpsCallable('yourFunction')().then(() => { });
         // firebase.messaging().requestPermission().then(() => { });
@@ -67,7 +86,7 @@
         // firebase.performance(); // call to activate
         //
         // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
+        
         try {
           let app = firebase.app();
           let features = [
@@ -89,9 +108,15 @@
           
         }
       });
+
+      let imageView = document.getElementById('get-image-from-firebase-storage');
+
+      firebase.storage().ref('WhatsApp Image 2023-12-09 at 20.32.55.jpeg').getDownloadURL().then( imgUrl => {
+          imageView.src = imgUrl;
+      })
     </script>
 
     <script src="script.js"></script>
-    
+
   </body>
 </html>
