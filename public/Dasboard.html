@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./boostrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./style.css">
     <title>Welcome to Food Surplus Hotel Web</title>
 
     <!-- update the version number as needed -->
@@ -15,17 +17,17 @@
     <script defer src="/__/firebase/10.10.0/firebase-functions-compat.js"></script>
     <script defer src="/__/firebase/10.10.0/firebase-messaging-compat.js"></script>
     <script defer src="/__/firebase/10.10.0/firebase-storage-compat.js"></script>
-    <!-- <script defer src="/__/firebase/10.10.0/firebase-analytics-compat.js"></script>
+    <!-- <script defer src="/__/firebase/10.10.0/firebase-analyti cs-compat.js"></script>
     <script defer src="/__/firebase/10.10.0/firebase-remote-config-compat.js"></script>
     <script defer src="/__/firebase/10.10.0/firebase-performance-compat.js"></script> -->
-    <!-- 
+    <!--    `   
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <!-- <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script> -->
 
-    <style media="screen">
+    <!-- <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
       #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
       #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
@@ -38,32 +40,70 @@
         body, #message { margin-top: 0; background: white; box-shadow: none; }
         body { border-top: 16px solid #ffa100; }
       }
-    </style>
+    </style> -->
   </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Welcome to Food Surplus Hotel Web</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+  <body class="body">
 
-      <img id="get-image-from-firebase-storage" width="500" height="600">
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <!-- Navbar  -->
+    <nav class="navbar navbar-expand-md fixed-top">
+      <a class="nav-item nav-link" style="margin: 0 21px; font-size: 30px;" href="#">
+        Nama Hotel
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="navbarNav">
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-4 flex-grow-0" style="width: 500px;" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <button class="btn btn-primary my-2 my-sm-0" style="margin-left: 10px;" type="submit">Search</button>
+        <div class="containe" style="margin-left: 550px;">
+          <div class="row">
+            <div class="col-auto">
+              <div class="circle">
+                <img src="gambar.jpg" alt="Gambar">
+              </div>
+            </div>
+            <div class="col">
+              <a class="nav-item nav-link" href="./Profile.html">Nama admin</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-    <span id="user-list">
-      
-    </span>
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="circle">
+    <img src="gambar.jpg" alt="Gambar">
+  </div>
+  <a class="nav-item nav-link" style="margin-bottom: 30px; font-size: 30px;" href="#">Nama admin</a>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link nav-hover" href="./Dasbooard.html">Dasboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link nav-hover" href="./MengirimBerkas.html">Mengirim Berkas</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link nav-hover" href="./DaftarKatalis.html">Daftar Katalis</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link nav-hover" href="./DaftarKurir.html">Daftar Kurir</a>
+    </li>
+    <li class="nav-item" style="margin-top: 91px;" >
+      <a class="nav-link logout-link" href="#">Logout</a>
+    </li>
+  </ul>
+</div>
 
-    <form id="add-user-form" >
-      <input type="text" name="name" placeholder="User name">
-      <button>Add User</button>
-    </form>
+<!-- Content -->
+<div class="content">
+<div class="kotak">
+  <h2>Halo......</h2>
+</div>
+</div>
 
-    <form id="update-user-name-form" >
-      <input type="text" name="name" placeholder="User name">
-      <button>Update User Name</button>
-    </form>
     
     <script type="module">
       // Your web app's Firebase configuration
@@ -123,6 +163,7 @@
         }
       });
     </script>
+    <script src="./boostrap/js/bootstrap.js"></script>
 
     <script type="module" src="script.js" defer></script>
 

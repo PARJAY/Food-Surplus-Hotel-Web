@@ -1,0 +1,150 @@
+.body{
+    margin: 0;
+    padding: 0;
+    background-color: #FFF9C9;
+}
+
+.navbar {
+  background-color: #862B0D;
+  color: #FFF9C9;
+  height: 80px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  height: 100%;
+  width: 200px;
+  background-color: #862B0D;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.sidebar ul li a{
+  font-size: 23;
+}
+
+.sidebar .circle {
+  width: 110px;
+  height: 110px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  overflow: hidden;
+  margin-top: 60px;
+}
+
+.sidebar .circle img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%;
+}
+
+.sidebar a {
+  color: #FFF9C9;
+}
+
+.sidebar .nav-link {
+  margin-bottom: 27px;
+  font-size: 20px;
+  font-weight: 500;
+}
+  
+.content {
+  margin-top: 105px;
+  margin-left: 225px; /* Sesuaikan dengan lebar sidebar */
+  padding: 20px;
+}
+
+.containe .circle{
+  width: 70px;
+  height: 70px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.containe .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nyala{
+  background-color: red;
+}
+
+.nav-hover{
+  border-radius: 20px;
+  margin: 0 5px;
+}
+
+.nav-hover:hover {
+  background-color: yellow;
+}
+
+.logout-link {
+  color: #000000;
+  font-weight: bold;
+  border-radius: 20px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.logout-link:hover {
+  background-color: #ff0000; /* Ubah warna latar belakang saat hover */
+}
+
+.kotak {
+  width: 1240px;
+  height: 550px;
+  border-radius: 10px;
+  background-color: #D9D9D9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kotak h2{
+  padding: 30px;
+}
+
+#tabelData th {
+  background-color: #000000; /* Warna latar belakang */
+  color: #ffffff; /* Warna teks */
+}
+
+.status-circle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; /* Membuat lingkaran */
+  margin-right: 5px; /* Jarak antara lingkaran dan teks */
+}
+
+.status-cell {
+  text-align: center;
+  vertical-align: middle; /* Mengatur posisi vertikal ke tengah */
+}
+
+.status-mengirim {
+  background-color: #00ff00; /* Warna hijau untuk status mengirim */
+}
+
+.status-Mengagur {
+  background-color: #ff2600; /* Warna merah untuk status gangguan */
+}
+
+.status-off {
+  background-color: #636363; /* Warna kuning untuk status off */
+}
