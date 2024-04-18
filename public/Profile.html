@@ -9,7 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <title>Dasboard</title>
+    <title>Profile</title>
   </head>
   <body class="body">
 
@@ -65,11 +65,67 @@
   
   <!-- Content -->
     <div class="content">
-      <div class="kotak">
-        <h2>Halo......</h2>
+      <div class="containe" style="margin-bottom: 10px;">
+        <div class="row">
+          <div class="col">
+            <h2>Profile Akun Anda</h2>
+          </div>
+        </div>
+      </div>
+      <div class="kotak-profile">
+        <div class="profile">
+          <div class="update d-flex justify-content-start align-items-center">
+              <h5 class="m-2">Update Profile Anda</h5>
+          </div>
+          <div class="col-auto mt-3 mb-3 d-flex justify-content-center">
+            <div class="circle">
+              <img src="gambar.jpg" alt="">
+            </div>
+          </div>
+          <div class="row pt-2 justify-content-end">
+            <div class="col-auto">
+              <h5 class="">Email Hotel:</h5>
+            </div>
+            <div class="col-auto">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="form" style="width: 420px; border: 1px solid black;">
+                </div>
+            </div>
+          </div>
+          <div class="row pt-2 justify-content-end">
+            <div class="col-auto">
+              <h5 class="">Name Hotel:</h5>
+            </div>
+            <div class="col-auto">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="form" style="width: 420px; border: 1px solid black;">
+                </div>
+            </div>
+          </div>
+          <div class="row pt-2 justify-content-end">
+            <div class="col-auto">
+              <h5 class="">Alamat Hotel:</h5>
+            </div>
+            <div class="col-auto">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="form" style="width: 420px; border: 1px solid black;">
+                </div>
+            </div>
+          </div>
+          <div class="row pt-2 justify-content-end">
+            <div class="col-auto">
+              <h5 class="">No Telepon:</h5>
+            </div>
+            <div class="col-auto">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="form" style="width: 420px; border: 1px solid black;">
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-      
+    
     <script src="boostrap/js/bootstrap.js"></script>
 
   </body>

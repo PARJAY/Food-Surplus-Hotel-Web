@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
@@ -9,8 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <title>Daftar Kurir</title>
-  </head>
+</head>
   <body class="body">
 
   <!-- Navbar  -->
@@ -62,35 +61,37 @@
         </li>
       </ul>
     </div>
-      
+    
   <!-- Content -->
     <div class="content">
       <div class="containe" style="margin-bottom: 10px;">
         <div class="row">
           <div class="col">
-            <h2>Daftar Kurir</h2>
+            <h2>History Transaksi</h2>
           </div>
           <div class="col-auto">
-            <button class="btn-custom" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#modalTambah">Tambah Kurir</button>
+            <button class="btn-custom" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#modalTambah">Tambah Transaksi</button>
           </div>
         </div>
       </div>
-      <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid black;">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Id Hotel</th>
-            <th>Nama Kurir</th>
-            <th>Alamat</th>
-            <th>No Telepon Kurir</th>
-            <th>Statur Kurir</th>
-            <th>#</th>
-          </tr>
-        </thead>
-        <tbody id="data">
-        
-        </tbody>
-      </table>
+        <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid black;">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Id Hotel</th>
+                <th>Nama Transaksi</th>
+                <th>Alamat</th>
+                <th>Menu</th>
+                <th>Jumlah Barang</th>
+                <th>Harga</th>
+                <th>Jumlah Harga</th>
+                <th>#</th>
+              </tr>
+            </thead>
+            <tbody id="data">
+              
+            </tbody>
+        </table>
     </div>
 
   <!-- Tambah modal -->
@@ -99,30 +100,34 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kurir</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Transaksi</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form>
                 <div class="form-group">
-                  <label>Nama Kurir:</label>
-                  <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama Kurir">
+                  <label>Nama:</label>
+                  <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama">
+                </div>
+                <div class="form-group">
+                  <label>Menu:</label>
+                  <input type="text" class="form-control" id="menu" placeholder="Menu">
                 </div>
                 <div class="form-group">
                   <label>Alamat:</label>
-                  <input type="text" class="form-control" id="alamat" placeholder="Alamat">
+                  <input type="text" class="form-control" id="alamat" placeholder="Masukkan Alamat">
                 </div>
                 <div class="form-group">
-                  <label>No Telepon Kurir:</label>
-                  <input type="number" class="form-control" id="phoneNumber" placeholder="Masukkan Stok">
+                  <label>Jumlah:</label>
+                  <input type="text" class="form-control" id="jumlah" placeholder="Masukkan Jumlah">
                 </div>
                 <div class="form-group">
-                  <label for="statusKurir">Status Kurir:</label>
-                  <select class="form-control" id="statusKurir">
-                      <option value="Mengagur">Mengagur</option>
-                      <option value="Bertugas">Bertugas</option>
-                      <option value="off">off</option>
-                  </select>
+                  <label>Harga:</label>
+                  <input type="number" class="form-control" id="harga" placeholder="Masukkan Harga">
+                </div>
+                <div class="form-group">
+                  <label>Jumlah Harga:</label>
+                  <input type="number" class="form-control" id="jumlahHarga" placeholder="Masukkan Jumlah Harga">
                 </div>
               </form>
             </div>
@@ -132,7 +137,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>  
 
   <!-- Edit modal -->
     <div class="modal-dialog modal-dialog-scrollable">
@@ -140,31 +145,35 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Kurir</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Transaksi</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <input type="hidden" id="id">
               <form>
                 <div class="form-group">
-                  <label>Nama Kurir:</label>
-                  <input type="text" class="form-control" id="nama_update" placeholder="Masukkan Nama Kurir">
+                  <label>Nama:</label>
+                  <input type="text" class="form-control" id="nama_update" placeholder="Masukkan Nama">
+                </div>
+                <div class="form-group">
+                  <label>Menu:</label>
+                  <input type="text" class="form-control" id="menu_update" placeholder="Menu">
                 </div>
                 <div class="form-group">
                   <label>Alamat:</label>
-                  <input type="text" class="form-control" id="alamat_update" placeholder="Alamat">
+                  <input type="text" class="form-control" id="alamat_update" placeholder="Masukkan Alamat">
                 </div>
                 <div class="form-group">
-                  <label>No Telepon Kurir:</label>
-                  <input type="number" class="form-control" id="phoneNumber_update" placeholder="Masukkan Stok">
+                  <label>Jumlah:</label>
+                  <input type="text" class="form-control" id="jumlah_update" placeholder="Masukkan Jumlah">
                 </div>
                 <div class="form-group">
-                  <label for="statusKurir">Status Kurir:</label>
-                  <select class="form-control" id="statusKurir_update">
-                      <option value="Mengagur">Mengagur</option>
-                      <option value="Bertugas">Bertugas</option>
-                      <option value="off">off</option>
-                  </select>
+                  <label>Harga:</label>
+                  <input type="number" class="form-control" id="harga_update" placeholder="Masukkan Harga">
+                </div>
+                <div class="form-group">
+                  <label>Jumlah Harga:</label>
+                  <input type="number" class="form-control" id="jumlahHarga_update" placeholder="Masukkan Jumlah Harga">
                 </div>
               </form>
             </div>
@@ -177,6 +186,7 @@
     </div>  
 
     <script>
+
       const firebaseConfig = {
         apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
         authDomain: "nofwa-indonesia.firebaseapp.com",
@@ -187,32 +197,33 @@
         measurementId: "G-WJSVLG5HW5"
       };
 
-      // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 
       const db = firebase.firestore();
 
-      db.collection("Kurir").onSnapshot(snapshot =>{
+      db.collection("TransaksiAdmin").onSnapshot(snapshot =>{
         snapshot.docChanges();
         getData();
       })
 
       async function getData() {
         document.getElementById('data').innerHTML = '';
-        const Admin = await db.collection("Kurir").get();
-        Admin.docs.forEach((krr, i) => {
-          console.log(krr.id);
+        const Admin = await db.collection("TransaksiAdmin").get();
+        Admin.docs.forEach((tks, i) => {
+          console.log(tks.id);
           document.getElementById('data').innerHTML += `
             <tr> 
-              <td>${i+1}</td>
+              <td>${i+1}</td> 
               <td>12345</td>
-              <td>${krr.data().nama}</td> 
-              <td>${krr.data().alamat}</td> 
-              <td>${krr.data().phoneNumber}</td> 
-              <td>${krr.data().statusKurir}</td>
+              <td>${tks.data().nama}</td> 
+              <td>${tks.data().menu}</td> 
+              <td>${tks.data().alamat}</td> 
+              <td>${tks.data().jumlah}</td>
+              <td>${tks.data().harga}</td>
+              <td>${tks.data().jumlahHarga}</td>
               <td class="button-container">
-                <button class="btn btn-warning editData mb-2" data-id="${krr.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
-                <button class="btn btn-danger hapusData" data-id="${krr.id}">Hapus</button>
+                <button class="btn btn-warning editData mb-2" data-id="${tks.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
+                <button class="btn btn-danger hapusData" data-id="${tks.id}">Hapus</button>
               </td>
             </tr>
           `;
@@ -220,11 +231,13 @@
       }
 
       document.getElementById('updateData').addEventListener('click', function(){
-        db.collection("Kurir").doc(document.getElementById('id').value).update({
-          nama: document.getElementById('nama_update').value,
+        db.collection("TransaksiAdmin").doc(document.getElementById('id').value).update({
+          nama: document.getElementById('nama_update').value, 
+          menu: document.getElementById('menu_update').value,
           alamat: document.getElementById('alamat_update').value,
-          phoneNumber: document.getElementById('phoneNumber_update').value,
-          statusKurir: document.getElementById('statusKurir_update').value
+          jumlah: document.getElementById('jumlah_update').value,
+          harga: document.getElementById('harga_update').value,
+          jumlahHarga: document.getElementById('jumlahHarga_update').value
         }).then(() => {
             console.log("Document successfully updated!");
             var modal = document.getElementById('modalUpdate');
@@ -238,7 +251,7 @@
       document.getElementById('data').addEventListener('click', function(e) {
         const id = e.target.dataset.id;
         if (e.target.classList.contains('hapusData')) {
-          db.collection("Kurir").doc(id).delete().then(() => {
+          db.collection("TransaksiAdmin").doc(id).delete().then(() => {
               console.log("Document successfully deleted!");
             }).catch((error) => {
               console.error("Error removing document: ", error);
@@ -246,37 +259,41 @@
           }
 
         if (e.target.classList.contains('editData')) {
-            db.collection("Kurir").doc(id).get().then((doc) => {
+            db.collection("TransaksiAdmin").doc(id).get().then((doc) => {
               if (doc.exists) {
                 console.log(doc.data());
                 document.getElementById('id').value = doc.id;
-                document.getElementById('nama_update').value = doc.data().nama;
-                document.getElementById('alamat_update').value = doc.data().alamat; 
-                document.getElementById('phoneNumber_update').value = doc.data().phoneNumber; 
-                document.getElementById('statusKurir_update').value = doc.data().statusKurir;
+                document.getElementById('nama_update').valu = doc.data().nama;
+                document.getElementById('menu_update').value = doc.data().menu;
+                document.getElementById('alamat_update').value = doc.data().alamat;
+                document.getElementById('jumlah_update').value = doc.data().jumlah;
+                document.getElementById('harga_update').value = doc.data().harga;
+                document.getElementById('jumlahHarga_update').value =doc.data().jumlahHarga;
               } else {
-                  console.log("No such document!");
+                console.log("No such document!");
                 }
             });
           }
         })
 
         document.getElementById('tambahData').addEventListener('click', function(){ 
-
-          db.collection("Kurir").add({
-            nama: document.getElementById('nama').value,
-            alamat: document.getElementById('alamat').value,
-            phoneNumber: document.getElementById('phoneNumber').value,
-            statusKurir: document.getElementById('statusKurir').value
-         })
+        db.collection("TransaksiAdmin").add({
+          nama: document.getElementById('nama').value,
+          menu: document.getElementById('menu').value,
+          alamat: document.getElementById('alamat').value,
+          jumlah: document.getElementById('jumlah').value,
+          hargha: document.getElementById('harga').value,
+          jumlahHarga: document.getElementById('jumlahHarga').value,
+        })
           .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
             
             document.getElementById('nama').value = '';
+            document.getElementById('menu').value = '';
             document.getElementById('alamat').value = '';
-            document.getElementById('phoneNumber').value = '';
-            document.getElementById('statusKurir').value = '';
-            
+            document.getElementById('jumlah').value = '';
+            document.getElementById('harga').value = '';
+            document.getElementById('jumlahHarga').value = '';
   
             var modal = document.getElementById('modalTambah');
             var modalInstance = bootstrap.Modal.getInstance(modal);
@@ -288,6 +305,9 @@
         })
 
     </script>
-  <script src="boostrap/js/bootstrap.js"></script>
+
+
+  <script src="/public/boostrap/js/bootstrap.js"></script>
+
   </body>
 </html>

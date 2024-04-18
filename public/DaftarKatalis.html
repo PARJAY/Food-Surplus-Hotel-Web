@@ -3,202 +3,355 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./boostrap/css/bootstrap.css">
-    <link rel="stylesheet" href="./style.css">
-    <title>Welcome to Food Surplus Hotel Web</title>
-
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.10.0/firebase-app-compat.js"></script>
-
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.10.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-storage-compat.js"></script>
-    <!-- <script defer src="/__/firebase/10.10.0/firebase-analyti cs-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-performance-compat.js"></script> -->
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-    <!-- <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script> -->
-
-    <!-- <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style> -->
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <title>Daftar Katalis</title>
   </head>
   <body class="body">
 
-    <!-- Navbar  -->
+  <!-- Navbar  -->
     <nav class="navbar navbar-expand-md fixed-top">
       <a class="nav-item nav-link" style="margin: 0 21px; font-size: 30px;" href="#">
         Nama Hotel
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <div class="navbar-collapse collapse" id="navbarNav">
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-4 flex-grow-0" style="width: 500px;" type="search" placeholder="Search" aria-label="Search">
         </form>
-        <button class="btn btn-primary my-2 my-sm-0" style="margin-left: 10px;" type="submit">Search</button>
-        <div class="containe" style="margin-left: 550px;">
+        <button class="btn-search" type="submit">Search</button>
+        <div class="containe" style="margin-left: 500px;">
           <div class="row">
+            <div class="col">
+              <a class="nav-item nav-link" href="Profile.html">Nama admin</a>
+            </div>
             <div class="col-auto">
               <div class="circle">
-                <img src="gambar.jpg" alt="Gambar">
+                <img src="gambar.jpg" alt="">
               </div>
-            </div>
-            <div class="col">
-              <a class="nav-item nav-link" href="./Profile.html">Nama admin</a>
             </div>
           </div>
         </div>
       </div>
     </nav>
-
-<!-- Sidebar -->
-<div class="sidebar">
-  <div class="circle">
-    <img src="gambar.jpg" alt="Gambar">
-  </div>
-  <a class="nav-item nav-link" style="margin-bottom: 30px; font-size: 30px;" href="#">Nama admin</a>
-  <ul class="nav flex-column">
-    <li class="nav-item">
-      <a class="nav-link nav-hover" href="./Dasbooard.html">Dasboard</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link nav-hover" href="./MengirimBerkas.html">Mengirim Berkas</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link nav-hover" href="./DaftarKatalis.html">Daftar Katalis</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link nav-hover" href="./DaftarKurir.html">Daftar Kurir</a>
-    </li>
-    <li class="nav-item" style="margin-top: 91px;" >
-      <a class="nav-link logout-link" href="#">Logout</a>
-    </li>
-  </ul>
-</div>
-
-<!-- Content -->
-<div class="content">
-  <h2>Dafta Katalis</h2>
-  <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid black">
-      <thead>
-        <tr>
-          <th scope="col" id="harga">Id</th>
-          <th scope="col" id="nama">Nama</th>
-          <th scope="col" id="komposisi">Komposisi</th>
-          <th scope="col" id="jumlah">Jumlah</th>
-          <th scope="col" id="harga">Harga</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Data dimasukkan di sini -->
-        <tr>
-          <td>Produk A</td>
-          <td>Komposisi A</td>
-          <td>10</td>
-          <td>100 Porsi</td>
-          <td>Rp. 10.000,00</td>
-        </tr>
-        <tr>
-          <td>Produk A</td>
-          <td>Komposisi A</td>
-          <td>10</td>
-          <td>100 Porsi</td>
-          <td>Rp. 10.000,00</td>
-        </tr>
-         <tr>
-          <td>Produk A</td>
-          <td>Komposisi A</td>
-          <td>10</td>
-          <td>100 Porsi</td>
-          <td>Rp. 10.000,00</td>
-        </tr>
-      </tbody>
-  </table>
-</div>
-
+  
+  <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="circle">
+        <img src="gambar.jpg" alt="Gambar">
+      </div>
+      <a class="nav-item nav-link nama" style="margin-bottom: 30px; font-size: 30px;" href="#">Nama admin</a>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="index.html">Dasboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Kurir</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
+        </li>
+        <li class="nav-item" style="margin-top: 91px;" >
+          <a class="nav-link logout-link" href="Login.html">Logout</a>
+        </li>
+      </ul>
+    </div>
     
-    <script type="module">
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  <!-- Content -->
+    <div class="content">
+      <div class="containe" style="margin-bottom: 10px;">
+        <div class="row">
+          <div class="col">
+            <h2>Daftar Katalis</h2>
+          </div>
+          <div class="col-auto">
+            <button class="btn-custom" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#modalTambah">Tambah</button>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid #000000">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Id Hotel</th>
+                    <th>Gambar</th>
+                    <th>Nama Katalis</th>
+                    <th>Stok Katalis</th>
+                    <th>Komposisi</th>
+                    <th>Harga Awal</th>
+                    <th>Harga Jual</th>
+                    <th>Porsi Jual</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+  <!-- Tambah modal -->
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Katalis</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label>Id Hotel:</label>
+                  <input type="text" class="form-control" id="idHotel" placeholder="Masukkan Id Hotel">
+                </div>
+                <div class="form-group">
+                  <label>Gambar:</label>
+                  <input type="image" class="form-control" id="img" placeholder="Gambar">
+                </div>
+                <div class="form-group">
+                  <label>Nama Katalis:</label>
+                  <input type="text" class="form-control" id="namaKatalis" placeholder="Masukkan Nama katalis">
+                </div>
+                <div class="form-group">
+                  <label>Stok Katalis:</label>
+                  <input type="text" class="form-control" id="stok" placeholder="Masukkan Stok">
+                </div>
+                <div class="form-group">
+                  <label>Komposisi:</label>
+                  <input type="text" class="form-control" id="komposisi" placeholder="Masukkan Komposisi">
+                </div>
+                <div class="form-group">
+                  <label>Harga Awal:</label>
+                  <input type="number" class="form-control" id="hargaAwal" placeholder="Masukkan Harga Awal">
+                </div>
+                <div class="form-group">
+                  <label>Harga Jual:</label>
+                  <input type="number" class="form-control" id="hargaJual" placeholder="Masukkan Harga Jual">
+                </div>
+                <div class="form-group">
+                  <label>Porsi Jual:</label>
+                  <input type="text" class="form-control" id="porsiJual" placeholder="Masukkan Porsi Jual">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="tambahData">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+  <!-- Edit modal -->
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Katalis</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="id">
+              <form>
+                <div class="form-group">
+                  <label>Id Hotel:</label>
+                  <input type="text" class="form-control" id="idHotel_update" placeholder="Masukkan Id Hotel">
+                </div>
+                <div class="form-group">
+                  <label>Gambar:</label>
+                  <input type="image" class="form-control" id="img_update" placeholder="Gambar">
+                </div>
+                <div class="form-group">
+                  <label>Nama Katalis:</label>
+                  <input type="text" class="form-control" id="namaKatalis_update" placeholder="Masukkan Nama katalis">
+                </div>
+                <div class="form-group">
+                  <label>Stok Katalis:</label>
+                  <input type="text" class="form-control" id="stok_update" placeholder="Masukkan Stok">
+                </div>
+                <div class="form-group">
+                  <label>Komposisi:</label>
+                  <input type="text" class="form-control" id="komposisi_update" placeholder="Masukkan Komposisi">
+                </div>
+                <div class="form-group">
+                  <label>Harga Awal:</label>
+                  <input type="number" class="form-control" id="hargaAwal_update" placeholder="Masukkan Harga Awal">
+                </div>
+                <div class="form-group">
+                  <label>Harga Jual:</label>
+                  <input type="number" class="form-control" id="hargaJual_update" placeholder="Masukkan Harga Jual">
+                </div>
+                <div class="form-group">
+                  <label>Porsi Jual:</label>
+                  <input type="text" class="form-control" id="porsiJual_update" placeholder="Masukkan Porsi Jual">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="updateData">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    
+    <script>
+
       const firebaseConfig = {
         apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
         authDomain: "nofwa-indonesia.firebaseapp.com",
         projectId: "nofwa-indonesia",
         storageBucket: "nofwa-indonesia.appspot.com",
         messagingSenderId: "608371446284",
-        appId: "1:608371446284:web:ec6af0cba6c012bf599429",
-        measurementId: "G-HE92R15VSY"
+        appId: "1:608371446284:web:5c15b701371d2390599429",
+        measurementId: "G-WJSVLG5HW5"
       };
 
-      // firebase.initializeApp(firebaseConfig);
-      
-      let imageView = document.getElementById('get-image-from-firebase-storage');
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
 
-      firebase.storage().ref('WhatsApp Image 2023-12-09 at 20.32.55.jpeg').getDownloadURL().then( imgUrl => {
-          imageView.src = imgUrl;
+      const db = firebase.firestore();
+
+      db.collection("Katalis").onSnapshot(snapshot =>{
+        snapshot.docChanges();
+        getData();
       })
 
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
+      async function getData() {
+        document.getElementById('data').innerHTML = '';
+        const Admin = await db.collection("Katalis").get();
+        Admin.docs.forEach((kts, i) => {
+          console.log(kts.id);
+          const hargaJual = parseInt(kts.data().hargaJual);
+          const hargaAwal = parseInt(kts.data().hargaAwal);
+          document.getElementById('data').innerHTML += `
+            <tr> 
+              <td>${i+1}</td>
+              <td>12345</td> 
+              <td>${kts.data().img}</td> 
+              <td>${kts.data().namaKatalis}</td>
+              <td>${kts.data().stok}</td> 
+              <td>${kts.data().komposisi}</td> 
+              <td>${kts.data().hargaAwal}</td>
+              <td>${kts.data().hargaJual}</td>
+              <td>${kts.data().porsiJual}</td>
+              <td class="button-container">
+                <button class="btn btn-warning editData mb-2" data-id="${kts.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
+                <button class="btn btn-danger hapusData" data-id="${kts.id}">Hapus</button>
+              </td>
+            </tr>
+          `;
+        });
+      }
+
+      document.getElementById('updateData').addEventListener('click', function(){
+
+        let hargaAwal_updateChecer;
+        let hargaJual_updateChecer;
+
+        if (isNaN(parseInt(document.getElementById('hargaAwal_update').value))) hargaAwal_updateChecer = 0;
+        else hargaAwal_updateChecer = parseInt(document.getElementById('hargaAwal_update').value);
+
+        if (isNaN(parseInt(document.getElementById('hargaJual_update').value))) hargaJual_updateChecer = 0;
+        else hargaJual_updateChecer = parseInt(document.getElementById('hargaJual_update').value);
+
+        db.collection("Katalis").doc(document.getElementById('id').value).update({
+          img: document.getElementById('img_update').value,
+          namaKatalis: document.getElementById('namaKatalis_update').value,
+          stok: document.getElementById('stok_update').value,
+          komposisi: document.getElementById('komposisi_update').value,
+          hargaAwal: hargaAwal_updateChecer,
+          hargaJual: hargaJual_updateChecer,
+          porsiJual: document.getElementById('porsiJual_update').value
+        }).then(() => {
+            console.log("Document successfully updated!");
+            var modal = document.getElementById('modalUpdate');
+            var modalInstance = bootstrap.Modal.getInstance(modal);
+            modalInstance.hide();
+        }).catch((error) => {
+            console.error("Error updating document: ", error);
+        });
+      })
+
+      document.getElementById('data').addEventListener('click', function(e) {
+        const id = e.target.dataset.id;
+        if (e.target.classList.contains('hapusData')) {
+          db.collection("Katalis").doc(id).delete().then(() => {
+              console.log("Document successfully deleted!");
+            }).catch((error) => {
+              console.error("Error removing document: ", error);
+            });
+          }
+
+        if (e.target.classList.contains('editData')) {
+            db.collection("Katalis").doc(id).get().then((doc) => {
+              if (doc.exists) {
+                console.log(doc.data());
+                document.getElementById('id').value = doc.id;
+                document.getElementById('img_update').value = doc.data().img; 
+                document.getElementById('namaKatalis_update').value = doc.data().namaKatalis;
+                document.getElementById('stok_update').value = doc.data().stok; 
+                document.getElementById('komposisi_update').value = doc.data().komposisi; 
+                document.getElementById('hargaAwal_update').value = parseInt(doc.data().hargaAwal); 
+                document.getElementById('hargaJual_update').value = parseInt(doc.data().hargaJual); 
+                document.getElementById('porsiJual_update').value = doc.data().porsiJual; 
+              } else {
+                  console.log("No such document!");
+                }
+            });
+          }
+        })
+
+      document.getElementById('tambahData').addEventListener('click', function(){ 
+
+        let hargaAwalChecer;
+        let hargaJualChecer;
+
+        if (isNaN(parseInt(document.getElementById('hargaAwal').value))) hargaAwalChecer = 0;
+        else hargaAwalChecer = parseInt(document.getElementById('hargaAwal').value);
+
+        if (isNaN(parseInt(document.getElementById('hargaJual').value))) hargaJualChecer = 0;
+        else hargaJualChecer = parseInt(document.getElementById('hargaJual').value);
+
+        db.collection("Katalis").add({
+          img: document.getElementById('img').value,
+          namaKatalis: document.getElementById('namaKatalis').value,
+          stok: document.getElementById('stok').value,
+          komposisi: document.getElementById('komposisi').value,
+          hargaAwal: hargaAwalChecer,
+          hargaJual: hargaJualChecer,
+          porsiJual: document.getElementById('porsiJual').value
+        })
+        .then((docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+          
+          document.getElementById('img').value = '';
+          document.getElementById('namaKatalis').value = '';
+          document.getElementById('stok').value = '';
+          document.getElementById('komposisi').value = '';
+          document.getElementById('hargaAwal').value = '';
+          document.getElementById('hargaJual').value = '';
+          document.getElementById('porsiJual').value = '';
+
+          var modal = document.getElementById('modalTambah');
+          var modalInstance = bootstrap.Modal.getInstance(modal);
+          modalInstance.hide();
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+      })
     </script>
-    <script src="./boostrap/js/bootstrap.js"></script>
-
-    <script type="module" src="script.js" defer></script>
-
+  <script src="boostrap/js/bootstrap.js"></script>
   </body>
 </html>
