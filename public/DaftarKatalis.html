@@ -26,7 +26,7 @@
         <div class="containe" style="margin-left: 500px;">
           <div class="row">
             <div class="col">
-              <a class="nav-item nav-link" href="Profile.html">Nama admin</a>
+              <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
             </div>
             <div class="col-auto">
               <div class="circle">
@@ -43,10 +43,10 @@
       <div class="circle">
         <img src="gambar.jpg" alt="Gambar">
       </div>
-      <a class="nav-item nav-link nama" style="margin-bottom: 30px; font-size: 30px;" href="#">Nama admin</a>
+      <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link nav-hover" href="index.html">Dasboard</a>
+          <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
@@ -58,7 +58,7 @@
           <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
         </li>
         <li class="nav-item" style="margin-top: 91px;" >
-          <a class="nav-link logout-link" href="Login.html">Logout</a>
+          <a class="nav-link logout-link" href="index.html">Logout</a>
         </li>
       </ul>
     </div>
@@ -85,9 +85,8 @@
                     <th>Nama Katalis</th>
                     <th>Stok Katalis</th>
                     <th>Komposisi</th>
-                    <th>Harga Awal</th>
-                    <th>Harga Jual</th>
-                    <th>Porsi Jual</th>
+                    <th>Harga</th>
+                    <th>Gram Per Porsi</th>
                     <th>#</th>
                 </tr>
             </thead>
@@ -98,7 +97,7 @@
     </div>
     </div>
 
-  <!-- Tambah modal -->
+  <!-- Modal Tambah -->
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -110,12 +109,8 @@
             <div class="modal-body">
               <form>
                 <div class="form-group">
-                  <label>Id Hotel:</label>
-                  <input type="text" class="form-control" id="idHotel" placeholder="Masukkan Id Hotel">
-                </div>
-                <div class="form-group">
                   <label>Gambar:</label>
-                  <input type="image" class="form-control" id="img" placeholder="Gambar">
+                  <input type="file" class="form-control" id="katalisImageLink" accept="image/*" onchange="uploadImage()">
                 </div>
                 <div class="form-group">
                   <label>Nama Katalis:</label>
@@ -123,23 +118,19 @@
                 </div>
                 <div class="form-group">
                   <label>Stok Katalis:</label>
-                  <input type="text" class="form-control" id="stok" placeholder="Masukkan Stok">
+                  <input type="number" class="form-control" id="stok" placeholder="Masukkan Stok">
                 </div>
                 <div class="form-group">
                   <label>Komposisi:</label>
                   <input type="text" class="form-control" id="komposisi" placeholder="Masukkan Komposisi">
                 </div>
                 <div class="form-group">
-                  <label>Harga Awal:</label>
-                  <input type="number" class="form-control" id="hargaAwal" placeholder="Masukkan Harga Awal">
+                  <label>Harga:</label>
+                  <input type="number" class="form-control" id="harga" placeholder="Masukkan Harga Awal">
                 </div>
                 <div class="form-group">
-                  <label>Harga Jual:</label>
-                  <input type="number" class="form-control" id="hargaJual" placeholder="Masukkan Harga Jual">
-                </div>
-                <div class="form-group">
-                  <label>Porsi Jual:</label>
-                  <input type="text" class="form-control" id="porsiJual" placeholder="Masukkan Porsi Jual">
+                  <label>Gram Per Porsi:</label>
+                  <input type="text" class="form-control" id="gramPerPorsi" placeholder="Masukkan Gram Per Porsi">
                 </div>
               </form>
             </div>
@@ -149,9 +140,9 @@
           </div>
         </div>
       </div>
-    </div>  
+    </div>
 
-  <!-- Edit modal -->
+  <!-- Modal Edit -->
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -164,12 +155,8 @@
               <input type="hidden" id="id">
               <form>
                 <div class="form-group">
-                  <label>Id Hotel:</label>
-                  <input type="text" class="form-control" id="idHotel_update" placeholder="Masukkan Id Hotel">
-                </div>
-                <div class="form-group">
                   <label>Gambar:</label>
-                  <input type="image" class="form-control" id="img_update" placeholder="Gambar">
+                  <input type="file" class="form-control" id="katalisImageLink_update" accept="image/*" onchange="uploadImage()">
                 </div>
                 <div class="form-group">
                   <label>Nama Katalis:</label>
@@ -177,23 +164,19 @@
                 </div>
                 <div class="form-group">
                   <label>Stok Katalis:</label>
-                  <input type="text" class="form-control" id="stok_update" placeholder="Masukkan Stok">
+                  <input type="number" class="form-control" id="stok_update" placeholder="Masukkan Stok">
                 </div>
                 <div class="form-group">
                   <label>Komposisi:</label>
                   <input type="text" class="form-control" id="komposisi_update" placeholder="Masukkan Komposisi">
                 </div>
                 <div class="form-group">
-                  <label>Harga Awal:</label>
-                  <input type="number" class="form-control" id="hargaAwal_update" placeholder="Masukkan Harga Awal">
+                  <label>Harga:</label>
+                  <input type="number" class="form-control" id="harga_update" placeholder="Masukkan Harga Awal">
                 </div>
                 <div class="form-group">
-                  <label>Harga Jual:</label>
-                  <input type="number" class="form-control" id="hargaJual_update" placeholder="Masukkan Harga Jual">
-                </div>
-                <div class="form-group">
-                  <label>Porsi Jual:</label>
-                  <input type="text" class="form-control" id="porsiJual_update" placeholder="Masukkan Porsi Jual">
+                  <label>Gram Per Porsi:</label>
+                  <input type="text" class="form-control" id="gramPerPorsi_update" placeholder="Masukkan Gram Per Porsi">
                 </div>
               </form>
             </div>
@@ -203,10 +186,10 @@
           </div>
         </div>
       </div>
-    </div>  
+    </div>
     
     <script>
-
+      // Initialize Firebase
       const firebaseConfig = {
         apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
         authDomain: "nofwa-indonesia.firebaseapp.com",
@@ -216,142 +199,291 @@
         appId: "1:608371446284:web:5c15b701371d2390599429",
         measurementId: "G-WJSVLG5HW5"
       };
-
+  
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-
       const db = firebase.firestore();
-
-      db.collection("Katalis").onSnapshot(snapshot =>{
-        snapshot.docChanges();
-        getData();
+  
+      db.collection("Katalis").onSnapshot(snapshot => {
+          snapshot.docChanges();
+          getData();
       })
 
-      async function getData() {
+  
+      async function getData(){
         document.getElementById('data').innerHTML = '';
-        const Admin = await db.collection("Katalis").get();
-        Admin.docs.forEach((kts, i) => {
-          console.log(kts.id);
-          const hargaJual = parseInt(kts.data().hargaJual);
-          const hargaAwal = parseInt(kts.data().hargaAwal);
-          document.getElementById('data').innerHTML += `
-            <tr> 
-              <td>${i+1}</td>
-              <td>12345</td> 
-              <td>${kts.data().img}</td> 
-              <td>${kts.data().namaKatalis}</td>
-              <td>${kts.data().stok}</td> 
-              <td>${kts.data().komposisi}</td> 
-              <td>${kts.data().hargaAwal}</td>
-              <td>${kts.data().hargaJual}</td>
-              <td>${kts.data().porsiJual}</td>
-              <td class="button-container">
-                <button class="btn btn-warning editData mb-2" data-id="${kts.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
-                <button class="btn btn-danger hapusData" data-id="${kts.id}">Hapus</button>
-              </td>
-            </tr>
-          `;
+          const Admin = await db.collection("Katalis").get();
+          Admin.docs.forEach(async (kts, i) => {
+            console.log(kts.id);
+              const harga = parseInt(kts.data().harga);
+
+              var idHotel = getCookie('user_uid');
+  
+              // Ambil URL unduhan gambar untuk setiap dokumen
+              const imageUrl = await firebase.storage().ref(`Hotel_${idHotel}/${kts.data().katalisImageLink}`).getDownloadURL();
+  
+              // Tambahkan baris ke tabel dengan URL gambar yang diambil
+              document.getElementById('data').innerHTML += `
+                <tr> 
+                  <td>${i + 1}</td>
+                  <td>12345</td> 
+                  <td><img src="${imageUrl}" id="imagePreview_${i}" width="80" height="80"></td>
+                  <td>${kts.data().namaKatalis}</td>
+                  <td>${kts.data().stok}</td> 
+                  <td>${kts.data().komposisi}</td> 
+                  <td>${kts.data().harga}</td>
+                  <td>${kts.data().gramPerPorsi}</td>
+                  <td class="button-container">
+                      <button class="btn btn-warning editData mb-2" data-id="${kts.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
+                      <button class="btn btn-danger hapusData" data-id="${kts.id}">Hapus</button>
+                  </td>
+                </tr>
+              `;
         });
       }
 
-      document.getElementById('updateData').addEventListener('click', function(){
+      document.getElementById('tambahData').addEventListener('click', function () {
+        let hargaChecer;
+        let stokChecer;
+    
+        if (isNaN(parseInt(document.getElementById('harga').value))) hargaChecer = 0;
+        else hargaChecer = parseInt(document.getElementById('harga').value);
+    
+        if (isNaN(parseInt(document.getElementById('stok').value))) stokChecer = 0;
+        else stokChecer = parseInt(document.getElementById('stok').value);
+    
+        const file = document.getElementById('katalisImageLink').files[0];
+    
+        var idHotel = getCookie('user_uid');
+    
+        // Periksa apakah pengguna telah memilih gambar
+        if (file) {
+            const storageRef = firebase.storage().ref(`Hotel_${idHotel}/${file.name}`);
+            const uploadTask = storageRef.put(file);
+    
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // Progress tracking
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                },
+                (error) => {
+                    // Handle unsuccessful uploads
+                    console.error('Error uploading image: ', error);
+                },
+                () => {
+                  db.collection("Katalis").add({
+                    idHotel: idHotel,
+                    katalisImageLink: file.name, // Simpan URL gambar ke dalam Firestore
+                    namaKatalis: document.getElementById('namaKatalis').value,
+                    stok: stokChecer,
+                    komposisi: document.getElementById('komposisi').value,
+                    harga: hargaChecer,
+                    gramPerPorsi: document.getElementById('gramPerPorsi').value
+                  }).then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id);
 
-        let hargaAwal_updateChecer;
-        let hargaJual_updateChecer;
+                    // Setel ulang nilai input setelah data berhasil ditambahkan
+                    document.getElementById('katalisImageLink').value = '';
+                    document.getElementById('namaKatalis').value = '';
+                    document.getElementById('stok').value = '';
+                    document.getElementById('komposisi').value = '';
+                    document.getElementById('harga').value = '';
+                    document.getElementById('gramPerPorsi').value = '';
 
-        if (isNaN(parseInt(document.getElementById('hargaAwal_update').value))) hargaAwal_updateChecer = 0;
-        else hargaAwal_updateChecer = parseInt(document.getElementById('hargaAwal_update').value);
+                    // Sembunyikan modal tambah setelah data berhasil ditambahkan
+                    var modal = document.getElementById('modalTambah');
+                    var modalInstance = bootstrap.Modal.getInstance(modal);
+                    modalInstance.hide();
+                  }).catch((error) => {
+                    console.error("Error adding document: ", error);
+                  });
+                   
+                 });
+        } else {
+            // Jika pengguna tidak memilih gambar, tampilkan pesan kesalahan
+            console.error("Error: No image selected");
+            // Anda dapat menambahkan tindakan lain di sini, seperti menampilkan pesan untuk pengguna
+        }
+    });
+  
+    document.getElementById('updateData').addEventListener('click', function () {
+      let harga_updateChecker;
+      let stok_updateChecker;
+  
+      if (isNaN(parseInt(document.getElementById('harga_update').value))) 
+          harga_updateChecker = 0;
+      else 
+          harga_updateChecker = parseInt(document.getElementById('harga_update').value);
+  
+      if (isNaN(parseInt(document.getElementById('stok_update').value))) 
+          stok_updateChecker = 0;
+      else 
+          stok_updateChecker = parseInt(document.getElementById('stok_update').value);
+  
+      const file = document.getElementById('katalisImageLink').files[0];
+    
+      var idHotel = getCookie('user_uid');
+  
+      if (file) {
+          const storageRefOld = firebase.storage().ref(`Hotel_${idHotel}/${file.name}`);
+          storageRefOld.delete().then(() => {
+              // File lama berhasil dihapus
+              console.log("Old file successfully deleted!");
+  
+              const storageRefNew = firebase.storage().ref(`Hotel_${idHotel}/${file.name}`);
+              const uploadTask = storageRefNew.put(file);
+  
+              uploadTask.on('state_changed',
+                  (snapshot) => {
+                      // Progress tracking
+                      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                      console.log('Upload is ' + progress + '% done');
+                  },
+                  (error) => {
+                      // Handle unsuccessful uploads
+                      console.error('Error uploading image: ', error);
+                  },
+                  () => {
+                      db.collection("Katalis").doc(document.getElementById('id').value).update({
+                          katalisImageLink: file.name, // Gunakan file yang baru diunggah
+                          namaKatalis: document.getElementById('namaKatalis_update').value,
+                          stok: stok_updateChecker,
+                          komposisi: document.getElementById('komposisi_update').value,
+                          harga: harga_updateChecker,
+                          gramPerPorsi: document.getElementById('gramPerPorsi_update').value
+                      }).then(() => {
+                          console.log("Document successfully updated!");
+                          var modal = document.getElementById('modalUpdate');
+                          var modalInstance = bootstrap.Modal.getInstance(modal);
+                          modalInstance.hide();
+                      }).catch((error) => {
+                          console.error("Error updating document: ", error);
+                      });
+                  });
+          }).catch((error) => {
+              console.error("Error deleting old file: ", error);
+          });
+      } else {
+          // Jika tidak ada file yang dipilih, langsung update dokumen tanpa menghapus dan mengunggah gambar baru
+          db.collection("Katalis").doc(document.getElementById('id').value).update({
+              namaKatalis: document.getElementById('namaKatalis_update').value,
+              stok: stok_updateChecker,
+              komposisi: document.getElementById('komposisi_update').value,
+              harga: harga_updateChecker,
+              gramPerPorsi: document.getElementById('gramPerPorsi_update').value
+          }).then(() => {
+              console.log("Document successfully updated!");
+              var modal = document.getElementById('modalUpdate');
+              var modalInstance = bootstrap.Modal.getInstance(modal);
+              modalInstance.hide();
+          }).catch((error) => {
+              console.error("Error updating document: ", error);
+          });
+      }
+  });
 
-        if (isNaN(parseInt(document.getElementById('hargaJual_update').value))) hargaJual_updateChecer = 0;
-        else hargaJual_updateChecer = parseInt(document.getElementById('hargaJual_update').value);
-
-        db.collection("Katalis").doc(document.getElementById('id').value).update({
-          img: document.getElementById('img_update').value,
-          namaKatalis: document.getElementById('namaKatalis_update').value,
-          stok: document.getElementById('stok_update').value,
-          komposisi: document.getElementById('komposisi_update').value,
-          hargaAwal: hargaAwal_updateChecer,
-          hargaJual: hargaJual_updateChecer,
-          porsiJual: document.getElementById('porsiJual_update').value
-        }).then(() => {
-            console.log("Document successfully updated!");
-            var modal = document.getElementById('modalUpdate');
-            var modalInstance = bootstrap.Modal.getInstance(modal);
-            modalInstance.hide();
+  document.getElementById('data').addEventListener('click', function(e) {
+    const id = e.target.dataset.id;
+    if (e.target.classList.contains('hapusData')) {
+      db.collection("Katalis").doc(id).delete().then(() => {
+          console.log("Document successfully deleted!");
         }).catch((error) => {
-            console.error("Error updating document: ", error);
+          console.error("Error removing document: ", error);
         });
-      })
+      }
 
-      document.getElementById('data').addEventListener('click', function(e) {
-        const id = e.target.dataset.id;
-        if (e.target.classList.contains('hapusData')) {
-          db.collection("Katalis").doc(id).delete().then(() => {
-              console.log("Document successfully deleted!");
-            }).catch((error) => {
-              console.error("Error removing document: ", error);
+    if (e.target.classList.contains('editData')) {
+        db.collection("Katalis").doc(id).get().then((doc) => {
+          if (doc.exists) {
+            console.log(doc.data());
+            document.getElementById('id').value = doc.id;
+            document.getElementById('katalisImageLink_update').value = doc.data().katalisImageLink;
+            document.getElementById('namaKatalis_update').value = doc.data().namaKatalis;
+            document.getElementById('stok_update').value = doc.data().stok; 
+            document.getElementById('komposisi_update').value = doc.data().komposisi; 
+            document.getElementById('harga_update').value = doc.data().harga;
+            document.getElementById('gramPerPorsi_update').value = doc.data().gramPerPorsi;
+          } else {
+              console.log("No such document!");
+            }
+        });
+      }
+    })
+
+
+
+  </script>
+  
+
+    <script>
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const storage = firebase.storage();
+    
+      function uploadImage(idHotel) {
+        const file = document.getElementById('katalisImageLink').files[0];
+        const storageRef = firebase.storage().ref(`Hotel_${idHotel}/${kts.data().katalisImageLink}`);
+        const uploadTask = storageRef.put(file);
+    
+        uploadTask.on('state_changed',
+          (snapshot) => {
+            // Progress tracking
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+          },
+          (error) => {
+            // Handle unsuccessful uploads
+            console.error('Error uploading image: ', error);
+          },
+          () => {
+            // Handle successful uploads on complete
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              // Display uploaded image
+              const imgPreview = document.getElementById('imagePreview');
+              imgPreview.innerHTML = `<img src="${downloadURL}" alt="Uploaded Image">`;
+    
+              // Add image URL to table
+              const tableBody = document.getElementById('imageTableBody');
+              const newRow = tableBody.insertRow();
+              const cell = newRow.insertCell();
+              cell.innerHTML = `<img src="${downloadURL}" alt="Uploaded Image">`;
             });
           }
-
-        if (e.target.classList.contains('editData')) {
-            db.collection("Katalis").doc(id).get().then((doc) => {
-              if (doc.exists) {
-                console.log(doc.data());
-                document.getElementById('id').value = doc.id;
-                document.getElementById('img_update').value = doc.data().img; 
-                document.getElementById('namaKatalis_update').value = doc.data().namaKatalis;
-                document.getElementById('stok_update').value = doc.data().stok; 
-                document.getElementById('komposisi_update').value = doc.data().komposisi; 
-                document.getElementById('hargaAwal_update').value = parseInt(doc.data().hargaAwal); 
-                document.getElementById('hargaJual_update').value = parseInt(doc.data().hargaJual); 
-                document.getElementById('porsiJual_update').value = doc.data().porsiJual; 
-              } else {
-                  console.log("No such document!");
-                }
-            });
-          }
-        })
-
-      document.getElementById('tambahData').addEventListener('click', function(){ 
-
-        let hargaAwalChecer;
-        let hargaJualChecer;
-
-        if (isNaN(parseInt(document.getElementById('hargaAwal').value))) hargaAwalChecer = 0;
-        else hargaAwalChecer = parseInt(document.getElementById('hargaAwal').value);
-
-        if (isNaN(parseInt(document.getElementById('hargaJual').value))) hargaJualChecer = 0;
-        else hargaJualChecer = parseInt(document.getElementById('hargaJual').value);
-
-        db.collection("Katalis").add({
-          img: document.getElementById('img').value,
-          namaKatalis: document.getElementById('namaKatalis').value,
-          stok: document.getElementById('stok').value,
-          komposisi: document.getElementById('komposisi').value,
-          hargaAwal: hargaAwalChecer,
-          hargaJual: hargaJualChecer,
-          porsiJual: document.getElementById('porsiJual').value
-        })
-        .then((docRef) => {
-          console.log("Document written with ID: ", docRef.id);
-          
-          document.getElementById('img').value = '';
-          document.getElementById('namaKatalis').value = '';
-          document.getElementById('stok').value = '';
-          document.getElementById('komposisi').value = '';
-          document.getElementById('hargaAwal').value = '';
-          document.getElementById('hargaJual').value = '';
-          document.getElementById('porsiJual').value = '';
-
-          var modal = document.getElementById('modalTambah');
-          var modalInstance = bootstrap.Modal.getInstance(modal);
-          modalInstance.hide();
-        })
-        .catch((error) => {
-          console.error("Error adding document: ", error);
-        });
-      })
+        );
+      }
     </script>
+
+    <script>
+      // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
+      function getCookie(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for (var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+          }
+          return null;
+      }
+  
+      window.onload = function() {
+        // Mendapatkan nama pengguna dari cookie
+        var userName = getCookie('user_name');
+        // Cek apakah nama pengguna ditemukan
+        if (userName) {
+          // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+          var namaAdminElements = document.getElementsByClassName('namaAdmin');
+            for (var i = 0; i < namaAdminElements.length; i++) {
+                namaAdminElements[i].innerText = userName;
+            }
+        } else {
+            // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
+            window.location.href = "index.html";
+        }
+      };
+    </script>
+
   <script src="boostrap/js/bootstrap.js"></script>
   </body>
 </html>

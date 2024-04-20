@@ -25,7 +25,7 @@
         <div class="containe" style="margin-left: 500px;">
           <div class="row">
             <div class="col">
-              <a class="nav-item nav-link" href="Profile.html">Nama admin</a>
+              <a class="nav-item nav-link namaAdmin" href="Profile.html">Nama admin</a>
             </div>
             <div class="col-auto">
               <div class="circle">
@@ -42,10 +42,10 @@
       <div class="circle">
         <img src="gambar.jpg" alt="Gambar">
       </div>
-      <a class="nav-item nav-link nama" style="margin-bottom: 30px; font-size: 30px;" href="#">Nama admin</a>
+      <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link nav-hover" href="index.html">Dasboard</a>
+          <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
@@ -57,7 +57,7 @@
           <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
         </li>
         <li class="nav-item" style="margin-top: 91px;" >
-          <a class="nav-link logout-link" href="Login.html">Logout</a>
+          <a class="nav-link logout-link" href="index.html">Logout</a>
         </li>
       </ul>
     </div>
@@ -79,12 +79,8 @@
               <tr>
                 <th>No</th>
                 <th>Id Hotel</th>
-                <th>Nama Transaksi</th>
-                <th>Alamat</th>
-                <th>Menu</th>
-                <th>Jumlah Barang</th>
-                <th>Harga</th>
-                <th>Jumlah Harga</th>
+                <th>Keuntungan</th>
+                <th>Waktu Transaksi</th>
                 <th>#</th>
               </tr>
             </thead>
@@ -106,28 +102,12 @@
             <div class="modal-body">
               <form>
                 <div class="form-group">
-                  <label>Nama:</label>
-                  <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama">
+                  <label>Keuntungan:</label>
+                  <input type="number" class="form-control" id="keuntungan" placeholder="Masukkan Keuntungan">
                 </div>
                 <div class="form-group">
-                  <label>Menu:</label>
-                  <input type="text" class="form-control" id="menu" placeholder="Menu">
-                </div>
-                <div class="form-group">
-                  <label>Alamat:</label>
-                  <input type="text" class="form-control" id="alamat" placeholder="Masukkan Alamat">
-                </div>
-                <div class="form-group">
-                  <label>Jumlah:</label>
-                  <input type="text" class="form-control" id="jumlah" placeholder="Masukkan Jumlah">
-                </div>
-                <div class="form-group">
-                  <label>Harga:</label>
-                  <input type="number" class="form-control" id="harga" placeholder="Masukkan Harga">
-                </div>
-                <div class="form-group">
-                  <label>Jumlah Harga:</label>
-                  <input type="number" class="form-control" id="jumlahHarga" placeholder="Masukkan Jumlah Harga">
+                  <label>Waktu Transaksi:</label>
+                  <input type="text" class="form-control" id="waktuTransaksi" placeholder="Masukkan waktuTransaksi">
                 </div>
               </form>
             </div>
@@ -152,28 +132,12 @@
               <input type="hidden" id="id">
               <form>
                 <div class="form-group">
-                  <label>Nama:</label>
-                  <input type="text" class="form-control" id="nama_update" placeholder="Masukkan Nama">
+                  <label>Keuntungan:</label>
+                  <input type="number" class="form-control" id="keuntungan_update" placeholder="Masukkan Keuntungan">
                 </div>
                 <div class="form-group">
-                  <label>Menu:</label>
-                  <input type="text" class="form-control" id="menu_update" placeholder="Menu">
-                </div>
-                <div class="form-group">
-                  <label>Alamat:</label>
-                  <input type="text" class="form-control" id="alamat_update" placeholder="Masukkan Alamat">
-                </div>
-                <div class="form-group">
-                  <label>Jumlah:</label>
-                  <input type="text" class="form-control" id="jumlah_update" placeholder="Masukkan Jumlah">
-                </div>
-                <div class="form-group">
-                  <label>Harga:</label>
-                  <input type="number" class="form-control" id="harga_update" placeholder="Masukkan Harga">
-                </div>
-                <div class="form-group">
-                  <label>Jumlah Harga:</label>
-                  <input type="number" class="form-control" id="jumlahHarga_update" placeholder="Masukkan Jumlah Harga">
+                  <label>Waktu Transaksi:</label>
+                  <input type="text" class="form-control" id="waktuTransaksi_update" placeholder="Masukkan waktuTransaksi">
                 </div>
               </form>
             </div>
@@ -201,29 +165,26 @@
 
       const db = firebase.firestore();
 
-      db.collection("TransaksiAdmin").onSnapshot(snapshot =>{
+      db.collection("Transaksi_Hotel Dummy_1").onSnapshot(snapshot =>{
         snapshot.docChanges();
         getData();
       })
 
       async function getData() {
         document.getElementById('data').innerHTML = '';
-        const Admin = await db.collection("TransaksiAdmin").get();
-        Admin.docs.forEach((tks, i) => {
-          console.log(tks.id);
+        const Admin = await db.collection("Transaksi_Hotel Dummy_1").get();
+        Admin.docs.forEach((tsk, i) => {
+          console.log(tsk.id);
+          const harga = parseInt(tsk.data().harga);
           document.getElementById('data').innerHTML += `
             <tr> 
               <td>${i+1}</td> 
               <td>12345</td>
-              <td>${tks.data().nama}</td> 
-              <td>${tks.data().menu}</td> 
-              <td>${tks.data().alamat}</td> 
-              <td>${tks.data().jumlah}</td>
-              <td>${tks.data().harga}</td>
-              <td>${tks.data().jumlahHarga}</td>
+              <td>${tsk.data().keuntungan}</td>
+              <td>${tsk.data().waktuTransaksi}</td> 
               <td class="button-container">
-                <button class="btn btn-warning editData mb-2" data-id="${tks.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
-                <button class="btn btn-danger hapusData" data-id="${tks.id}">Hapus</button>
+                <button class="btn btn-warning editData mb-2" data-id="${tsk.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
+                <button class="btn btn-danger hapusData" data-id="${tsk.id}">Hapus</button>
               </td>
             </tr>
           `;
@@ -231,13 +192,15 @@
       }
 
       document.getElementById('updateData').addEventListener('click', function(){
-        db.collection("TransaksiAdmin").doc(document.getElementById('id').value).update({
-          nama: document.getElementById('nama_update').value, 
-          menu: document.getElementById('menu_update').value,
-          alamat: document.getElementById('alamat_update').value,
-          jumlah: document.getElementById('jumlah_update').value,
-          harga: document.getElementById('harga_update').value,
-          jumlahHarga: document.getElementById('jumlahHarga_update').value
+
+        let keuntungan_updateChecer;
+
+        if (isNaN(parseInt(document.getElementById('keuntungan_update').value))) keuntungan_updateChecer = 0;
+        else keuntungan_updateChecer = parseInt(document.getElementById('keuntungan_update').value);
+
+        db.collection("Transaksi_Hotel Dummy_1").doc(document.getElementById('id').value).update({
+          keuntungan: keuntungan_updateChecer,
+          waktuTransaksi: document.getElementById('waktuTransaksi_update').value,
         }).then(() => {
             console.log("Document successfully updated!");
             var modal = document.getElementById('modalUpdate');
@@ -251,7 +214,7 @@
       document.getElementById('data').addEventListener('click', function(e) {
         const id = e.target.dataset.id;
         if (e.target.classList.contains('hapusData')) {
-          db.collection("TransaksiAdmin").doc(id).delete().then(() => {
+          db.collection("Transaksi_Hotel Dummy_1").doc(id).delete().then(() => {
               console.log("Document successfully deleted!");
             }).catch((error) => {
               console.error("Error removing document: ", error);
@@ -259,16 +222,12 @@
           }
 
         if (e.target.classList.contains('editData')) {
-            db.collection("TransaksiAdmin").doc(id).get().then((doc) => {
+            db.collection("Transaksi_Hotel Dummy_1").doc(id).get().then((doc) => {
               if (doc.exists) {
                 console.log(doc.data());
                 document.getElementById('id').value = doc.id;
-                document.getElementById('nama_update').valu = doc.data().nama;
-                document.getElementById('menu_update').value = doc.data().menu;
-                document.getElementById('alamat_update').value = doc.data().alamat;
-                document.getElementById('jumlah_update').value = doc.data().jumlah;
-                document.getElementById('harga_update').value = doc.data().harga;
-                document.getElementById('jumlahHarga_update').value =doc.data().jumlahHarga;
+                document.getElementById('keuntungan_update').value =doc.data().keuntungan;
+                document.getElementById('waktuTransaksi_update').value =doc.data().waktuTransaksi;
               } else {
                 console.log("No such document!");
                 }
@@ -277,23 +236,21 @@
         })
 
         document.getElementById('tambahData').addEventListener('click', function(){ 
-        db.collection("TransaksiAdmin").add({
-          nama: document.getElementById('nama').value,
-          menu: document.getElementById('menu').value,
-          alamat: document.getElementById('alamat').value,
-          jumlah: document.getElementById('jumlah').value,
-          hargha: document.getElementById('harga').value,
-          jumlahHarga: document.getElementById('jumlahHarga').value,
+
+        let keuntunganChecer;
+
+        if (isNaN(parseInt(document.getElementById('keuntungan').value))) keuntunganChecer = 0;
+        else keuntunganChecer = parseInt(document.getElementById('keuntungan').value);
+
+        db.collection("Transaksi_Hotel Dummy_1").add({
+          keuntungan: keuntunganChecer,
+          waktuTransaksi: document.getElementById('waktuTransaksi').value,
         })
           .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
             
-            document.getElementById('nama').value = '';
-            document.getElementById('menu').value = '';
-            document.getElementById('alamat').value = '';
-            document.getElementById('jumlah').value = '';
-            document.getElementById('harga').value = '';
-            document.getElementById('jumlahHarga').value = '';
+            document.getElementById('keuntungan').value = '';
+            document.getElementById('waktuTransaksi').value = '';
   
             var modal = document.getElementById('modalTambah');
             var modalInstance = bootstrap.Modal.getInstance(modal);
@@ -303,11 +260,39 @@
             console.error("Error adding document: ", error);
           });
         })
-
     </script>
 
+    <script>
+      // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
+      function getCookie(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for (var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+          }
+          return null;
+      }
+  
+      window.onload = function() {
+        // Mendapatkan nama pengguna dari cookie
+        var userName = getCookie('user_name');
+        // Cek apakah nama pengguna ditemukan
+        if (userName) {
+          // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+          var namaAdminElements = document.getElementsByClassName('namaAdmin');
+            for (var i = 0; i < namaAdminElements.length; i++) {
+                namaAdminElements[i].innerText = userName;
+            }
+        } else {
+            // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
+            window.location.href = "index.html";
+        }
+      };
+    </script>
 
-  <script src="/public/boostrap/js/bootstrap.js"></script>
+  <script src="boostrap/js/bootstrap.js"></script>
 
   </body>
 </html>

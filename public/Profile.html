@@ -26,7 +26,7 @@
         <div class="containe" style="margin-left: 500px;">
           <div class="row">
             <div class="col">
-              <a class="nav-item nav-link" href="Profile.html">Nama admin</a>
+              <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
             </div>
             <div class="col-auto">
               <div class="circle">
@@ -43,10 +43,10 @@
       <div class="circle">
         <img src="gambar.jpg" alt="Gambar">
       </div>
-      <a class="nav-item nav-link nama" style="margin-bottom: 30px; font-size: 30px;" href="#">Nama admin</a>
+      <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link nav-hover" href="index.html">Dasboard</a>
+          <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
@@ -58,7 +58,7 @@
           <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
         </li>
         <li class="nav-item" style="margin-top: 91px;" >
-          <a class="nav-link logout-link" href="Login.html">Logout</a>
+          <a class="nav-link logout-link" href="index.html">Logout</a>
         </li>
       </ul>
     </div>
@@ -125,6 +125,36 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
+      function getCookie(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for (var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+          }
+          return null;
+      }
+  
+      window.onload = function() {
+        // Mendapatkan nama pengguna dari cookie
+        var userName = getCookie('user_name');
+        // Cek apakah nama pengguna ditemukan
+        if (userName) {
+          // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+          var namaAdminElements = document.getElementsByClassName('namaAdmin');
+            for (var i = 0; i < namaAdminElements.length; i++) {
+                namaAdminElements[i].innerText = userName;
+            }
+        } else {
+            // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
+            window.location.href = "index.html";
+        }
+      };
+    </script>
     
     <script src="boostrap/js/bootstrap.js"></script>
 

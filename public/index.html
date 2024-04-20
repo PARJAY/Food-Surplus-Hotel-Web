@@ -1,76 +1,127 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="boostrap/css/bootstrap.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <title>Dasboard</title>
-  </head>
-  <body class="body">
-
-  <!-- Navbar  -->
-    <nav class="navbar navbar-expand-md fixed-top">
-      <a class="nav-item nav-link" style="margin: 0 21px; font-size: 30px;" href="#">
-        Nama Hotel
-      </a>
-      <div class="navbar-collapse collapse" id="navbarNav">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-4 flex-grow-0" style="width: 500px;" type="search" placeholder="Search" aria-label="Search">
-        </form>
-        <button class="btn-search" type="submit">Search</button>
-        <div class="containe" style="margin-left: 500px;">
-          <div class="row">
-            <div class="col">
-              <a class="nav-item nav-link" href="Profile.html">Nama admin</a>
-            </div>
-            <div class="col-auto">
-              <div class="circle">
-                <img src="gambar.jpg" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-  
-  <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="circle">
-        <img src="gambar.jpg" alt="Gambar">
-      </div>
-      <a class="nav-item nav-link nama" style="margin-bottom: 30px; font-size: 30px;" href="#">Nama admin</a>
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link nav-hover" href="index.html">Dasboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Kurir</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
-        </li>
-        <li class="nav-item" style="margin-top: 91px;" >
-          <a class="nav-link logout-link" href="Login.html">Logout</a>
-        </li>
-      </ul>
+    <title>Login</title>
+</head>
+<body style="background-color: #862B0D; overflow: hidden;">
+    
+    <div class="login-form" style="background-color:#FFF9C9; border-radius: 15px;">
+        <form style="background-color:#FFF9C9;">
+            <h1 class="text-center">Login</h1>
+            <h5><span class="text-start" style="font-weight: bolder;">Selamat Datang,</span><br>Silahkan Login Dengan Akun Hotel Anda</h5>
+            <div class="form-group d-grid gap-2" style="padding-top: 170px;">  
+                <button type="button" id="login-hotel" class="btn-custom" >
+                    Hotel Sign in with Google
+                </button>
+            </div>              
+        </form>     
     </div>
-  
-  <!-- Content -->
-    <div class="content">
-      <div class="kotak">
-        <h2>Halo......</h2>
-      </div>
-    </div>
-      
-    <script src="boostrap/js/bootstrap.js"></script>
 
-  </body>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
+            authDomain: "nofwa-indonesia.firebaseapp.com",
+            projectId: "nofwa-indonesia",
+            storageBucket: "nofwa-indonesia.appspot.com",
+            messagingSenderId: "608371446284",
+            appId: "1:608371446284:web:5c15b701371d2390599429",
+            measurementId: "G-WJSVLG5HW5"
+          };
+    
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const hotelCollection = "Hotel";
+
+        // Fungsi untuk menetapkan nilai cookie
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+         // Mendengarkan klik tombol login-hotel
+         document.getElementById('login-hotel').addEventListener('click', (e) => {
+            firebase.auth().signInWithPopup(provider).then((result) => {
+                var credential = result.credential;
+                var token = credential.accessToken;
+                var user = result.user;
+
+                console.log("Success");
+                console.log(user);
+                
+                console.log(`user.displayName : ${user.displayName}`);
+                console.log(`user.email : ${user.email}`);
+                console.log(`user.uid : ${user.uid}`);
+                console.log(`user.photoURL : ${user.photoURL}`);
+
+                // Memeriksa apakah pengguna sudah ada di koleksi hotel
+                db.collection(hotelCollection).doc(user.uid).get().then((querySnapshot) => {
+                    if (querySnapshot.exists) {
+                        console.log("Hotel user already exists:", querySnapshot.data());
+                        // Set cookie untuk informasi pengguna
+                        setCookie('user_uid', user.uid, 7);
+                        setCookie('user_name', user.displayName, 7);
+                        setCookie('user_email', user.email, 7);
+                        // Arahkan pengguna ke halaman dasboard
+                        window.location.href = "Dasboard.html";
+                    } else {
+                        // Jika tidak, tambahkan pengguna ke koleksi hotel
+                        db.collection(hotelCollection).doc(user.uid).set({
+                            name: user.displayName,
+                            email: user.email
+                        }).then(() => {
+                            console.log("New hotel data added for user!");
+                            // Set cookie untuk informasi pengguna
+                            setCookie('user_uid', user.uid, 7);
+                            setCookie('user_name', user.displayName, 7);
+                            setCookie('user_email', user.email, 7);
+                            // Arahkan pengguna ke halaman dasboard
+                            window.location.href = "Dasboard.html";
+
+                            // Arahkan pengguna ke halaman profile
+                            window.location.href = "Profile.html";
+
+                            // Arahkan pengguna ke halaman katalis
+                            window.location.href = "DaftarKatalis.html";
+
+                            // Arahkan pengguna ke halaman kurir
+                            window.location.href = "DaftarKurir.html";
+
+                            // Arahkan pengguna ke halaman transaksi
+                            window.location.href = "HistoryTransaksi.html";
+                        }).catch((error) => {
+                            console.error("Error adding hotel data:", error);
+                        });
+                    }
+                }).catch((error) => {
+                    console.error("Error checking hotel user:", error);
+                });
+                
+            }).catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                var email = error.email;
+                var credential = error.credential;
+
+                console.log(`Error: ${errorMessage}`);
+            });
+        });
+    </script>
+
+
+    <script src="boostrap/js/bootstrap.js"></script>                                          
+</body>
 </html>
