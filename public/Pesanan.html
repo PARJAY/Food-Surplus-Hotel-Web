@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <title>Pesanan</title>
+</head>
+<body class="body">
+
+    <!-- Navbar  -->
+    <nav class="navbar navbar-expand-md fixed-top">
+        <a class="nav-item nav-link" style="margin: 0 21px; font-size: 30px;" href="#">
+          Nama Hotel
+        </a>
+        <div class="navbar-collapse collapse" id="navbarNav">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-4 flex-grow-0" style="width: 500px;" type="search" placeholder="Search" aria-label="Search">
+          </form>
+          <button class="btn-search" type="submit">Search</button>
+          <div class="containe" style="margin-left: 500px;">
+            <div class="row">
+              <div class="col">
+                <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
+              </div>
+              <div class="col-auto">
+                <div class="circle">
+                  <img src="gambar.jpg" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+    <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="circle">
+          <img src="gambar.jpg" alt="Gambar">
+        </div>
+        <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Kurir</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
+          </li>
+          <li class="nav-item" style="margin-top: 21px;" >
+            <a class="nav-link logout-link" href="index.html">Logout</a>
+          </li>
+        </ul>
+      </div>
+    
+    <!-- Content -->
+    <div class="content">
+      <div class="containe" style="margin-bottom: 10px;">
+        <div class="row">
+          <div class="col">
+            <h2>Daftar Katalis</h2>
+          </div>
+          <div class="col-auto">
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid #000000">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>gambar</th>
+                    <th>Id Customer</th>
+                    <th>Id Hotel</th>
+                    <th>Id Kurir</th>
+                    <th>Id Pesanan</th>
+                    <th>List Daftar Katalis</th>
+                    <th>Status Pesanan</th>
+                    <th>Waktu Pesanan</th>
+                    <th>Total Harga</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                
+            </tbody>
+        </table>
+    </div>
+    </div> 
+    
+    <script>
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
+        authDomain: "nofwa-indonesia.firebaseapp.com",
+        projectId: "nofwa-indonesia",
+        storageBucket: "nofwa-indonesia.appspot.com",
+        messagingSenderId: "608371446284",
+        appId: "1:608371446284:web:5c15b701371d2390599429",
+        measurementId: "G-WJSVLG5HW5"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      db.collection("Pesanan").onSnapshot(snapshot =>{
+        snapshot.docChanges();
+        getData();
+      })
+      db.collection("katalis").onSnapshot(snapshot =>{
+        snapshot.docChanges();
+        getData();
+      })
+
+      async function getData() {
+        
+        document.getElementById('data').innerHTML = '';
+        const Admin = await db.collection("Pesanan").get();
+        const admin = await db.collection("katalis").get();
+        Admin.docs.forEach(async(kts, i) => {
+          console.log(kts.id);
+        //   const idHotel = kts.data().idHotel;
+        //   const harga = parseInt(kts.data().harga);
+        //   const hargaAdmin = parseInt(kts.data().hargaAdmin);
+        //   const imageUrl = await firebase.storage().ref(Hotel_${idHotel}/${kts.data().katalisImageLink}).getDownloadURL();
+          document.getElementById('data').innerHTML += `
+            <tr> 
+              <td>${i+1}</td>
+             <td></td>
+              <td>${kts.data().id_customer}</td>
+              <td>${kts.data().id_hotel}</td> 
+              <td>${kts.data().id_kurir}</td> 
+              <td>${kts.data().id_pesanan}</td>
+              <td>${kts.data().list_daftar_katalis}</td>
+              <td>${kts.data().status_pesanan}</td>
+              <td>${kts.data().waktu_pesanan_dibuat}</td>
+              <td>${kts.data().total_harga}</td>
+            </tr>
+          `;
+        });
+      }
+
+     
+    </script>
+
+    
+
+    <script>
+        // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    
+        window.onload = function() {
+          // Mendapatkan nama pengguna dari cookie
+          var userName = getCookie('user_name');
+          // Cek apakah nama pengguna ditemukan
+          if (userName) {
+            // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+            var namaAdminElements = document.getElementsByClassName('namaAdmin');
+              for (var i = 0; i < namaAdminElements.length; i++) {
+                  namaAdminElements[i].innerText = userName;
+              }
+          } else {
+              // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
+              window.location.href = "index.html";
+          }
+        };
+      </script>
+    <script src="./boostrap/js/bootstrap.js"></script>
+</body>
+</html>

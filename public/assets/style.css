@@ -214,21 +214,29 @@
 }
 
 .kotak-profile {
-  width: 1240px;
+  width: 720px;
   height: 500px;
-  border-radius: 10px;
   background-color: #CDC899;
   display: flex;
+  border-radius: 10px;
 }
 
 .kotak-profile h2{
   padding: 30px;
 }
 
-.profile {
-  margin: 20px;
-  width: 600px;
+.kotak-persetujuan {
+  width: max-content;
+  height: 500px;
+  background-color: #CDC899;
+  display: flex;
+  border-radius: 10px;
 }
+
+.kotak-persetujuan h2{
+  padding: 30px;
+}
+
 
 .update {
   background-color: #862B0D;
@@ -246,4 +254,9 @@
 .box {
   color: #ffffff;
   width: 50px;
+}
+
+.profile .circle img{
+  width: 100%;
+  height: auto;
 }

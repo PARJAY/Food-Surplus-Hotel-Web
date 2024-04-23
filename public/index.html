@@ -75,19 +75,22 @@
                         setCookie('user_uid', user.uid, 7);
                         setCookie('user_name', user.displayName, 7);
                         setCookie('user_email', user.email, 7);
+                        setCookie('user_photoURl', user.photoURL, 7);
                         // Arahkan pengguna ke halaman dasboard
                         window.location.href = "Dasboard.html";
                     } else {
                         // Jika tidak, tambahkan pengguna ke koleksi hotel
                         db.collection(hotelCollection).doc(user.uid).set({
                             name: user.displayName,
-                            email: user.email
+                            email: user.email,
+                            photoURL : user.photoURL
                         }).then(() => {
                             console.log("New hotel data added for user!");
                             // Set cookie untuk informasi pengguna
                             setCookie('user_uid', user.uid, 7);
                             setCookie('user_name', user.displayName, 7);
                             setCookie('user_email', user.email, 7);
+                            
                             // Arahkan pengguna ke halaman dasboard
                             window.location.href = "Dasboard.html";
 
@@ -102,6 +105,10 @@
 
                             // Arahkan pengguna ke halaman transaksi
                             window.location.href = "HistoryTransaksi.html";
+
+                            // Arahkan pengguna ke halaman transaksi
+                            window.location.href = "Pesanan.html";
+                            
                         }).catch((error) => {
                             console.error("Error adding hotel data:", error);
                         });

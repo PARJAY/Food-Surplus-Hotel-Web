@@ -9,6 +9,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Google Maps JavaScript library -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCDPAJZhujCsSSP-or2YAhnMzUxQuPxI6I"></script>
     <title>Profile</title>
   </head>
   <body class="body">
@@ -57,7 +60,10 @@
         <li class="nav-item">
           <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
         </li>
-        <li class="nav-item" style="margin-top: 91px;" >
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
+        </li>
+        <li class="nav-item" style="margin-top: 21px;" >
           <a class="nav-link logout-link" href="index.html">Logout</a>
         </li>
       </ul>
@@ -72,54 +78,119 @@
           </div>
         </div>
       </div>
-      <div class="kotak-profile">
-        <div class="profile">
-          <div class="update d-flex justify-content-start align-items-center">
-              <h5 class="m-2">Update Profile Anda</h5>
-          </div>
-          <div class="col-auto mt-3 mb-3 d-flex justify-content-center">
-            <div class="circle">
-              <img src="gambar.jpg" alt="">
-            </div>
-          </div>
-          <div class="row pt-2 justify-content-end">
-            <div class="col-auto">
-              <h5 class="">Email Hotel:</h5>
-            </div>
-            <div class="col-auto">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="form" style="width: 420px; border: 1px solid black;">
+      <div class="container" style="display: grid; grid-gap: 2px;">
+        <div class="row">
+          <div class="col">
+            <div class="kotak-profile">
+              <div class="container">
+                <div style="margin: 20px;">
+                  <div class="update d-flex justify-content-start align-items-center mb-4">
+                    <h5 class="m-2">Profile Anda</h5>
+                  </div>
+                  <div class="row pt-2 justify-content-end">
+                    <div class="col-auto">
+                      <h5 class="">Email Hotel:</h5>
+                    </div>
+                    <div class="col-auto">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="email" style="width: 500px; border: 1px solid black;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pt-2 justify-content-end">
+                    <div class="col-auto">
+                      <h5 class="">Nama Hotel:</h5>
+                    </div>
+                    <div class="col-auto">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="nama" style="width: 500px; border: 1px solid black;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pt-2 justify-content-end">
+                    <div class="col-auto">
+                      <h5 class="">Alamat Hotel:</h5>
+                    </div>
+                    <div class="col-auto">
+                      <div class="form-group">
+                        <input id="alamatInput" type="text" class="form-control" style="width: 500px; border: 1px solid black;" readonly>
+                      </div> 
+                    </div>
+                  </div>
+                  <div class="row pt-2 justify-content-end">
+                    <div class="col-auto">
+                      <h5 class="">No Telepon:</h5>
+                    </div>
+                    <div class="col-auto">
+                      <div class="form-group">
+                        <input  id="phoneInput" type="number" class="form-control" style="width: 500px; border: 1px solid black;" readonly>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row pt-2 justify-content-center">
+                    <div class="col-auto">
+                      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPersetujuan">Simpan</button>
+                      <button id="edit" class="btn btn-warning">Edit</button>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
           </div>
-          <div class="row pt-2 justify-content-end">
-            <div class="col-auto">
-              <h5 class="">Name Hotel:</h5>
+        </div>
+      </div>
+    </div>
+
+  <!-- Modal Persetujuan -->
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal fade" id="modalPersetujuan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Daftar Persetjuan</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="col-auto">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="form" style="width: 420px; border: 1px solid black;">
+            <div class="modal-body">
+              <div class="card-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Higernis, yakni tidak mengandung kuman sumber penyakit.
+                  </label>
                 </div>
-            </div>
-          </div>
-          <div class="row pt-2 justify-content-end">
-            <div class="col-auto">
-              <h5 class="">Alamat Hotel:</h5>
-            </div>
-            <div class="col-auto">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="form" style="width: 420px; border: 1px solid black;">
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check2">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Bergizi, mengandung karbohirat, lemak, protein, mineral dan vitamin yang cukup.
+                  </label>
                 </div>
-            </div>
-          </div>
-          <div class="row pt-2 justify-content-end">
-            <div class="col-auto">
-              <h5 class="">No Telepon:</h5>
-            </div>
-            <div class="col-auto">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="form" style="width: 420px; border: 1px solid black;">
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check3">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Berkecukupan, memenuhi kebutuhan tubuh di usia dan kondisi tertentu.
+                  </label>
                 </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check4">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Mudah dicerna
+                  </label>
+                </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check5">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Tidak mengandung bahan pengawet atau pewarna buatan.
+                  </label>
+                </div>
+                <hr>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="tambah" onclick="saveChanges()">Save changes</button>
             </div>
           </div>
         </div>
@@ -142,20 +213,186 @@
       window.onload = function() {
         // Mendapatkan nama pengguna dari cookie
         var userName = getCookie('user_name');
+        // Mendapatkan email pengguna dari cookie
+        var userEmail = getCookie('user_email');
         // Cek apakah nama pengguna ditemukan
         if (userName) {
-          // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
-          var namaAdminElements = document.getElementsByClassName('namaAdmin');
+            // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+            var namaAdminElements = document.getElementsByClassName('namaAdmin');
             for (var i = 0; i < namaAdminElements.length; i++) {
                 namaAdminElements[i].innerText = userName;
             }
+
+            // Mendapatkan elemen input dan mengisi dengan nama pengguna
+            var inputElement = document.getElementById('nama');
+            inputElement.value = userName;
+            inputElement.setAttribute('readonly', 'true');
+
+            // Mendapatkan elemen input email dan mengisi dengan email pengguna
+            var inputEmail = document.getElementById('email');
+            inputEmail.value = userEmail;
+            inputEmail.setAttribute('readonly', 'true');
+
         } else {
             // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
             window.location.href = "index.html";
         }
       };
     </script>
+
+    <script>// google maps
+      var alamatInput = 'alamatInput';
+      var autocomplete;
+      var latitudeResult;
+      var longitudeResult;
+
+      $(document).ready(function () {
+          autocomplete = new google.maps.places.Autocomplete((document.getElementById(alamatInput)), {
+              types: ['establishment'],
+          });
+
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+              var near_place = autocomplete.getPlace();
+              if (near_place.geometry) {
+                  var latitude = near_place.geometry.location.lat();
+                  var longitude = near_place.geometry.location.lng();
+                  latitudeResult = latitude;
+                  longitudeResult = longitude;
+                  console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+              } else {
+                  console.log("Location not found.");
+              }
+          });
+      });
+
+      function getLatitudeResult() {
+          return latitudeResult;
+      }
+
+      function getLongitudeResult() {
+          return longitudeResult;
+      }
+    </script>
+  
+    <script> // database
+      const firebaseConfig = {
+        apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
+        authDomain: "nofwa-indonesia.firebaseapp.com",
+        projectId: "nofwa-indonesia",
+        storageBucket: "nofwa-indonesia.appspot.com",
+        messagingSenderId: "608371446284",
+        appId: "1:608371446284:web:5c15b701371d2390599429",
+        measurementId: "G-WJSVLG5HW5"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      var idHotel = getCookie('user_uid');
+  
+      document.getElementById('tambah').addEventListener('click', function(){ 
+        // Memeriksa apakah semua checkbox sudah dicentang
+        var checkboxes = document.querySelectorAll('.form-check-input');
+        var allChecked = true;
+        checkboxes.forEach(function(checkbox) {
+          if (!checkbox.checked) {
+            allChecked = false;
+          }
+        });
     
+        if (allChecked) {
+          // Jika semua checkbox sudah dicentang, tambahkan data ke database
+          var newData = {
+            alamat: document.getElementById('alamatInput').value,
+            geolocation: `${getLatitudeResult()}, ${getLongitudeResult()}`,
+            phone: document.getElementById('phoneInput').value
+          };
+    
+          // Gunakan update() untuk menambahkan atau memperbarui data dalam dokumen yang sudah ada
+          db.collection("Hotel").doc(idHotel).update(newData)
+            .then(() => {
+              console.log("Document successfully updated");
+            })
+            .catch((error) => {
+              // Jika dokumen belum ada, update() akan membuat dokumen baru
+              if (error.code === "not-found") {
+                db.collection("Hotel").doc(idHotel).set(newData)
+                  .then(() => {
+                    console.log("Document successfully created");
+                  })
+                  .catch((error) => {
+                    console.error("Error creating document: ", error);
+                  });
+              } else {
+                console.error("Error updating document: ", error);
+              }
+            });
+        } else {
+          // Jika ada checkbox yang belum dicentang, tampilkan pesan kesalahan
+          alert("Mohon centang semua kotak persetujuan terlebih dahulu.");
+        }
+      });
+
+    </script>
+
+    <script>
+      var idHotel = getCookie('user_uid');
+      // Mengambil referensi elemen input
+      var inputAlamat = document.getElementById("alamatInput");
+      var inputPhone = document.getElementById("phoneInput");
+      db.collection("Hotel").doc(idHotel).get().then(function(doc) {
+        if (doc.exists) {
+            // Mendapatkan data dari dokumen
+            var data = doc.data();
+            var alamat = data.alamat;
+            var phone = data.phone;
+            inputAlamat.value = alamat;
+            inputPhone.value = phone;
+        } else {
+            console.error("Dokumen tidak ditemukan!");
+        }
+      }).catch(function(error) {
+        console.error("Gagal mengambil data:", error);
+      });
+    </script>
+
+    <script>
+      $('#edit').click(function () {
+        $('#alamatInput').removeAttr('readonly');
+        $('#phoneInput').removeAttr('readonly');
+      });
+    </script>
+
+    <script>
+      function saveChanges() {
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        let allChecked = true;
+        checkboxes.forEach(function(checkbox) {
+          if (!checkbox.checked) {
+            allChecked = false;
+          }
+        });
+        if (allChecked) {
+          // Lakukan penyimpanan atau tindakan lainnya di sini
+          console.log("Simpan data...");
+        } else {
+          alert("Mohon centang semua kotak persetujuan terlebih dahulu.");
+        }
+      }
+    </script>  
+    
+    <script>
+      function saveChanges() {
+        // Lakukan penyimpanan atau tindakan lainnya di sini
+        console.log("Simpan data...");
+        // Menutup modal setelah tombol "Save changes" diklik
+        const modalElement = document.getElementById('modalPersetujuan');
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
+      }
+    </script>
+
     <script src="boostrap/js/bootstrap.js"></script>
 
   </body>
