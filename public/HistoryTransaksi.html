@@ -216,6 +216,7 @@
 
       document.getElementById('data').addEventListener('click', function(e) {
         const id = e.target.dataset.id;
+        
         if (e.target.classList.contains('hapusData')) {
           db.collection("Transaksi_Hotel Dummy_1").doc(id).delete().then(() => {
               console.log("Document successfully deleted!");

@@ -112,50 +112,51 @@
         measurementId: "G-WJSVLG5HW5"
       };
 
-      // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore(); // Definisi koneksi ke Firestore
 
-      db.collection("Pesanan").onSnapshot(snapshot =>{
-        snapshot.docChanges();
-        getData();
-      })
-      db.collection("katalis").onSnapshot(snapshot =>{
-        snapshot.docChanges();
-        getData();
-      })
-
+      // Fungsi untuk mengambil data dari Firestore
       async function getData() {
-        
-        document.getElementById('data').innerHTML = '';
-        const Admin = await db.collection("Pesanan").get();
-        const admin = await db.collection("katalis").get();
-        Admin.docs.forEach(async(kts, i) => {
-          console.log(kts.id);
-        //   const idHotel = kts.data().idHotel;
-        //   const harga = parseInt(kts.data().harga);
-        //   const hargaAdmin = parseInt(kts.data().hargaAdmin);
-        //   const imageUrl = await firebase.storage().ref(Hotel_${idHotel}/${kts.data().katalisImageLink}).getDownloadURL();
-          document.getElementById('data').innerHTML += `
-            <tr> 
-              <td>${i+1}</td>
-             <td></td>
-              <td>${kts.data().id_customer}</td>
-              <td>${kts.data().id_hotel}</td> 
-              <td>${kts.data().id_kurir}</td> 
-              <td>${kts.data().id_pesanan}</td>
-              <td>${kts.data().list_daftar_katalis}</td>
-              <td>${kts.data().status_pesanan}</td>
-              <td>${kts.data().waktu_pesanan_dibuat}</td>
-              <td>${kts.data().total_harga}</td>
-            </tr>
-          `;
-        });
+          try {
+              const [pesananSnapshot, katalisSnapshot] = await Promise.all([
+                  db.collection("Pesanan").get(),
+                  db.collection("katalis").get()
+              ]);
+
+              // Hapus data yang ada sebelum menampilkan data baru
+              document.getElementById('data').innerHTML = '';
+
+              pesananSnapshot.forEach((doc, i) => {
+                  const kts = doc.data();
+                  const katalis = katalisSnapshot.docs.find(katalisDoc => katalisDoc.id === kts.id_katalis);
+                  
+                  document.getElementById('data').innerHTML += `
+                      <tr> 
+                          <td>${i+1}</td>
+                          <td></td>
+                          <td>${kts.id_customer}</td>
+                          <td>${kts.id_hotel}</td> 
+                          <td>${kts.id_kurir}</td> 
+                          <td>${kts.id_pesanan}</td>
+                          <td>${kts.list_daftar_katalis}</td>
+                          <td>${kts.status_pesanan}</td>
+                          <td>${kts.waktu_pesanan_dibuat}</td>
+                          <td>${kts.total_harga}</td>
+                      </tr>
+                  `;
+              });
+          } catch (error) {
+              console.error("Error getting documents: ", error);
+          }
       }
+
+    // Panggil getData() setelah DOM dimuat
+    document.addEventListener("DOMContentLoaded", function(event) {
+        getData();
+    });
 
      
     </script>
-
-    
 
     <script>
         // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya

@@ -213,24 +213,18 @@
     })
 
 
-    async function getData(){
+    async function getData() {
       document.getElementById('data').innerHTML = '';
-        const Admin = await db.collection("Katalis").get();
-        Admin.docs.forEach(async (kts, i) => {
-          console.log(kts.id);
-          const harga = parseInt(kts.data().harga);
-
+      const Admin = await db.collection("Katalis").get();
+      Admin.docs.forEach((kts, i) => {
+        console.log(kts.id);
+        const harga = parseInt(kts.data().harga);
           var idHotel = getCookie('user_uid');
-
-          // Ambil URL unduhan gambar untuk setiap dokumen
-          const imageUrl = await firebase.storage().ref(`Hotel_${idHotel}/${kts.data().katalisImageLink}`).getDownloadURL();
-
-          // Tambahkan baris ke tabel dengan URL gambar yang diambil
           document.getElementById('data').innerHTML += `
             <tr> 
               <td>${i + 1}</td>
               <td>12345</td> 
-              <td><img src="${imageUrl}" id="imagePreview_${i}" width="80" height="80"></td>
+              <td></td>
               <td>${kts.data().namaKatalis}</td>
               <td>${kts.data().stok}</td> 
               <td>${kts.data().komposisi}</td> 
@@ -244,278 +238,104 @@
           `;
       });
     }
+  
 
     document.getElementById('tambahData').addEventListener('click', function () {
       let hargaChecer;
       let stokChecer;
-  
+      
       if (isNaN(parseInt(document.getElementById('harga').value))) hargaChecer = 0;
       else hargaChecer = parseInt(document.getElementById('harga').value);
-  
+      
       if (isNaN(parseInt(document.getElementById('stok').value))) stokChecer = 0;
       else stokChecer = parseInt(document.getElementById('stok').value);
-  
-      const file = document.getElementById('katalisImageLink').files[0];
-  
+      
       var idHotel = getCookie('user_uid');
-  
-      if (file) {
-        const storageRef = firebase.storage().ref(`Hotel_${idHotel}/${file.name}`);
-        const uploadTask = storageRef.put(file);
+      
+      db.collection("Katalis").add({
+        idHotel: idHotel,
+        namaKatalis: document.getElementById('namaKatalis').value,
+        stok: stokChecer,
+        komposisi: document.getElementById('komposisi').value,
+        harga: hargaChecer,
+        gramPerPorsi: document.getElementById('gramPerPorsi').value
+      }).then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
 
-        uploadTask.on('state_changed',
-        (snapshot) => {
-          // Progress tracking
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + progress + '% done');
-        },
-        (error) => {
-            // Handle unsuccessful uploads
-            console.error('Error uploading image: ', error);
-        }, 
-        () => {
-          db.collection("Katalis").add({
-            idHotel: idHotel,
-            katalisImageLink: file.name, // Simpan URL gambar ke dalam Firestore
-            namaKatalis: document.getElementById('namaKatalis').value,
-            stok: stokChecer,
-            komposisi: document.getElementById('komposisi').value,
-            harga: hargaChecer,
-            gramPerPorsi: document.getElementById('gramPerPorsi').value
-          }).then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
+        document.getElementById('katalisImageLink').value = '';
+        document.getElementById('namaKatalis').value = '';
+        document.getElementById('stok').value = '';
+        document.getElementById('komposisi').value = '';
+        document.getElementById('harga').value = '';
+        document.getElementById('gramPerPorsi').value = '';
 
-            // Setel ulang nilai input setelah data berhasil ditambahkan
-            document.getElementById('katalisImageLink').value = '';
-            document.getElementById('namaKatalis').value = '';
-            document.getElementById('stok').value = '';
-            document.getElementById('komposisi').value = '';
-            document.getElementById('harga').value = '';
-            document.getElementById('gramPerPorsi').value = '';
-
-            // Sembunyikan modal tambah setelah data berhasil ditambahkan
-            var modal = document.getElementById('modalTambah');
-            var modalInstance = bootstrap.Modal.getInstance(modal);
-            modalInstance.hide();
-          }).catch((error) => {
-            console.error("Error adding document: ", error);
-          });  
-        });
-      } else {
-          // Jika pengguna tidak memilih gambar, tampilkan pesan kesalahan
-          console.error("Error: No image selected");
-          // Anda dapat menambahkan tindakan lain di sini, seperti menampilkan pesan untuk pengguna
-      }
+        var modal = document.getElementById('modalTambah');
+        var modalInstance = bootstrap.Modal.getInstance(modal);
+        modalInstance.hide();
+      }).catch((error) => {
+        console.error("Error adding document: ", error);
+      }); 
     });
 
     document.getElementById('updateData').addEventListener('click', function () {
       let harga_updateChecker;
       let stok_updateChecker;
 
-      if (isNaN(parseInt(document.getElementById('harga_update').value))) 
-          harga_updateChecker = 0;
-      else 
-          harga_updateChecker = parseInt(document.getElementById('harga_update').value);
+      if (isNaN(parseInt(document.getElementById('harga_update').value))) harga_updateChecker = 0;
+      else harga_updateChecker = parseInt(document.getElementById('harga_update').value);
 
-      if (isNaN(parseInt(document.getElementById('stok_update').value))) 
-          stok_updateChecker = 0;
-      else 
-          stok_updateChecker = parseInt(document.getElementById('stok_update').value);
-
-      const file = document.getElementById('katalisImageLink').files[0];
+      if (isNaN(parseInt(document.getElementById('stok_update').value))) stok_updateChecker = 0;
+      else stok_updateChecker = parseInt(document.getElementById('stok_update').value);
     
       var idHotel = getCookie('user_uid');
 
-      if (file) {
-        const storageRefOld = firebase.storage().ref(`Hotel_${idHotel}/${file.name}`);
-        storageRefOld.delete().then(() => {
-        // File lama berhasil dihapus
-        console.log("Old file successfully deleted!");
-
-        const storageRefNew = firebase.storage().ref(`Hotel_${idHotel}/${file.name}`);
-        const uploadTask = storageRefNew.put(file);
-
-        uploadTask.on('state_changed',
-          (snapshot) => {
-            // Progress tracking
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-          },
-          (error) => {
-            // Handle unsuccessful uploads
-            console.error('Error uploading image: ', error);
-          },
-          () => {
-            db.collection("Katalis").doc(document.getElementById('idHotel').value).update({
-              katalisImageLink: file.name, // Gunakan file yang baru diunggah
-              namaKatalis: document.getElementById('namaKatalis_update').value,
-              stok: stok_updateChecker,
-              komposisi: document.getElementById('komposisi_update').value,
-              harga: harga_updateChecker,
-              gramPerPorsi: document.getElementById('gramPerPorsi_update').value
-            }).then(() => {
-              console.log("Document successfully updated!");
-              var modal = document.getElementById('modalUpdate');
-              var modalInstance = bootstrap.Modal.getInstance(modal);
-              modalInstance.hide();
-            }).catch((error) => {
-              console.error("Error updating document: ", error);
-            });
-          });
-        }).catch((error) => {
-          console.error("Error deleting old file: ", error);
-        });
-      } else {
-        // Jika tidak ada file yang dipilih, langsung update dokumen tanpa menghapus dan mengunggah gambar baru
-        db.collection("Katalis").doc(document.getElementById('id').value).update({
-          namaKatalis: document.getElementById('namaKatalis_update').value,
-          stok: stok_updateChecker,
-          komposisi: document.getElementById('komposisi_update').value,
-          harga: harga_updateChecker,
-          gramPerPorsi: document.getElementById('gramPerPorsi_update').value
-        }).then(() => {
-          console.log("Document successfully updated!");
-          var modal = document.getElementById('modalUpdate');
-          var modalInstance = bootstrap.Modal.getInstance(modal);
-          modalInstance.hide();
-        }).catch((error) => {
-          console.error("Error updating document: ", error);
-        });
-      }
+      db.collection("Katalis").doc(document.getElementById('id').value).update({
+        namaKatalis: document.getElementById('namaKatalis_update').value,
+        stok: stok_updateChecker,
+        komposisi: document.getElementById('komposisi_update').value,
+        harga: harga_updateChecker,
+        gramPerPorsi: document.getElementById('gramPerPorsi_update').value
+      }).then(() => {
+        console.log("Document successfully updated!");
+        var modal = document.getElementById('modalUpdate');
+        var modalInstance = bootstrap.Modal.getInstance(modal);
+        modalInstance.hide();
+      }).catch((error) => {
+        console.error("Error updating document: ", error);
+      });
     });
 
     document.getElementById('data').addEventListener('click', function(e) {
       const id = e.target.dataset.id;
-      // Mendapatkan idHotel dari cookie
       const idHotel = getCookie('user_uid');
 
       if (e.target.classList.contains('hapusData')) {
-        db.collection("Katalis").doc(id).get().then((doc) => {
-          if (doc.exists) {
-            const file = document.getElementById('katalisImageLink').files[0];
-            db.collection("Katalis").doc(id).delete().then(() => {
-              console.log("Dokumen berhasil dihapus!");
-                if (file) {
-                  // Menghapus gambar dari penyimpanan
-                  const imageRef = storage.ref(`Hotel_${idHotel}/${file.name}`);
-                  imageRef.delete().then(() => {
-                      console.log("Gambar berhasil dihapus!");
-                  }).catch((error) => {
-                      console.error("Error menghapus gambar: ", error);
-                  });
-                }
-            }).catch((error) => {
-              console.error("Error menghapus dokumen: ", error);
-            });
-          } else {
-            console.log("Dokumen tidak ditemukan!");
-          }
+        db.collection("Katalis").doc(id).delete().then((doc) => {
+        console.log("Dokumen berhasil dihapus!");
         }).catch((error) => {
-          console.error("Error mengambil dokumen: ", error);
+          console.error("Error menghapus gambar: ", error);
         });
       }
 
       if (e.target.classList.contains('editData')) {
-        const file = document.getElementById('katalisImageLink_update').files[0];
-        const id = e.target.dataset.id;
-        const idHotel = getCookie('user_uid');
-    
-        if (file) {
-          // Jika ada file gambar yang dipilih, proses unggah gambar yang baru
-          const storageRefOld = firebase.storage().ref(`Hotel_${idHotel}/${file.name}`);
-          storageRefOld.delete().then(() => {
-              // File lama berhasil dihapus
-              console.log("Old file successfully deleted!");
-  
-              // Unggah gambar yang baru
-              const storageRefNew = firebase.storage().ref(`Hotel_${idHotel}/${file.name}`);
-              const uploadTask = storageRefNew.put(file);
-  
-              uploadTask.on('state_changed',
-              (snapshot) => {
-              // Progress tracking
-              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              console.log('Upload is ' + progress + '% done');
-              },
-              (error) => {
-              // Handle unsuccessful uploads
-              console.error('Error uploading image: ', error);
-              },
-              () => {
-                uploadTask.snapshot.ref.getDownloadURL().then(() => {
-                  // Update URL gambar pada dokumen Firestore
-                  db.collection("Katalis").doc(id).update({
-                      katalisImageLink: file.name // Gunakan nama file yang baru diunggah
-                  }).then(() => {
-                      console.log("Document successfully updated with new image URL!");
-                  }).catch((error) => {
-                      console.error("Error updating document with new image URL: ", error);
-                  });
-                });
-              }).catch((error) => {
-              console.error("Error deleting old file: ", error);
-              });
-          });
-    
-          // Update data lainnya
-          db.collection("Katalis").doc(id).get().then((doc) => {
-            if (doc.exists) {
-              console.log(doc.data());
-              document.getElementById('id').value = doc.id;
-              document.getElementById('katalisImageLink_update').value = doc.data().katalisImageLink;
-              document.getElementById('namaKatalis_update').value = doc.data().namaKatalis;
-              document.getElementById('stok_update').value = doc.data().stok;
-              document.getElementById('komposisi_update').value = doc.data().komposisi;
-              document.getElementById('harga_update').value = doc.data().harga;
-              document.getElementById('gramPerPorsi_update').value = doc.data().gramPerPorsi;
-            } else {
-              console.log("No such document!");
-            }
-          });
-        }
-      }
-    });
-    
-    </script>
-  
-    <script>
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      const storage = firebase.storage();
-    
-      function uploadImage(idHotel) {
-        const file = document.getElementById('katalisImageLink').files[0];
-        const storageRef = firebase.storage().ref(`Hotel_${idHotel}/${kts.data().katalisImageLink}`);
-        const uploadTask = storageRef.put(file);
-    
-        uploadTask.on('state_changed',
-          (snapshot) => {
-            // Progress tracking
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-          },
-          (error) => {
-            // Handle unsuccessful uploads
-            console.error('Error uploading image: ', error);
-          },
-          () => {
-            // Handle successful uploads on complete
-            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-              // Display uploaded image
-              const imgPreview = document.getElementById('imagePreview');
-              imgPreview.innerHTML = `<img src="${downloadURL}" alt="Uploaded Image">`;
-    
-              // Add image URL to table
-              const tableBody = document.getElementById('imageTableBody');
-              const newRow = tableBody.insertRow();
-              const cell = newRow.insertCell();
-              cell.innerHTML = `<img src="${downloadURL}" alt="Uploaded Image">`;
-            });
+        db.collection("Katalis").doc(id).get().then((doc) => {
+          if (doc.exists) {
+          console.log(doc.data());
+          document.getElementById('id').value = doc.id;
+          document.getElementById('namaKatalis_update').value = doc.data().namaKatalis;
+          document.getElementById('stokKatalis_update').value = doc.data().stok;
+          document.getElementById('komposisi_update').value = doc.data().komposisi;
+          document.getElementById('harga_update').value = doc.data().harga;
+          document.getElementById('gramPerPorsi_update').value =doc.data().gramPerPorsi;
+        } else {
+          console.log("No such document!");
           }
-        );
+        })
       }
+    })
+    
     </script>
-
+  
     <script>
       // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
       function getCookie(name) {
