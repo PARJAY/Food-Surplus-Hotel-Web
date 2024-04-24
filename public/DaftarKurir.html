@@ -30,7 +30,7 @@
             </div>
             <div class="col-auto">
               <div class="circle">
-                <img src="gambar.jpg" alt="">
+                <img id="userPhoto1" alt="gambar">
               </div>
             </div>
           </div>
@@ -41,7 +41,7 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="circle">
-      <img src="gambar.jpg" alt="Gambar">
+      <img id="userPhoto2" alt="gambar">
     </div>
     <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
     <ul class="nav flex-column">
@@ -79,7 +79,6 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Id Hotel</th>
             <th>Nama Kurir</th>
             <th>No Telepon Kurir</th>
             <th>Statur Kurir</th>
@@ -155,10 +154,10 @@
         const Admin = await db.collection("Kurir").get();
         Admin.docs.forEach((krr, i) => {
           console.log(krr.id);
+          var idHotel = getCookie('user_uid');
           document.getElementById('data').innerHTML += `
             <tr> 
               <td>${i+1}</td>
-              <td>12345</td>
               <td>${krr.data().name}</td> 
               <td>${krr.data().phoneNumber}</td> 
               <td>${krr.data().statusKurir}</td>
@@ -229,15 +228,21 @@
       window.onload = function() {
         // Mendapatkan nama pengguna dari cookie
         var userName = getCookie('user_name');
-        // Cek apakah nama pengguna ditemukan
-        if (userName) {
-          // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
-          var namaAdminElements = document.getElementsByClassName('namaAdmin');
+        // Mendapatkan URL foto pengguna dari cookie
+        var userPhoto = getCookie('user_photoURl');
+        
+        // Cek apakah nama pengguna dan URL foto pengguna ditemukan
+        if (userName && userPhoto) {
+            // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+            var namaAdminElements = document.getElementsByClassName('namaAdmin');
             for (var i = 0; i < namaAdminElements.length; i++) {
                 namaAdminElements[i].innerText = userName;
             }
+            // Setel gambar pengguna
+            document.getElementById('userPhoto1').src = userPhoto;
+            document.getElementById('userPhoto2').src = userPhoto;
         } else {
-            // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
+            // Jika nama pengguna atau URL foto pengguna tidak ditemukan, arahkan kembali ke halaman login
             window.location.href = "index.html";
         }
       };

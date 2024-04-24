@@ -29,7 +29,7 @@
             </div>
             <div class="col-auto">
               <div class="circle">
-                <img src="gambar.jpg" alt="">
+                <img id="userPhoto1" alt="gambar">
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@
   <!-- Sidebar -->
     <div class="sidebar">
       <div class="circle">
-        <img src="gambar.jpg" alt="Gambar">
+        <img id="userPhoto2" alt="gambar">
       </div>
       <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
       <ul class="nav flex-column">
@@ -81,7 +81,6 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Id Hotel</th>
                 <th>Keuntungan</th>
                 <th>Waktu Transaksi</th>
                 <th>#</th>
@@ -179,10 +178,10 @@
         Admin.docs.forEach((tsk, i) => {
           console.log(tsk.id);
           const harga = parseInt(tsk.data().harga);
+          var idHotel = getCookie('user_uid');
           document.getElementById('data').innerHTML += `
             <tr> 
               <td>${i+1}</td> 
-              <td>12345</td>
               <td>${tsk.data().keuntungan}</td>
               <td>${tsk.data().waktuTransaksi}</td> 
               <td class="button-container">
@@ -282,15 +281,21 @@
       window.onload = function() {
         // Mendapatkan nama pengguna dari cookie
         var userName = getCookie('user_name');
-        // Cek apakah nama pengguna ditemukan
-        if (userName) {
-          // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
-          var namaAdminElements = document.getElementsByClassName('namaAdmin');
+        // Mendapatkan URL foto pengguna dari cookie
+        var userPhoto = getCookie('user_photoURl');
+        
+        // Cek apakah nama pengguna dan URL foto pengguna ditemukan
+        if (userName && userPhoto) {
+            // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+            var namaAdminElements = document.getElementsByClassName('namaAdmin');
             for (var i = 0; i < namaAdminElements.length; i++) {
                 namaAdminElements[i].innerText = userName;
             }
+            // Setel gambar pengguna
+            document.getElementById('userPhoto1').src = userPhoto;
+            document.getElementById('userPhoto2').src = userPhoto;
         } else {
-            // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
+            // Jika nama pengguna atau URL foto pengguna tidak ditemukan, arahkan kembali ke halaman login
             window.location.href = "index.html";
         }
       };

@@ -30,7 +30,7 @@
               </div>
               <div class="col-auto">
                 <div class="circle">
-                  <img src="gambar.jpg" alt="">
+                  <img id="userPhoto1" alt="gambar">
                 </div>
               </div>
             </div>
@@ -41,7 +41,7 @@
     <!-- Sidebar -->
       <div class="sidebar">
         <div class="circle">
-          <img src="gambar.jpg" alt="Gambar">
+          <img id="userPhoto2" alt="gambar">
         </div>
         <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
         <ul class="nav flex-column">
@@ -67,11 +67,12 @@
       </div>
     
     <!-- Content -->
+    <!-- Content -->
     <div class="content">
       <div class="containe" style="margin-bottom: 10px;">
         <div class="row">
           <div class="col">
-            <h2>Daftar Katalis</h2>
+            <h2>Daftar Pesanan</h2>
           </div>
           <div class="col-auto">
           </div>
@@ -82,11 +83,7 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>gambar</th>
-                    <th>Id Customer</th>
-                    <th>Id Hotel</th>
-                    <th>Id Kurir</th>
-                    <th>Id Pesanan</th>
+
                     <th>List Daftar Katalis</th>
                     <th>Status Pesanan</th>
                     <th>Waktu Pesanan</th>
@@ -101,7 +98,7 @@
     </div> 
     
     <script>
-
+      
       const firebaseConfig = {
         apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
         authDomain: "nofwa-indonesia.firebaseapp.com",
@@ -111,52 +108,49 @@
         appId: "1:608371446284:web:5c15b701371d2390599429",
         measurementId: "G-WJSVLG5HW5"
       };
-
+  
+      // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore(); // Definisi koneksi ke Firestore
-
-      // Fungsi untuk mengambil data dari Firestore
+      const db = firebase.firestore();
+  
+      db.collection("Pesanan").onSnapshot(snapshot => {
+          snapshot.docChanges();
+          getData();
+      })
+  
       async function getData() {
-          try {
-              const [pesananSnapshot, katalisSnapshot] = await Promise.all([
-                  db.collection("Pesanan").get(),
-                  db.collection("katalis").get()
-              ]);
+        document.getElementById('data').innerHTML = '';
 
-              // Hapus data yang ada sebelum menampilkan data baru
-              document.getElementById('data').innerHTML = '';
+        const Admin = await db.collection("Pesanan").get();
+        const snapshot = await db.collection("List_Pesanan_Katalis").get();
+        Admin.docs.forEach(async (kts, i) => {
+          console.log(kts.id);
 
-              pesananSnapshot.forEach((doc, i) => {
-                  const kts = doc.data();
-                  const katalis = katalisSnapshot.docs.find(katalisDoc => katalisDoc.id === kts.id_katalis);
-                  
-                  document.getElementById('data').innerHTML += `
-                      <tr> 
-                          <td>${i+1}</td>
-                          <td></td>
-                          <td>${kts.id_customer}</td>
-                          <td>${kts.id_hotel}</td> 
-                          <td>${kts.id_kurir}</td> 
-                          <td>${kts.id_pesanan}</td>
-                          <td>${kts.list_daftar_katalis}</td>
-                          <td>${kts.status_pesanan}</td>
-                          <td>${kts.waktu_pesanan_dibuat}</td>
-                          <td>${kts.total_harga}</td>
-                      </tr>
-                  `;
-              });
-          } catch (error) {
-              console.error("Error getting documents: ", error);
+          let text = ""
+          snapshot.forEach((doc) => {
+          const data = doc.data();
+          
+          console.log(data.DaftarKatalis)
+          for (let idKatalis in data.DaftarKatalis) {
+            console.log(idKatalis)
+            console.log(data.DaftarKatalis[idKatalis] + " ")
+
+            text += `${idKatalis} : ${data.DaftarKatalis[idKatalis]} | `
           }
+        });
+        document.getElementById('data').innerHTML += `
+                  <tr> 
+                      <td>${i + 1}</td>
+                      <td>${text}</td>
+                      <td>${data.status_pesanan}</td>
+                      <td>${data.waktu_pesanan_dibuat}</td>
+                      <td>${data.total_harga}</td>
+                  </tr>
+              `;
+        });
       }
-
-    // Panggil getData() setelah DOM dimuat
-    document.addEventListener("DOMContentLoaded", function(event) {
-        getData();
-    });
-
-     
     </script>
+
 
     <script>
         // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
@@ -174,15 +168,21 @@
         window.onload = function() {
           // Mendapatkan nama pengguna dari cookie
           var userName = getCookie('user_name');
-          // Cek apakah nama pengguna ditemukan
-          if (userName) {
-            // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
-            var namaAdminElements = document.getElementsByClassName('namaAdmin');
+          // Mendapatkan URL foto pengguna dari cookie
+          var userPhoto = getCookie('user_photoURl');
+          
+          // Cek apakah nama pengguna dan URL foto pengguna ditemukan
+          if (userName && userPhoto) {
+              // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+              var namaAdminElements = document.getElementsByClassName('namaAdmin');
               for (var i = 0; i < namaAdminElements.length; i++) {
                   namaAdminElements[i].innerText = userName;
               }
+              // Setel gambar pengguna
+              document.getElementById('userPhoto1').src = userPhoto;
+              document.getElementById('userPhoto2').src = userPhoto;
           } else {
-              // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
+              // Jika nama pengguna atau URL foto pengguna tidak ditemukan, arahkan kembali ke halaman login
               window.location.href = "index.html";
           }
         };

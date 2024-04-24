@@ -33,7 +33,7 @@
             </div>
             <div class="col-auto">
               <div class="circle">
-                <img src="gambar.jpg" alt="">
+                <img id="userPhoto1" alt="gambar">
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@
   <!-- Sidebar -->
     <div class="sidebar">
       <div class="circle">
-        <img src="gambar.jpg" alt="Gambar">
+        <img id="userPhoto2" alt="gambar">
       </div>
       <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
       <ul class="nav flex-column">
@@ -215,8 +215,11 @@
         var userName = getCookie('user_name');
         // Mendapatkan email pengguna dari cookie
         var userEmail = getCookie('user_email');
+        // Mendapatkan URL foto pengguna dari cookie
+        var userPhoto = getCookie('user_photoURl');
+
         // Cek apakah nama pengguna ditemukan
-        if (userName) {
+        if (userName && userPhoto && userEmail) {
             // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
             var namaAdminElements = document.getElementsByClassName('namaAdmin');
             for (var i = 0; i < namaAdminElements.length; i++) {
@@ -232,6 +235,10 @@
             var inputEmail = document.getElementById('email');
             inputEmail.value = userEmail;
             inputEmail.setAttribute('readonly', 'true');
+
+            // Setel gambar pengguna
+            document.getElementById('userPhoto1').src = userPhoto;
+            document.getElementById('userPhoto2').src = userPhoto;
 
         } else {
             // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
@@ -290,6 +297,8 @@
       const db = firebase.firestore();
 
       var idHotel = getCookie('user_uid');
+
+      document.getElementById('tambah').setAttribute('value', 'menunggu');
   
       document.getElementById('tambah').addEventListener('click', function(){ 
         // Memeriksa apakah semua checkbox sudah dicentang
@@ -306,7 +315,9 @@
           var newData = {
             alamat: document.getElementById('alamatInput').value,
             geolocation: `${getLatitudeResult()}, ${getLongitudeResult()}`,
-            phone: document.getElementById('phoneInput').value
+            phone: document.getElementById('phoneInput').value,
+            berkas: "menunggu",
+            status: ""
           };
     
           // Gunakan update() untuk menambahkan atau memperbarui data dalam dokumen yang sudah ada
@@ -358,13 +369,6 @@
     </script>
 
     <script>
-      $('#edit').click(function () {
-        $('#alamatInput').removeAttr('readonly');
-        $('#phoneInput').removeAttr('readonly');
-      });
-    </script>
-
-    <script>
       function saveChanges() {
         const checkboxes = document.querySelectorAll('.form-check-input');
         let allChecked = true;
@@ -380,9 +384,6 @@
           alert("Mohon centang semua kotak persetujuan terlebih dahulu.");
         }
       }
-    </script>  
-    
-    <script>
       function saveChanges() {
         // Lakukan penyimpanan atau tindakan lainnya di sini
         console.log("Simpan data...");
@@ -391,7 +392,21 @@
         const modalInstance = bootstrap.Modal.getInstance(modalElement);
         modalInstance.hide();
       }
-    </script>
+      // Event listener untuk menangkap saat modal ditutup
+      $('#modalPersetujuan').on('hidden.bs.modal', function () {
+        // Tangkap semua checkbox
+        var checkboxes = document.querySelectorAll('.form-check-input');
+        
+        // Kosongkan status centang checkbox
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
+      });
+      $('#edit').click(function () {
+        $('#alamatInput').removeAttr('readonly');
+        $('#phoneInput').removeAttr('readonly');
+      });
+    </script> 
 
     <script src="boostrap/js/bootstrap.js"></script>
 

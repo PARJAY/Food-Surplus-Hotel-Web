@@ -30,7 +30,7 @@
             </div>
             <div class="col-auto">
               <div class="circle">
-                <img src="gambar.jpg" alt="">
+                <img id="userPhoto1" alt="gambar">
               </div>
             </div>
           </div>
@@ -41,7 +41,7 @@
   <!-- Sidebar -->
     <div class="sidebar">
       <div class="circle">
-        <img src="gambar.jpg" alt="Gambar">
+        <img id="userPhoto2" alt="gambar">
       </div>
       <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
       <ul class="nav flex-column">
@@ -58,7 +58,7 @@
           <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-hover" href="HistoryTransaksi.html">Pesanan</a>
+          <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
         </li>
         <li class="nav-item" style="margin-top: 21px;" >
           <a class="nav-link logout-link" href="index.html">Logout</a>
@@ -83,12 +83,11 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Id Hotel</th>
-                    <th>Gambar</th>
+                    <th class="col-1">Gambar</th>
                     <th>Nama Katalis</th>
-                    <th>Stok Katalis</th>
-                    <th>Komposisi</th>
-                    <th>Harga</th>
+                    <th class="col-1">Stok Katalis</th>
+                    <th class="col-1">Komposisi</th>
+                    <th class="col-1">Harga</th>
                     <th>Gram Per Porsi</th>
                     <th>#</th>
                 </tr>
@@ -219,23 +218,22 @@
       Admin.docs.forEach((kts, i) => {
         console.log(kts.id);
         const harga = parseInt(kts.data().harga);
-          var idHotel = getCookie('user_uid');
-          document.getElementById('data').innerHTML += `
-            <tr> 
-              <td>${i + 1}</td>
-              <td>12345</td> 
-              <td></td>
-              <td>${kts.data().namaKatalis}</td>
-              <td>${kts.data().stok}</td> 
-              <td>${kts.data().komposisi}</td> 
-              <td>${kts.data().harga}</td>
-              <td>${kts.data().gramPerPorsi}</td>
-              <td class="button-container">
-                  <button class="btn btn-warning editData mb-2" data-id="${kts.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
-                  <button class="btn btn-danger hapusData" data-id="${kts.id}">Hapus</button>
-              </td>
-            </tr>
-          `;
+        var idHotel = getCookie('user_uid');
+        document.getElementById('data').innerHTML += `
+          <tr> 
+            <td>${i + 1}</td>
+            <td></td>
+            <td>${kts.data().namaKatalis}</td>
+            <td>${kts.data().stok}</td> 
+            <td>${kts.data().komposisi}</td> 
+            <td>${kts.data().harga}</td>
+            <td>${kts.data().gramPerPorsi}</td>
+            <td class="button-container">
+              <button class="btn btn-warning editData mb-2" data-id="${kts.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
+                <button class="btn btn-danger hapusData" data-id="${kts.id}">Hapus</button>
+            </td>
+          </tr>
+        `;
       });
     }
   
@@ -352,15 +350,21 @@
       window.onload = function() {
         // Mendapatkan nama pengguna dari cookie
         var userName = getCookie('user_name');
-        // Cek apakah nama pengguna ditemukan
-        if (userName) {
-          // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
-          var namaAdminElements = document.getElementsByClassName('namaAdmin');
+        // Mendapatkan URL foto pengguna dari cookie
+        var userPhoto = getCookie('user_photoURl');
+        
+        // Cek apakah nama pengguna dan URL foto pengguna ditemukan
+        if (userName && userPhoto) {
+            // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+            var namaAdminElements = document.getElementsByClassName('namaAdmin');
             for (var i = 0; i < namaAdminElements.length; i++) {
                 namaAdminElements[i].innerText = userName;
             }
+            // Setel gambar pengguna
+            document.getElementById('userPhoto1').src = userPhoto;
+            document.getElementById('userPhoto2').src = userPhoto;
         } else {
-            // Jika nama pengguna tidak ditemukan, arahkan kembali ke halaman login
+            // Jika nama pengguna atau URL foto pengguna tidak ditemukan, arahkan kembali ke halaman login
             window.location.href = "index.html";
         }
       };

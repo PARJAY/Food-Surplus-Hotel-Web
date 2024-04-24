@@ -81,7 +81,7 @@
                     } else {
                         // Jika tidak, tambahkan pengguna ke koleksi hotel
                         db.collection(hotelCollection).doc(user.uid).set({
-                            name: user.displayName,
+                            namaHotel: user.displayName,
                             email: user.email,
                             photoURL : user.photoURL
                         }).then(() => {
@@ -90,24 +90,10 @@
                             setCookie('user_uid', user.uid, 7);
                             setCookie('user_name', user.displayName, 7);
                             setCookie('user_email', user.email, 7);
+                            setCookie('user_photoURl', user.photoURL, 7);
                             
                             // Arahkan pengguna ke halaman dasboard
                             window.location.href = "Dasboard.html";
-
-                            // Arahkan pengguna ke halaman profile
-                            window.location.href = "Profile.html";
-
-                            // Arahkan pengguna ke halaman katalis
-                            window.location.href = "DaftarKatalis.html";
-
-                            // Arahkan pengguna ke halaman kurir
-                            window.location.href = "DaftarKurir.html";
-
-                            // Arahkan pengguna ke halaman transaksi
-                            window.location.href = "HistoryTransaksi.html";
-
-                            // Arahkan pengguna ke halaman transaksi
-                            window.location.href = "Pesanan.html";
                             
                         }).catch((error) => {
                             console.error("Error adding hotel data:", error);
