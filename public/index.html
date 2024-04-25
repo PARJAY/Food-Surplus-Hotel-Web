@@ -81,7 +81,7 @@
                     } else {
                         // Jika tidak, tambahkan pengguna ke koleksi hotel
                         db.collection(hotelCollection).doc(user.uid).set({
-                            namaHotel: user.displayName,
+                            name: user.displayName,
                             email: user.email,
                             photoURL : user.photoURL
                         }).then(() => {

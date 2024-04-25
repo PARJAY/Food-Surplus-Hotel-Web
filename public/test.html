@@ -1,74 +1,441 @@
 <!DOCTYPE html>
 <html>
-<head> 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Google Maps JavaScript API with Places Library Autocomplete Address Field</title> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Google Maps JavaScript library -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCDPAJZhujCsSSP-or2YAhnMzUxQuPxI6I"></script>
- 
-<style>
-#search_input {font-size:18px;}
-.form-group{
- margin-bottom: 10px;margin-top:50px;
-}
-.form-group label{
- font-size:18px;
- font-weight: 600;
-}
-.form-group input{
-    width: 100%;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-.form-group input:focus {
-    color: #495057;
-    background-color: #fff;
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
-</style>
-</head>
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <p><h1>Google Maps JavaScript API with Places Library Autocomplete Address Field</h1></p>
-   <!-- Autocomplete location search input --> 
-   <div class="form-group">
-    <label>Location:</label>
-    <input type="text" class="form-control" id="search_input" placeholder="Type address..." />
-   </div>
-     </div>
-   </div>
-</div>
-<script>
-    var searchInput = 'search_input';
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <title>Daftar Katalis</title>
+  </head>
+  <body class="body">
+
+  <!-- Navbar  -->
+    <nav class="navbar navbar-expand-md fixed-top">
+      <a class="nav-item nav-link" style="margin: 0 21px; font-size: 30px;" href="#">
+        Nama Hotel
+      </a>
+      <div class="containe" style="padding-left: 1100px;">
+        <div class="row">
+          <div class="col">
+            <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
+          </div>
+          <div class="col-auto">
+            <div class="circle">
+              <img id="userPhoto1" alt="gambar">
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  
+  <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="circle">
+        <img id="userPhoto2" alt="gambar">
+      </div>
+      <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;"></a>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Kurir</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
+        </li>
+        <li class="nav-item" style="margin-top: 21px;" >
+          <a class="nav-link logout-link" href="index.html">Logout</a>
+        </li>
+      </ul>
+    </div>
     
-    $(document).ready(function () {
-     var autocomplete;
-     autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
-      types: ['establishment'], // Mengubah jenis pencarian ke 'establishment' untuk mencakup tempat
-      /*componentRestrictions: {
-       country: "USA"
-      }*/
-     });
+  <!-- Content -->
+    <div class="content">
+      <div class="containe" style="margin-bottom: 10px;">
+        <div class="row">
+          <div class="col">
+            <h2>Daftar Katalis</h2>
+          </div>
+          <div class="col-auto">
+            <button class="btn-custom" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#modalTambah">Tambah</button>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid #000000">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th class="col-1">Gambar</th>
+                    <th class="col">Nama Katalis</th>
+                    <th class="col">Stok Katalis</th>
+                    <th class="col-1">Komposisi</th>
+                    <th class="col-1">Harga</th>
+                    <th>Gram Per Porsi</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+  <!-- Modal Tambah -->
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Katalis</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label>Gambar:</label>
+                  <input type="file" class="form-control" id="katalisImageLink" accept="image/*">
+                </div>
+                <div class="form-group">
+                  <label>Nama Katalis:</label>
+                  <input type="text" class="form-control" id="namaKatalis" placeholder="Masukkan Nama katalis">
+                </div>
+                <div class="form-group">
+                  <label>Stok Katalis:</label>
+                  <input type="number" class="form-control" id="stok" placeholder="Masukkan Stok">
+                </div>
+                <div class="form-group">
+                  <label>Komposisi:</label>
+                  <input type="text" class="form-control" id="komposisi" placeholder="Masukkan Komposisi">
+                </div>
+                <div class="form-group">
+                  <label>Harga:</label>
+                  <input type="number" class="form-control" id="harga" placeholder="Masukkan Harga Awal">
+                </div>
+                <div class="form-group">
+                  <label>Gram Per Porsi:</label>
+                  <input type="text" class="form-control" id="gramPerPorsi" placeholder="Masukkan Gram Per Porsi">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="tambahData">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Modal Edit -->
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Katalis</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="id">
+              <form>
+                <div class="form-group">
+                  <label>Gambar:</label>
+                  <input type="file" class="form-control" id="katalisImageLink_update" accept="image/*">
+                </div>
+                <div class="form-group">
+                  <label>Nama Katalis:</label>
+                  <input type="text" class="form-control" id="namaKatalis_update" placeholder="Masukkan Nama katalis">
+                </div>
+                <div class="form-group">
+                  <label>Stok Katalis:</label>
+                  <input type="number" class="form-control" id="stok_update" placeholder="Masukkan Stok">
+                </div>
+                <div class="form-group">
+                  <label>Komposisi:</label>
+                  <input type="text" class="form-control" id="komposisi_update" placeholder="Masukkan Komposisi">
+                </div>
+                <div class="form-group">
+                  <label>Harga:</label>
+                  <input type="number" class="form-control" id="harga_update" placeholder="Masukkan Harga Awal">
+                </div>
+                <div class="form-group">
+                  <label>Gram Per Porsi:</label>
+                  <input type="text" class="form-control" id="gramPerPorsi_update" placeholder="Masukkan Gram Per Porsi">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="updateData">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
+      authDomain: "nofwa-indonesia.firebaseapp.com",
+      projectId: "nofwa-indonesia",
+      storageBucket: "nofwa-indonesia.appspot.com",
+      messagingSenderId: "608371446284",
+      appId: "1:608371446284:web:5c15b701371d2390599429",
+      measurementId: "G-WJSVLG5HW5"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
+    db.collection("Katalis").onSnapshot(snapshot => {
+      snapshot.docChanges();
+      getData();
+    })
+
+    async function getData() {
+      document.getElementById('data').innerHTML = '';
+      const Admin = await db.collection("Katalis").get();
+  
+      for (let i = 0; i < Admin.docs.length; i++) {
+          const kts = Admin.docs[i];
+          console.log(kts.id);
+          var idHotel = getCookie('user_uid');
+          const image = await firebase.storage().ref(`Hotel_${idHotel}/${kts.data().img}`).getDownloadURL();
+          const harga = parseInt(kts.data().harga);
+          document.getElementById('data').innerHTML += `
+              <tr> 
+                  <td>${i+1}</td>
+                  <td><img src="${image}" id="previewImage_update" width="80" height="80" onchange="previewImage()"></td>
+                  <td>${kts.data().namaKatalis}</td>
+                  <td>${kts.data().stok}</td> 
+                  <td>${kts.data().komposisi}</td> 
+                  <td>${kts.data().harga}</td>
+                  <td>${kts.data().gramPerPorsi}</td>
+                  <td class="button-container">
+                      <button class="btn btn-warning editData mb-2" data-id="${kts.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
+                      <button class="btn btn-danger hapusData" data-id="${kts.id}">Hapus</button>
+                  </td>
+              </tr>
+          `;
+      }
+    }
+    
+    function uploadImage(file) {
+        var idHotel = getCookie('user_uid');
+        return new Promise((resolve, reject) => {
+            const storageRef = storage.ref(`Hotel_${idHotel}/${file.name}`);
+            const uploadTask = storageRef.put(file);
+    
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // Progress tracking
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                },
+                (error) => {
+                    // Handle unsuccessful uploads
+                    console.error('Error uploading image: ', error);
+                    reject(error);
+                },
+                () => {
+                    // Handle successful uploads on complete
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        resolve(downloadURL);
+                    }).catch((error) => {
+                        console.error('Error getting download URL: ', error);
+                        reject(error);
+                    });
+                }
+            );
+        });
+    }
+    
+    document.getElementById('tambahData').addEventListener('click', async function(){ 
+      let hargaChecer;
+      let stokChecer;
       
-     google.maps.event.addListener(autocomplete, 'place_changed', function () {
-      var near_place = autocomplete.getPlace();
-     });
+      if (isNaN(parseInt(document.getElementById('harga').value))) hargaChecer = 0;
+      else hargaChecer = parseInt(document.getElementById('harga').value);
+  
+      if (isNaN(parseInt(document.getElementById('stok').value))) stokChecer = 0;
+      else stokChecer = parseInt(document.getElementById('stok').value);
+      
+      var idHotel = getCookie('user_uid');
+  
+      const file = document.getElementById('katalisImageLink').files[0];
+  
+      if (file) {
+          try {
+              const imgUrl = await uploadImage(file); // tunggu sampai gambar diunggah
+              await db.collection("Katalis").add({
+                  idHotel: idHotel,
+                  img: file.name,
+                  namaKatalis: document.getElementById('namaKatalis').value,
+                  stok: stokChecer,
+                  komposisi: document.getElementById('komposisi').value,
+                  harga: hargaChecer,
+                  gramPerPorsi: document.getElementById('gramPerPorsi').value
+              });
+              console.log("Data added successfully");
+              // Clear input values
+              document.getElementById('katalisImageLink').value = '';
+              document.getElementById('namaKatalis').value = '';
+              document.getElementById('stok').value = '';
+              document.getElementById('komposisi').value = '';
+              document.getElementById('harga').value = '';
+              document.getElementById('gramPerPorsi').value = '';
+              // Hide modal after successful addition
+              var modal = document.getElementById('modalTambah');
+              var modalInstance = bootstrap.Modal.getInstance(modal);
+              modalInstance.hide();
+          } catch (error) {
+              console.error("Error adding document: ", error);
+              // Handle error
+          }
+      } else {
+          console.error("Error: No image selected");
+          // Handle error
+      }
     });
+
+    document.getElementById('updateData').addEventListener('click', async function () {
+      let harga_updateChecker;
+      let stok_updateChecker;
+  
+      if (isNaN(parseInt(document.getElementById('harga_update').value))) harga_updateChecker = 0;
+      else harga_updateChecker = parseInt(document.getElementById('harga_update').value);
+  
+      if (isNaN(parseInt(document.getElementById('stok_update').value))) stok_updateChecker = 0;
+      else stok_updateChecker = parseInt(document.getElementById('stok_update').value);
+  
+      const file = document.getElementById('katalisImageLink_update').files[0];
+  
+      if (file) {
+          try {
+              const imgUrl = await uploadImage(file); // Upload gambar baru
+              // Update data dengan URL gambar yang baru
+              db.collection("Katalis").doc(document.getElementById('id').value).update({
+                  namaKatalis: document.getElementById('namaKatalis_update').value,
+                  stok: stok_updateChecker,
+                  komposisi: document.getElementById('komposisi_update').value,
+                  harga: harga_updateChecker,
+                  gramPerPorsi: document.getElementById('gramPerPorsi_update').value,
+                  img: file.name
+              }).then(() => {
+                  console.log("Document successfully updated!");
+                  var modal = document.getElementById('modalUpdate');
+                  var modalInstance = bootstrap.Modal.getInstance(modal);
+                  modalInstance.hide();
+              }).catch((error) => {
+                  console.error("Error updating document: ", error);
+              });
+          } catch (error) {
+              console.error("Error uploading image: ", error);
+          }
+      } else {
+          // Jika tidak ada gambar yang dipilih, update data tanpa mengubah gambar
+          db.collection("Katalis").doc(document.getElementById('id').value).update({
+              namaKatalis: document.getElementById('namaKatalis_update').value,
+              stok: stok_updateChecker,
+              komposisi: document.getElementById('komposisi_update').value,
+              harga: harga_updateChecker,
+              gramPerPorsi: document.getElementById('gramPerPorsi_update').value
+          }).then(() => {
+              console.log("Document successfully updated!");
+              var modal = document.getElementById('modalUpdate');
+              var modalInstance = bootstrap.Modal.getInstance(modal);
+              modalInstance.hide();
+          }).catch((error) => {
+              console.error("Error updating document: ", error);
+          });
+      }
+    });
+  
+    document.getElementById('data').addEventListener('click', function (e) {
+      const id = e.target.dataset.id;
+      const idHotel = getCookie('user_uid');
+
+      if (e.target.classList.contains('hapusData')) {
+        db.collection("Katalis").doc(id).delete().then((doc) => {
+        console.log("Dokumen berhasil dihapus!");
+        }).catch((error) => {
+          console.error("Error menghapus gambar: ", error);
+        });
+      }
+  
+      if (e.target.classList.contains('editData')) {
+          db.collection("Katalis").doc(id).get().then(async (doc) => {
+              if (doc.exists) {
+                  console.log(doc.data());
+                  document.getElementById('id').value = doc.id;
+                  document.getElementById('namaKatalis_update').value = doc.data().namaKatalis;
+                  document.getElementById('stok_update').value = doc.data().stok;
+                  document.getElementById('komposisi_update').value = doc.data().komposisi;
+                  document.getElementById('harga_update').value = doc.data().harga;
+                  document.getElementById('gramPerPorsi_update').value = doc.data().gramPerPorsi;
+  
+                  // Set the src attribute for the image preview element in the edit modal
+                  const imageUrl = await firebase.storage().ref(`Hotel_${idHotel}/${doc.data().img}`).getDownloadURL();
+                  document.getElementById('previewImage_update').setAttribute('src', imageUrl);
+                  document.getElementById('previewImage_update').setAttribute('data-id', id); // Optionally set data-id attribute
+              } else {
+                  console.log("No such document!");
+              }
+          })
+      }
+    });
+    
     </script>
-</body>
+  
+    <script>
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    
+        window.onload = function() {
+            // Mendapatkan nama pengguna dari cookie
+            var userName = getCookie('user_name');
+            // Mendapatkan URL foto pengguna dari cookie
+            var userPhoto = getCookie('user_photoURl');
+            
+            // Cek apakah nama pengguna dan URL foto pengguna ditemukan
+            if (userName && userPhoto) {
+                // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
+                var namaAdminElements = document.getElementsByClassName('namaAdmin');
+                for (var i = 0; i < namaAdminElements.length; i++) {
+                    namaAdminElements[i].innerText = userName;
+                }
+                // Setel gambar pengguna
+                document.getElementById('userPhoto1').src = userPhoto;
+                document.getElementById('userPhoto2').src = userPhoto;
+            } else {
+                // Jika nama pengguna atau URL foto pengguna tidak ditemukan, arahkan kembali ke halaman login
+                window.location.href = "index.html";
+            }
+        };
+    </script>
+
+  <script src="boostrap/js/bootstrap.js"></script>
+  </body>
 </html>
