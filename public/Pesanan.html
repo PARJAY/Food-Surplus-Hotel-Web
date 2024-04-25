@@ -92,7 +92,6 @@
     </div> 
     
     <script>
-      
       const firebaseConfig = {
         apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
         authDomain: "nofwa-indonesia.firebaseapp.com",
@@ -107,40 +106,42 @@
       firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
   
-      db.collection("Pesanan").onSnapshot(snapshot => {
-          snapshot.docChanges();
-          getData();
-      })
-  
+      getData();
+      // db.collection("Pesanan").onSnapshot(snapshot => {
+      //     snapshot.docChanges();
+          
+      // })
+
       async function getData() {
         document.getElementById('data').innerHTML = '';
 
-        const Admin = await db.collection("Pesanan").get();
-        const snapshot = await db.collection("List_Pesanan_Katalis").get();
-        Admin.docs.forEach(async (kts, i) => {
-          console.log(kts.id);
-
-          let text = ""
-          snapshot.forEach((doc) => {
-          const data = doc.data();
+        const pesanan = await db.collection("Pesanan").get();
+        
+        pesanan.docs.forEach(async (pesanan, i) => {
+          console.log(pesanan.id);
           
-          console.log(data.DaftarKatalis)
-          for (let idKatalis in data.DaftarKatalis) {
-            console.log(idKatalis)
-            console.log(data.DaftarKatalis[idKatalis] + " ")
+          console.log(`pesanan.list_id_daftar_katalis : ${pesanan.data().list_id_daftar_katalis}`);
+          
+          const listDaftarKatalisRef = await db.collection("List_Pesanan_Katalis").doc(pesanan.data().list_id_daftar_katalis).get()
+          
+          var map = listDaftarKatalisRef.data().daftarKatalis
 
-            text += `${idKatalis} : ${data.DaftarKatalis[idKatalis]} | `
-          }
-        });
-        document.getElementById('data').innerHTML += `
-                  <tr> 
-                      <td>${i + 1}</td>
-                      <td>${text}</td>
-                      <td>${data.status_pesanan}</td>
-                      <td>${data.waktu_pesanan_dibuat}</td>
-                      <td>${data.total_harga}</td>
-                  </tr>
-              `;
+          const katalisRef = await db.collection("Katalis").doc(`${Object.keys(map)}`).get()
+          
+          console.log(katalisRef.data())
+          
+          document.getElementById('data').innerHTML += `
+                    <tr> 
+                        <td>${i + 1}</td>
+                        <td>${katalisRef.data().namaKatalis} ${Object.values(map)}</td>
+                        <td>${pesanan.data().status_pesanan}</td>
+                        <td>${pesanan.data().waktu_pesanan_dibuat}</td>
+                        <td>${pesanan.data().total_harga}</td>
+                    </tr>
+                `;
+
+          console.log("loop?")
+          
         });
       }
     </script>
