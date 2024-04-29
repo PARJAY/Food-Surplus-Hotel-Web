@@ -5,7 +5,7 @@
 }
 
 .navbar {
-  background-color: #862B0D;
+  background-color: #34BE82;
   color: #FFF9C9;
   height: 80px;
 }
@@ -16,7 +16,7 @@
   left: 0;
   height: 100%;
   width: 200px;
-  background-color: #862B0D;
+  background-color: #047242;
   padding-top: 20px;
   display: flex;
   flex-direction: column;
@@ -113,12 +113,11 @@
 }
 
 .kotak {
-  width: 1240px;
-  height: 550px;
+  width: 100%;
+  height: auto;
   border-radius: 10px;
   background-color: #CDC899;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
@@ -158,9 +157,14 @@
 
 /* Login */
 .login-form {
-  width: 360px;
-  margin: 120px auto;
-  font-family: Arial, sans-serif;
+  background-color: #FFF9C9;
+  border-radius: 15px;
+}
+
+.green-bg {
+  background-color: #047242;
+  color: white;
+  padding: 25px;
 }
 
 .login-form form {
@@ -182,12 +186,12 @@
 }
 
 .btn-custom {
-  background-color: #862B0D;
-  color: #ffffff;
+  background-color: #faf5f3;
+  color: #0087f5;
   padding: 10px 20px; /* Sesuaikan dengan kebutuhan Anda */
-  border-radius: 25px;
+  border-radius: 15px;
   border-color: transparent;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -260,4 +264,31 @@
 .profile .circle img{
   width: 100%;
   height: auto;
+}
+.col {
+  flex: 0 0 auto;
+}
+
+.col-auto {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end; /* Meletakkan tombol di sebelah kanan */
+}
+.tombol-tambah {
+  background-color: #4CAF50; /* Warna hijau */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 7px;
+  transition: background-color 0.3s;
+}
+
+.tombol-tambah:hover {
+  background-color: #45a049; /* Warna hijau yang lebih gelap saat dihover */
+}
+
+.icon {
+  margin-right: 5px;
 }

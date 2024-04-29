@@ -11,19 +11,28 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <title>Login</title>
 </head>
-<body style="background-color: #862B0D; overflow: hidden;">
-    
-    <div class="login-form" style="background-color:#FFF9C9; border-radius: 15px;">
-        <form style="background-color:#FFF9C9;">
-            <h1 class="text-center">Login</h1>
-            <h5><span class="text-start" style="font-weight: bolder;">Selamat Datang,</span><br>Silahkan Login Dengan Akun Hotel Anda</h5>
-            <div class="form-group d-grid gap-2" style="padding-top: 170px;">  
-                <button type="button" id="login-hotel" class="btn-custom" >
-                    Hotel Sign in with Google
-                </button>
-            </div>              
-        </form>     
+<body style="background-color: #34BE82; overflow: hidden; position: relative;">
+
+    <div class="position-absolute top-0 left-0 col-md-6 green-bg" style="z-index: 10; width: 100%;">
+        <h1 class="text-white">Hotel</h1>
     </div>
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="login-form" style="background-color:#FFF9C9; border-radius: 15px;">
+            <form style="background-color:#FFF9C9; width: 450px; margin: 0 auto;">
+                <h1 class="text-center">Login</h1>
+                <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+                    <h3>Selamat Datang<br>Silahkan Login</h3>
+                </div>
+                <div class="form-group d-grid gap-2" style="padding-top: 100px;">  
+                    <button type="button" id="login-hotel" class="btn-custom">
+                        Hotel Sign in with Google
+                    </button>
+                </div>
+            </form>    
+        </div>
+    </div>
+    
 
     <script>
         const firebaseConfig = {

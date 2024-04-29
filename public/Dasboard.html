@@ -13,27 +13,27 @@
   </head>
   <body class="body">
 
-  <!-- Navbar  -->
-    <nav class="navbar navbar-expand-md fixed-top">
-      <a class="nav-item nav-link" style="margin: 0 21px; font-size: 30px;" href="#">
-        Nama Hotel
-      </a>
-      <div class="containe" style="padding-left: 1100px;">
-        <div class="row">
-          <div class="col">
-            <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
-          </div>
-          <div class="col-auto">
-            <div class="circle">
-              <img id="userPhoto1" alt="gambar">
-            </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md fixed-top d-flex justify-content-between">
+    <a class="nav-item nav-link ms-2" style="font-size: 30px;" href="#">
+      Nama Hotel
+    </a>
+    <div class="containe me-3">
+      <div class="row">
+        <div class="col">
+          <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
+        </div>
+        <div class="col-auto">
+          <div class="circle">
+            <img id="userPhoto1" alt="gambar">
           </div>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
   
   <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar mt-5">
       <div class="circle">
         <img id="userPhoto2" alt="gambar">
       </div>
@@ -62,8 +62,8 @@
   
   <!-- Content -->
     <div class="content">
-      <div class="kotak">
-        <h2 id="greeting">Halo</h2>
+      <div class="kotak" style="height: 750px;">
+        <h2 id="greeting" class="">Welcome</h2>
       </div>
     </div>
       
@@ -96,7 +96,7 @@
               }
               // Jika ditemukan, ubah teks "Halo" menjadi "Halo [Nama Pengguna]"
               var greetingElement = document.getElementById('greeting');
-              greetingElement.innerText = "Halo " + userName;
+              greetingElement.innerText = "Welcome, " + userName;
               // Setel gambar pengguna
               document.getElementById('userPhoto1').src = userPhoto;
               document.getElementById('userPhoto2').src = userPhoto;

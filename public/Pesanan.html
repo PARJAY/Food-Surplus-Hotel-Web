@@ -14,11 +14,11 @@
 <body class="body">
 
     <!-- Navbar  -->
-    <nav class="navbar navbar-expand-md fixed-top">
-      <a class="nav-item nav-link" style="margin: 0 21px; font-size: 30px;" href="#">
+    <nav class="navbar navbar-expand-md fixed-top d-flex justify-content-between">
+      <a class="nav-item nav-link ms-2" style="font-size: 30px;" href="#">
         Nama Hotel
       </a>
-      <div class="containe" style="padding-left: 1100px;">
+      <div class="containe me-3">
         <div class="row">
           <div class="col">
             <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
@@ -31,9 +31,9 @@
         </div>
       </div>
     </nav>
-    
+
     <!-- Sidebar -->
-      <div class="sidebar">
+      <div class="sidebar mt-5">
         <div class="circle">
           <img id="userPhoto2" alt="gambar">
         </div>
@@ -61,35 +61,41 @@
       </div>
     
     <!-- Content -->
-    <!-- Content -->
     <div class="content">
       <div class="containe" style="margin-bottom: 10px;">
         <div class="row">
-          <div class="col">
-            <h2>Daftar Pesanan</h2>
-          </div>
           <div class="col-auto">
+            <h2 class="fs-1">Daftar Pesanan</h2>
           </div>
         </div>
+      </div>
+      <div class="col-auto pb-3">
+        <button class="tombol-tambah">
+          Tambah <span class="icon">+</span>
+        </button>
       </div>
       <div class="table-responsive">
         <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid #000000">
             <thead>
                 <tr>
                     <th>No</th>
-
-                    <th>List Daftar Katalis</th>
+                    <th>Customer</th>
+                    <th>GeoLokasi Tujuan</th>
+                    <th>Nama Katalis Pesanan</th>
+                    <th>QTY</th>
+                    <th>Harga PerPorsi</th>
+                    <th>Total Harga</th>
                     <th>Status Pesanan</th>
                     <th>Waktu Pesanan</th>
-                    <th>Total Harga</th>
+                    <th>Kurir</th>
                 </tr>
             </thead>
             <tbody id="data">
                 
             </tbody>
         </table>
+      </div>
     </div>
-    </div> 
     
     <script>
       const firebaseConfig = {
