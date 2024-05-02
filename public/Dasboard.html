@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="boostrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
@@ -14,30 +15,30 @@
   <body class="body">
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-md fixed-top d-flex justify-content-between">
-    <a class="nav-item nav-link ms-2" style="font-size: 30px;" href="#">
-      Hotel Dahsyat
-    </a>
-    <div class="containe me-3">
-      <div class="row">
-        <div class="col">
-          <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
-        </div>
-        <div class="col-auto">
-          <div class="circle">
-            <img id="userPhoto1" alt="gambar">
+    <nav class="navbar navbar-expand-md fixed-top d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-center">
+        <div id="star-rating"></div>
+      </div>
+      <div class="containe me-3">
+        <div class="row">
+          <div class="col">
+            <a class="nav-item nav-link nameInput fs-5" href="Profile.html">Nama Anda</a>
+          </div>
+          <div class="col-auto">
+            <div class="circle">
+              <img id="userPhoto1" alt="gambar">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
   
   <!-- Sidebar -->
     <div class="sidebar mt-5">
       <div class="circle">
         <img id="userPhoto2" alt="gambar">
       </div>
-      <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;">ads</a>
+      <a class="nav-item nav-link nama nameInput p-1" style="margin-bottom: 30px; font-size: 30px;">Nama Anda</a>
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
@@ -47,9 +48,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Kurir</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
         </li>
         <li class="nav-item">
           <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
@@ -62,115 +60,263 @@
   
   <!-- Content -->
     <div class="content">
-<<<<<<< HEAD
-      <div class="kotak d-flex flex-column" style="height: 750px;">
-        <h2 id="greeting" class="text-center" style="margin-bottom: 0px;">Selamat Datang</h2>
-        <h5 class="text-center" style="margin-top: 10px; margin-bottom: 0px;">Daftarkan Hotel Anda terlebih Dahulu</h5>
-        <div class="container">
-          <div class="d-flex justify-content-center pt-5">
-              <button class="btn btn-success btn-sm btn-block col-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Daftar</button>
-            </div>
-=======
-      <div class="kotak" style="height: 750px;">
-        <div class="col align-self-start">
-
-          <h2 id="greeting" class="">Welcome</h2>
-
-          <div class="mb-3">
-            <label for="formFile" class="form-label">Masukkan Surat Operasional Ijin Hotel</label>
-            <input class="form-control" type="file" id="formFile">
-          </div>
-
-          <input class="form-control" type="text" placeholder="Tahun Awal Beroperasi" aria-label="default input example">
-
-          <input class="form-control" type="text" placeholder="Bintang Hotel" aria-label="default input example">
-
-          <div class="mb-3">
-            <label for="formFile" class="form-label">Surat Pernyataan Bekerja Sama</label>
-            <input class="form-control" type="file" id="formFile">
-          </div>
-
->>>>>>> 66d71fdc72e1214f8b5359e909d6dfecaf8bdc32
-        </div>
+      <div class="kotak">
+        <h2 id="greeting">Welcome, Nama Anda!</h2>
+        <button class="btn btn-primary berkas" data-bs-toggle="modal" data-bs-target="#modalBerkas">Berkas</button>
       </div>
     </div>
 
-    <!-- Modal Persetujuan -->
-    
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Berkas Hotel Anda</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label>Surat Ijin Operasional:</label>
-              <input type="file" class="form-control" id="ijin" accept="berkas/*">
+    <!-- Modal Berkas -->
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal fade" id="modalBerkas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Daftar Hotel</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" id="id">
+                <form>
+                  <div class="form-group">
+                    <label>Surat Ijin Operasional:</label>
+                    <input type="file" class="form-control" id="ijin" accept="berkas/*">
+                  </div>
+                  <div class="form-group">
+                    <label>Surat Pernyataan Kerjasama:</label>
+                    <input type="file" class="form-control" id="pernyataan" accept="berkas/*">
+                  </div>
+                  <div class="form">
+                    <label>Tahun Awal Beroperasi:</label>
+                    <input type="datetime-local" class="form-control" id="operasi" placeholder="Masukan Tahun">
+                  </div>
+                  <div class="form-group">
+                    <label>Masukkan Bintang Hotel:</label>
+                    <select class="form-control" id="bintang">
+                        <option value="1">Bintang 1</option>
+                        <option value="2">Bintang 2</option>
+                        <option value="3">Bintang 3</option>
+                        <option value="4">Bintang 4</option>
+                        <option value="5">Bintang 5</option>
+                    </select>
+                </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="tambahData" onchange="saveChanges()">Save changes</button>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Surat Pernyataan kerjasama:</label>
-              <input type="file" class="form-control" id="ijin" accept="berkas/*">
-            </div>
-            <div class="form-group">
-              <label>Tahun Awal Hotel Beroperasi:</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Masukan Bintang Hotel:</label>
-              <input type="text" class="form-control"">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Submit</button>
           </div>
         </div>
       </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
       
   <script>
-
-      // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
-      function getCookie(name) {
-          var nameEQ = name + "=";
-          var ca = document.cookie.split(';');
-          for (var i = 0; i < ca.length; i++) {
-              var c = ca[i];
-              while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-          }
-          return null;
+    // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
       }
-  
-      window.onload = function() {
-          // Mendapatkan nama pengguna dari cookie
-          var userName = getCookie('user_name');
-          // Mendapatkan URL foto pengguna dari cookie
-          var userPhoto = getCookie('user_photoURl');
-          
-          // Cek apakah nama pengguna dan URL foto pengguna ditemukan
-          if (userName && userPhoto) {
-              // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
-              var namaAdminElements = document.getElementsByClassName('namaAdmin');
-              for (var i = 0; i < namaAdminElements.length; i++) {
-                  namaAdminElements[i].innerText = userName;
-              }
-              // Jika ditemukan, ubah teks "Halo" menjadi "Halo [Nama Pengguna]"
-              var greetingElement = document.getElementById('greeting');
-              greetingElement.innerText = "Selamat Datang   " + userName;
-              // Setel gambar pengguna
-              document.getElementById('userPhoto1').src = userPhoto;
-              document.getElementById('userPhoto2').src = userPhoto;
-          } else {
-              // Jika nama pengguna atau URL foto pengguna tidak ditemukan, arahkan kembali ke halaman login
-              window.location.href = "index.html";
-          }
-      };
+      return null;
+    }
+    // Menampilkan Cookie
+    window.onload = function() {
+      var userPhoto = getCookie('user_photoURl');
+
+      if (userPhoto) {
+        document.getElementById('userPhoto1').src = userPhoto;
+        document.getElementById('userPhoto2').src = userPhoto;
+      } else {
+        window.location.href = "index.html";
+      }
+    };
   </script>
+
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
+      authDomain: "nofwa-indonesia.firebaseapp.com",
+      projectId: "nofwa-indonesia",
+      storageBucket: "nofwa-indonesia.appspot.com",
+      messagingSenderId: "608371446284",
+      appId: "1:608371446284:web:5c15b701371d2390599429",
+      measurementId: "G-WJSVLG5HW5"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
+    var idHotel = getCookie('user_uid');
+    // Mengambil referensi elemen input
+    var inputName = document.getElementsByClassName("nameInput");
+    db.collection('Hotel').doc(idHotel).get().then(function(doc) {
+      if (doc.exists) {
+        var fullName = doc.data().name;
+        var abbreviatedName = getFirstTwoWords(fullName);
+        for (var i = 0; i < inputName.length; i++) {
+          inputName[i].textContent = abbreviatedName;
+        }
+      } else {
+        console.error("Dokumen tidak ditemukan!");
+      }
+    }).catch(function(error) {
+      console.error("Gagal mengambil data:", error);
+    });
+
+    // Fungsi untuk mendapatkan dua kata pertama dari sebuah string
+    function getFirstTwoWords(fullName) {
+      var nameArray = fullName.split(" ");
+      var firstTwoWords = nameArray.slice(0, 2).join(" ");
+      return firstTwoWords;
+    }
+
+    function getNameFromDatabase(idHotel) {
+    return db.collection("Hotel").doc(idHotel).get().then(function(doc) {
+      if (doc.exists) {
+        var fullName = doc.data().name;
+        var nameArray = fullName.split(" ");
+        var abbreviatedName = nameArray[0] + " " + nameArray[1]; // Ambil dua kata pertama
+        return abbreviatedName;
+      } else {
+        return "Unknown";
+      }
+    }).catch(function(error) {
+      console.error("Error getting document:", error);
+      return "Unknown";
+    });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      getNameFromDatabase(idHotel).then(function(nameInput) {
+        var greetingElement = document.getElementById("greeting");
+        greetingElement.textContent = "Welcome, " + nameInput + "!";
+      });
+    });
+  </script>
+
+  <script>
+    // Tambah Data Ke DataBase
+    const hotelCollection = "Hotel";
+    document.getElementById('tambahData').addEventListener('click', async function(){
+      var idHotel = getCookie('user_uid'); 
+      const file1 = document.getElementById('ijin').files[0];
+      const file2 = document.getElementById('pernyataan').files[0];
+      const bintang = document.getElementById('bintang').value;
+      const operasi = document.getElementById('operasi').value; 
+
+      if (file1 && file2 && bintang && operasi) {
+        try {
+          const berkasUrl1 = await uploadFile(file1, `Hotel_${idHotel}`);
+          const berkasUrl2 = await uploadFile(file2, `Hotel_${idHotel}`);
+
+          await db.collection(hotelCollection).doc(idHotel).update({
+            docOperasionalHotelLink : file1.name,
+            docPernyataanBekerjaSamaLink : file2.name,
+            bintangHotel: parseInt(bintang),
+            operasi: firebase.firestore.Timestamp.fromDate(new Date(operasi)),
+            statusHotel : "MENUNGGU"
+          }); 
+          var modal = document.getElementById('modalBerkas');
+          var modalInstance = bootstrap.Modal.getInstance(modal);
+          modalInstance.hide();
+        } catch (error) {
+          console.error("Error adding document: ", error);
+        }
+      } else {
+        console.error("Error: No File selected");
+      }
+      saveChanges();
+    });
+
+    // Upload Image
+    function uploadFile(file, folderName) {
+      return new Promise((resolve, reject) => {
+        const storageRef = storage.ref(`Hotel_${idHotel}/${file.name}`);
+        const uploadTask = storageRef.put(file);
+        uploadTask.on('state_changed',
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+          },(error) => {
+            console.error('Error uploading file: ', error);
+            reject(error);
+          },() => {
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              resolve(downloadURL);
+            }).catch((error) => {
+              console.error('Error getting download URL: ', error);
+              reject(error);
+            });
+          }
+        );
+      });
+    }
+  </script>
+
+  <script>
+    var idHotel = getCookie('user_uid');
+    // Star Rating
+    db.collection(`Hotel`).doc(idHotel).get().then((doc) => {
+      if (doc.exists) {
+        const bintang = doc.data().bintangHotel;
+        const starRating = document.getElementById("star-rating");
+
+        for (let i = 0; i < bintang; i++) {
+          const icon = document.createElement("i");
+          icon.classList.add("bi", "bi-star-fill", "ms-3", "custom-star");
+          starRating.appendChild(icon);
+        }
+      } else {
+        console.log("No such document!");
+      }
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+
+    // Refresh 
+    function saveChanges() {
+      // Lakukan penyimpanan atau tindakan lainnya di sini
+      console.log("Simpan data...");
+      setTimeout(() => {
+        location.reload();
+      }, 500); 
+    }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var idHotel = getCookie('user_uid');
+      var hotelRef = db.collection('Hotel').doc(idHotel);
+      hotelRef.get().then(function(doc) {
+        if (doc.exists) {
+          var data = doc.data();
+          if (data.statusHotel === 'TERVERIFIKASI') {
+            console.log("Status hotel sudah terverifikasi.");
+            // Menghapus tombol "Berkas" jika status hotel sudah terverifikasi
+            var berkasButton = document.querySelector('.berkas');
+            berkasButton.parentNode.removeChild(berkasButton);
+          } else {
+            var bars = document.querySelectorAll('.bar');
+            bars.forEach(function(bar) {
+              bar.querySelector('.nav-link').innerText = '';
+            });
+          }
+        } else {
+          console.log("Dokumen tidak ditemukan!");
+        }
+      }).catch(function(error) {
+        console.log("Error getting document:", error);
+      });
+    });
+  </script>
+
   <script src="boostrap/js/bootstrap.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>

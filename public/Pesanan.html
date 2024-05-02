@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="boostrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <title>Pesanan</title>
-</head>
-<body class="body">
+  </head>
+  <body class="body">
 
-    <!-- Navbar  -->
+  <!-- Navbar -->
     <nav class="navbar navbar-expand-md fixed-top d-flex justify-content-between">
-      <a class="nav-item nav-link ms-2" style="font-size: 30px;" href="#">
-        Nama Hotel
-      </a>
+      <div class="d-flex justify-content-between align-items-center">
+        <div id="star-rating"></div>
+      </div>
       <div class="containe me-3">
         <div class="row">
           <div class="col">
-            <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
+            <a class="nav-item nav-link nameInput fs-5" href="Profile.html">Nama Anda</a>
           </div>
           <div class="col-auto">
             <div class="circle">
@@ -32,125 +33,62 @@
       </div>
     </nav>
 
-    <!-- Sidebar -->
-      <div class="sidebar mt-5">
-        <div class="circle">
-          <img id="userPhoto2" alt="gambar">
-        </div>
-        <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;"></a>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Kurir</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
-          </li>
-          <li class="nav-item" style="margin-top: 21px;" >
-            <a class="nav-link logout-link" href="index.html">Logout</a>
-          </li>
-        </ul>
+  <!-- Sidebar -->
+    <div class="sidebar mt-5">
+      <div class="circle">
+        <img id="userPhoto2" alt="gambar">
       </div>
+      <a class="nav-item nav-link nama nameInput p-1" style="margin-bottom: 30px; font-size: 30px;">Nama Anda</a>
+      <ul class="nav flex-column">
+        <li class="nav-item bar">
+          <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
+        </li>
+        <li class="nav-item bar">
+          <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
+        </li>
+        <li class="nav-item bar">
+          <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Katalis</a>
+        </li>
+        <li class="nav-item bar">
+          <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
+        </li>
+        <li class="nav-item" style="margin-top: 21px;" >
+          <a class="nav-link logout-link" href="index.html">Logout</a>
+        </li>
+      </ul>
+    </div>
     
-    <!-- Content -->
-    <div class="content">
-      <div class="containe" style="margin-bottom: 10px;">
-        <div class="row">
-          <div class="col-auto">
-            <h2 class="fs-1">Daftar Pesanan</h2>
-          </div>
-        </div>
-      </div>
-      <div class="col-auto pb-3">
-        <button class="tombol-tambah" data-bs-toggle="modal" data-bs-target="#modalPersetujuan">
-          Tambah <span class="icon">+</span>
-        </button>
-      </div>
-      <div class="table-responsive">
-        <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid #000000">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Customer</th>
-                    <th>GeoLokasi Tujuan</th>
-                    <th>Nama Katalis Pesanan</th>
-                    <th>QTY</th>
-                    <th>Harga PerPorsi</th>
-                    <th>Total Harga</th>
-                    <th>Status Pesanan</th>
-                    <th>Waktu Pesanan</th>
-                    <th>Kurir</th>
-                </tr>
-            </thead>
-            <tbody id="data">
-                
-            </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Modal Persetujuan -->
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal fade" id="modalPersetujuan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Syarat Katalis Pesanan</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="card-body">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check1">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Higernis, yakni tidak mengandung kuman sumber penyakit.
-                  </label>
-                </div>
-                <hr>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check2">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Bergizi, mengandung karbohirat, lemak, protein, mineral dan vitamin yang cukup.
-                  </label>
-                </div>
-                <hr>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check3">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Berkecukupan, memenuhi kebutuhan tubuh di usia dan kondisi tertentu.
-                  </label>
-                </div>
-                <hr>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check4">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Mudah dicerna
-                  </label>
-                </div>
-                <hr>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check5">
-                  <label class="form-check-label" for="defaultCheck1">
-                    Tidak mengandung bahan pengawet atau pewarna buatan.
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="tambah" onclick="saveChanges()">Save changes</button>
-            </div>
-          </div>
+  <!-- Content -->
+  <div class="content">
+    <div class="containe pb-3" style="margin-bottom: 10px;">
+      <div class="row">
+        <div class="col-auto">
+          <h2 class="fs-1">Daftar Pesanan</h2>
         </div>
       </div>
     </div>
+    <div class="table-responsive">
+      <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid #000000">
+          <thead>
+              <tr>
+                  <th>No</th>
+                  <th>Customer</th>
+                  <th>Alamat Tujuan</th>
+                  <th>Nama Katalis Pesanan</th>
+                  <th>QTY</th>
+                  <th>Harga PerPorsi</th>
+                  <th>Total Harga</th>
+                  <th>Status Pesanan</th>
+                  <th>Waktu Pesanan</th>
+                  <th>Kurir</th>
+              </tr>
+          </thead>
+          <tbody id="data">
+              
+          </tbody>
+      </table>
+    </div>
+  </div>
     
     <script>
       const firebaseConfig = {
@@ -167,82 +105,142 @@
       firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
   
-      getData();
-      // db.collection("Pesanan").onSnapshot(snapshot => {
-      //     snapshot.docChanges();
-          
-      // })
+      db.collection("Pesanan").onSnapshot(snapshot => {
+        snapshot.docChanges();
+        getData();
+      })
 
       async function getData() {
-        document.getElementById('data').innerHTML = '';
+        try {
+          document.getElementById('data').innerHTML = '';
+          const pesanan = await db.collection('Pesanan').get();
+          for (let i = 0; i < pesanan.docs.length; i++) {
+            const psn = pesanan.docs[i].data();
+            var idHotel = getCookie('user_uid');
 
-        const pesanan = await db.collection("Pesanan").get();
-        
-        pesanan.docs.forEach(async (pesanan, i) => {
-          console.log(pesanan.id);
-          
-          console.log(`pesanan.list_id_daftar_katalis : ${pesanan.data().list_id_daftar_katalis}`);
-          
-          const listDaftarKatalisRef = await db.collection("List_Pesanan_Katalis").doc(pesanan.data().list_id_daftar_katalis).get()
-          
-          var map = listDaftarKatalisRef.data().daftarKatalis
+            console.log(`compare : ${psn.id_Hotel} with ${idHotel}`)
+            if (psn.id_hotel == idHotel){
+              const customer = await db.collection("Customer").doc(psn.id_customer).get();
+              const kurir = await db.collection("Kurir").doc(psn.id_kurir).get();
 
-          const katalisRef = await db.collection("Katalis").doc(`${Object.keys(map)}`).get()
-          
-          console.log(katalisRef.data())
-          
-          document.getElementById('data').innerHTML += `
-                    <tr> 
-                        <td>${i + 1}</td>
-                        <td>${katalisRef.data().namaKatalis} ${Object.values(map)}</td>
-                        <td>${pesanan.data().status_pesanan}</td>
-                        <td>${pesanan.data().waktu_pesanan_dibuat}</td>
-                        <td>${pesanan.data().total_harga}</td>
-                    </tr>
-                `;
-
-          console.log("loop?")
-          
-        });
+              let rowData = `
+                <tr> 
+                  <td>${i+1}</td>
+                  <td>${customer.data().name}</td>
+                  <td>${psn.alamatTujuan}</td>
+                  <td>`;
+                    // Loop through daftarKatalis
+                    for (const key in psn.daftarKatalis) {
+                      if (psn.daftarKatalis.hasOwnProperty(key)) {
+                        const katalisRef = await db.collection("Katalis").doc(key).get();
+                        const katalisData = katalisRef.data();
+                        if (katalisData) {
+                          rowData += `${katalisData.namaKatalis}<br>`;
+                        }
+                      }
+                    }
+      rowData += `</td>
+                  <td>`;
+                    // Loop through daftarKatalis again to get the quantity
+                    for (const key in psn.daftarKatalis) {
+                      if (psn.daftarKatalis.hasOwnProperty(key)) {
+                        rowData += `${psn.daftarKatalis[key]}<br>`;
+                      }
+                    }
+      rowData += `</td>
+                  <td>`;
+                    for (const key in psn.daftarKatalis) {
+                      if (psn.daftarKatalis.hasOwnProperty(key)) {
+                        const katalisRef = await db.collection("Katalis").doc(key).get();
+                        const katalisData = katalisRef.data();
+                        if (katalisData) {
+                          rowData += `${katalisData.hargaPerPorsi}<br>`;
+                        }
+                      }
+                    }
+      rowData += `</td>
+                  <td>${psn.total_harga}</td>
+                  <td>${psn.status_pesanan}</td>
+                  <td>${psn.waktu_pesanan_dibuat.toDate()}</td>
+                  <td>${kurir.data().name}</td>
+                </tr>`;
+              document.getElementById('data').innerHTML += rowData;
+            }
+          }
+        } catch (error) {
+          console.error("Terjadi kesalahan saat mengambil data:", error);
+        }
       }
     </script>
 
 
     <script>
-        // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
-        function getCookie(name) {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
+      // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
+      function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
         }
-    
-        window.onload = function() {
-          // Mendapatkan nama pengguna dari cookie
-          var userName = getCookie('user_name');
-          // Mendapatkan URL foto pengguna dari cookie
-          var userPhoto = getCookie('user_photoURl');
-          
-          // Cek apakah nama pengguna dan URL foto pengguna ditemukan
-          if (userName && userPhoto) {
-              // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
-              var namaAdminElements = document.getElementsByClassName('namaAdmin');
-              for (var i = 0; i < namaAdminElements.length; i++) {
-                  namaAdminElements[i].innerText = userName;
-              }
-              // Setel gambar pengguna
-              document.getElementById('userPhoto1').src = userPhoto;
-              document.getElementById('userPhoto2').src = userPhoto;
-          } else {
-              // Jika nama pengguna atau URL foto pengguna tidak ditemukan, arahkan kembali ke halaman login
-              window.location.href = "index.html";
+        return null;
+      }
+    // Menampilkan Cookie
+    window.onload = function() {
+      var userPhoto = getCookie('user_photoURl');
+
+      if (userPhoto) {
+        document.getElementById('userPhoto1').src = userPhoto;
+        document.getElementById('userPhoto2').src = userPhoto;
+      } else {
+        window.location.href = "index.html";
+      }
+    };
+
+    var idHotel = getCookie('user_uid');
+      // Mengambil referensi elemen input
+      var inputName = document.getElementsByClassName("nameInput");
+      db.collection("Hotel").doc(idHotel).get().then(function(doc) {
+        if (doc.exists) {
+          // Mendapatkan data dari dokumen
+          var data = doc.data();
+          var name = data.name;
+          // Iterasi melalui semua elemen dengan kelas "nameInput" dan mengatur nilai mereka
+          for (var i = 0; i < inputName.length; i++) {
+            inputName[i].value = name;
+            inputName[i].textContent = name;
           }
-        };
-      </script>
+        } else {
+            console.error("Dokumen tidak ditemukan!");
+        }
+      }).catch(function(error) {
+        console.error("Gagal mengambil data:", error);
+      });
+    </script>
+    
+    <script>
+      var idHotel = getCookie('user_uid');
+      // Star Rating
+      db.collection(`Hotel`).doc(idHotel).get().then((doc) => {
+        if (doc.exists) {
+          const bintang = doc.data().bintangHotel;
+          const starRating = document.getElementById("star-rating");
+  
+          for (let i = 0; i < bintang; i++) {
+            const icon = document.createElement("i");
+            icon.classList.add("bi", "bi-star-fill", "ms-3", "custom-star");
+            starRating.appendChild(icon);
+          }
+        } else {
+          console.log("No such document!");
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+      });
+    </script>
+
     <script src="./boostrap/js/bootstrap.js"></script>
-</body>
+
+  </body>
 </html>

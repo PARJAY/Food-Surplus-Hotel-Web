@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="boostrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
@@ -13,56 +14,56 @@
   </head>
   <body class="body">
 
-  <!-- Navbar  -->
-  <nav class="navbar navbar-expand-md fixed-top d-flex justify-content-end">
-    <div class="containe me-3">
-      <div class="row">
-        <div class="col">
-          <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
-        </div>
-        <div class="col-auto">
-          <div class="circle">
-            <img id="userPhoto1" alt="gambar">
+  <!-- Navbar -->
+    <nav class="navbar navbar-expand-md fixed-top d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-center">
+        <div id="star-rating"></div>
+      </div>
+      <div class="containe me-3">
+        <div class="row">
+          <div class="col">
+            <a class="nav-item nav-link nameInput fs-5" href="Profile.html">Nama Anda</a>
+          </div>
+          <div class="col-auto">
+            <div class="circle">
+              <img id="userPhoto1" alt="gambar">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
     
   <!-- Sidebar -->
-  <div class="sidebar mt-5">
-    <div class="circle">
-      <img id="userPhoto2" alt="gambar">
+    <div class="sidebar mt-5">
+      <div class="circle">
+        <img id="userPhoto2" alt="gambar">
+      </div>
+      <a class="nav-item nav-link nama nameInput p-1" style="margin-bottom: 30px; font-size: 30px;">Nama Anda</a>
+      <ul class="nav flex-column">
+        <li class="nav-item bar">
+          <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
+        </li>
+        <li class="nav-item bar">
+          <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
+        </li>
+        <li class="nav-item bar">
+          <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Kurir</a>
+        </li>
+        <li class="nav-item bar">
+          <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
+        </li>
+        <li class="nav-item" style="margin-top: 21px;" >
+          <a class="nav-link logout-link" href="index.html">Logout</a>
+        </li>
+      </ul>
     </div>
-    <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;"></a>
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link nav-hover" href="DaftarKatalis.html">Daftar Katalis</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Kurir</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
-      </li>
-      <li class="nav-item" style="margin-top: 21px;" >
-        <a class="nav-link logout-link" href="index.html">Logout</a>
-      </li>
-    </ul>
-  </div>
 
   <!-- Content -->
     <div class="content">
       <div class="containe" style="margin-bottom: 10px;">
         <div class="row">
-          <div class="col text-center">
-            <h2>Daftar Kurir</h2>
+          <div class="col-auto pb-3">
+            <h2 class="fs-2">Daftar Kurir</h2>
           </div>
         </div>
       </div>
@@ -73,7 +74,6 @@
             <th>Nama Kurir</th>
             <th>No Telepon Kurir</th>
             <th>Statur Kurir</th>
-            <th>#</th>
           </tr>
         </thead>
         <tbody id="data">
@@ -81,44 +81,6 @@
         </tbody>
       </table>
     </div>
-
-  <!-- Edit modal -->
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Kurir</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" id="id">
-              <form>
-                <div class="form-group">
-                  <label>Nama Kurir:</label>
-                  <input type="text" class="form-control" id="name_update" placeholder="Masukkan Nama">
-                </div>
-                <div class="form-group">
-                  <label>No Telepon Kurir:</label>
-                  <input type="text" class="form-control" id="phoneNumber_update" placeholder="Masukkan No Telepon">
-                </div>
-                <div class="form-group">
-                  <label for="statusKurir">Status Kurir:</label>
-                  <select class="form-control" id="statusKurir_update">
-                      <option value="IDLE">IDLE</option>
-                      <option value="Mengirim ">Mengirim </option>
-                      <option value="off">off</option>
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="updateData">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>  
 
     <script>
       const firebaseConfig = {
@@ -140,6 +102,7 @@
         getData();
       })
 
+      // Menampilkan Data Ke Dalam Tabel
       async function getData() {
         document.getElementById('data').innerHTML = '';
         const Admin = await db.collection("Kurir").get();
@@ -152,91 +115,81 @@
               <td>${krr.data().name}</td> 
               <td>${krr.data().phoneNumber}</td> 
               <td>${krr.data().statusKurir}</td>
-              <td class="button-container">
-                <button class="btn btn-warning editData mb-2" data-id="${krr.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
-                <button class="btn btn-danger hapusData" data-id="${krr.id}">Hapus</button>
-              </td>
             </tr>
           `;
         });
       }
-
-      document.getElementById('updateData').addEventListener('click', function(){
-        db.collection("Kurir").doc(document.getElementById('id').value).update({
-          name: document.getElementById('name_update').value,
-          phoneNumber: document.getElementById('phoneNumber_update').value,
-          statusKurir: document.getElementById('statusKurir_update').value
-        }).then(() => {
-            console.log("Document successfully updated!");
-            var modal = document.getElementById('modalUpdate');
-            var modalInstance = bootstrap.Modal.getInstance(modal);
-            modalInstance.hide();
-        }).catch((error) => {
-            console.error("Error updating document: ", error);
-        });
-      })
-
-      document.getElementById('data').addEventListener('click', function(e) {
-        const id = e.target.dataset.id;
-        if (e.target.classList.contains('hapusData')) {
-          db.collection("Kurir").doc(id).delete().then(() => {
-              console.log("Document successfully deleted!");
-            }).catch((error) => {
-              console.error("Error removing document: ", error);
-            });
-          }
-
-        if (e.target.classList.contains('editData')) {
-            db.collection("Kurir").doc(id).get().then((doc) => {
-              if (doc.exists) {
-                console.log(doc.data());
-                document.getElementById('id').value = doc.id;
-                document.getElementById('name_update').value = doc.data().name;
-                document.getElementById('phoneNumber_update').value = doc.data().phoneNumber; 
-                document.getElementById('statusKurir_update').value = doc.data().statusKurir;
-              } else {
-                  console.log("No such document!");
-                }
-            });
-          }
-        })
-
     </script>
 
     <script>
       // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
       function getCookie(name) {
-          var nameEQ = name + "=";
-          var ca = document.cookie.split(';');
-          for (var i = 0; i < ca.length; i++) {
-              var c = ca[i];
-              while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-          }
-          return null;
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
       }
   
+      // Menampilkan Cookie
       window.onload = function() {
-        // Mendapatkan nama pengguna dari cookie
-        var userName = getCookie('user_name');
-        // Mendapatkan URL foto pengguna dari cookie
         var userPhoto = getCookie('user_photoURl');
-        
-        // Cek apakah nama pengguna dan URL foto pengguna ditemukan
-        if (userName && userPhoto) {
-            // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
-            var namaAdminElements = document.getElementsByClassName('namaAdmin');
-            for (var i = 0; i < namaAdminElements.length; i++) {
-                namaAdminElements[i].innerText = userName;
-            }
-            // Setel gambar pengguna
-            document.getElementById('userPhoto1').src = userPhoto;
-            document.getElementById('userPhoto2').src = userPhoto;
+
+        if (userPhoto) {
+          document.getElementById('userPhoto1').src = userPhoto;
+          document.getElementById('userPhoto2').src = userPhoto;
         } else {
-            // Jika nama pengguna atau URL foto pengguna tidak ditemukan, arahkan kembali ke halaman login
-            window.location.href = "index.html";
+          window.location.href = "index.html";
         }
       };
+
+      var idHotel = getCookie('user_uid');
+      // Mengambil referensi elemen input
+      var inputName = document.getElementsByClassName("nameInput");
+      db.collection('Hotel').doc(idHotel).get().then(function(doc) {
+        if (doc.exists) {
+          var fullName = doc.data().name;
+          var abbreviatedName = getFirstTwoWords(fullName);
+          for (var i = 0; i < inputName.length; i++) {
+            inputName[i].textContent = abbreviatedName;
+          }
+        } else {
+          console.error("Dokumen tidak ditemukan!");
+        }
+      }).catch(function(error) {
+        console.error("Gagal mengambil data:", error);
+      });
+
+      // Fungsi untuk mendapatkan dua kata pertama dari sebuah string
+      function getFirstTwoWords(fullName) {
+        var nameArray = fullName.split(" ");
+        var firstTwoWords = nameArray.slice(0, 2).join(" ");
+        return firstTwoWords;
+      }
+    </script>
+
+    <script>
+      var idHotel = getCookie('user_uid');
+      // Star Rating
+      db.collection(`Hotel`).doc(idHotel).get().then((doc) => {
+        if (doc.exists) {
+          const bintang = doc.data().bintangHotel;
+          const starRating = document.getElementById("star-rating");
+  
+          for (let i = 0; i < bintang; i++) {
+            const icon = document.createElement("i");
+            icon.classList.add("bi", "bi-star-fill", "ms-3", "custom-star");
+            starRating.appendChild(icon);
+          }
+        } else {
+          console.log("No such document!");
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+      });
     </script>
 
   <script src="boostrap/js/bootstrap.js"></script>

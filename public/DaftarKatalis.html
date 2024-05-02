@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="boostrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
@@ -15,13 +16,13 @@
 
   <!-- Navbar  -->
     <nav class="navbar navbar-expand-md fixed-top d-flex justify-content-between">
-      <a class="nav-item nav-link ms-2" style="font-size: 30px;" href="#">
-        Hotel Dahsyat
-      </a>
+      <div class="d-flex justify-content-between align-items-center">
+        <div id="star-rating"></div>
+      </div>
       <div class="containe me-3">
         <div class="row">
           <div class="col">
-            <a class="nav-item nav-link namaAdmin" href="Profile.html"></a>
+            <a class="nav-item nav-link nameInput fs-5" href="Profile.html">Nama Anda</a>
           </div>
           <div class="col-auto">
             <div class="circle">
@@ -31,13 +32,13 @@
         </div>
       </div>
     </nav>
-  
+    
   <!-- Sidebar -->
     <div class="sidebar mt-5">
       <div class="circle">
         <img id="userPhoto2" alt="gambar">
       </div>
-      <a class="nav-item nav-link nama namaAdmin" style="margin-bottom: 30px; font-size: 30px;"></a>
+      <a class="nav-item nav-link nama nameInput p-1" style="margin-bottom: 30px; font-size: 30px;"></a>
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link nav-hover" href="Dasboard.html">Dasboard</a>
@@ -49,9 +50,6 @@
           <a class="nav-link nav-hover" href="DaftarKurir.html">Daftar Kurir</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-hover" href="HistoryTransaksi.html">History Transaksi</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link nav-hover" href="Pesanan.html">Pesanan</a>
         </li>
         <li class="nav-item" style="margin-top: 21px;" >
@@ -61,31 +59,29 @@
     </div>
     
   <!-- Content -->
-  <div class="content">
-    <div class="containe" style="margin-bottom: 10px;">
-      <div class="row">
-        <div class="col-auto">
-          <h2 class="fs-1">Daftar Katalis</h2>
+    <div class="content">
+      <div class="containe" style="margin-bottom: 10px;">
+        <div class="row">
+          <div class="col-auto">
+            <h2 class="fs-1">Daftar Katalis</h2>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-auto pb-3">
-     <button class="tombol-tambah" data-bs-toggle="modal" data-bs-target="#modalTambah">
-          Tambah <span class="icon">+</span>
-        </button>
-    </div>
+      <div class="col-auto pb-3">
+        <button class="tombol-tambah" data-bs-toggle="modal" data-bs-target="#modalPersetujuan">Tambah <span class="icon">+</span></button>
+      </div>
       <div class="table-responsive">
         <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid #000000">
             <thead>
                 <tr>
                     <th class="col">No</th>
-                    <th class="col">Id Hotel</th>
-                    <th class="col">Nama Katalis</th>
                     <th class="col">Gambar</th>
+                    <th class="col">Nama Katalis</th>
+                    <th class="col">Stok Katalis</th>
                     <th class="col">Komposisi</th>
+                    <th class="col-1">Harga Per Porsi</th>
+                    <th class="col">Status Katalis</th>
                     <th class="col">Kadaluarsa</th>
-                    <th class="col">Harga</th>
-                    <th class="col">Gram Per Porsi</th>
                     <th>#</th>
                 </tr>
             </thead>
@@ -93,7 +89,63 @@
                 
             </tbody>
         </table>
+      </div>
     </div>
+
+  <!-- Modal Persetujuan -->
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal fade" id="modalPersetujuan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Daftar Persetjuan</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="card-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Higernis, yakni tidak mengandung kuman sumber penyakit.
+                  </label>
+                </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check2">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Bergizi, mengandung karbohirat, lemak, protein, mineral dan vitamin yang cukup.
+                  </label>
+                </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check3">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Berkecukupan, memenuhi kebutuhan tubuh di usia dan kondisi tertentu.
+                  </label>
+                </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check4">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Mudah dicerna
+                  </label>
+                </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check5">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Tidak mengandung bahan pengawet atau pewarna buatan.
+                  </label>
+                </div>
+                <hr>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-bs-target="#modalTambah" data-bs-toggle="modal">Selanjutnya</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   <!-- Modal Tambah -->
@@ -124,12 +176,12 @@
                   <input type="text" class="form-control" id="komposisi" placeholder="Masukkan Komposisi">
                 </div>
                 <div class="form-group">
-                  <label>Harga:</label>
-                  <input type="number" class="form-control" id="harga" placeholder="Masukkan Harga">
+                  <label>Harga Per Porsi:</label>
+                  <input type="number" class="form-control" id="hargaPerPorsi" placeholder="Masukkan Harga">
                 </div>
                 <div class="form-group">
-                  <label>Gram Per Porsi:</label>
-                  <input type="text" class="form-control" id="gramPerPorsi" placeholder="Masukkan Gram Per Porsi">
+                  <label>Kadaluarsa:</label>
+                  <input type="datetime-local" class="form-control" id="kadaluarsa" placeholder="Masukkan Batas Kadaluarsa">
                 </div>
               </form>
             </div>
@@ -159,23 +211,23 @@
                 </div>
                 <div class="form-group">
                   <label>Nama Katalis:</label>
-                  <input type="text" class="form-control" id="namaKatalis_update" placeholder="Masukkan Nama katalis">
+                  <input type="text" class="form-control" id="namaKatalis_update" placeholder="Edit Nama katalis">
                 </div>
                 <div class="form-group">
                   <label>Stok Katalis:</label>
-                  <input type="number" class="form-control" id="stok_update" placeholder="Masukkan Stok">
+                  <input type="number" class="form-control" id="stok_update" placeholder="Edit Stok">
                 </div>
                 <div class="form-group">
                   <label>Komposisi:</label>
-                  <input type="text" class="form-control" id="komposisi_update" placeholder="Masukkan Komposisi">
+                  <input type="text" class="form-control" id="komposisi_update" placeholder="Edit Komposisi">
                 </div>
                 <div class="form-group">
                   <label>Harga:</label>
-                  <input type="number" class="form-control" id="harga_update" placeholder="Masukkan Harga">
+                  <input type="number" class="form-control" id="hargaPerPorsi_update" placeholder="Edit Harga">
                 </div>
                 <div class="form-group">
-                  <label>Gram Per Porsi:</label>
-                  <input type="text" class="form-control" id="gramPerPorsi_update" placeholder="Masukkan Gram Per Porsi">
+                  <label>Kadaluarsa:</label>
+                  <input type="datetime-local" class="form-control" id="kadaluarsa_update" placeholder="Edit Batas Kadaluarsa">
                 </div>
               </form>
             </div>
@@ -188,255 +240,297 @@
     </div>
     
     <script>
-    // Initialize Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
-      authDomain: "nofwa-indonesia.firebaseapp.com",
-      projectId: "nofwa-indonesia",
-      storageBucket: "nofwa-indonesia.appspot.com",
-      messagingSenderId: "608371446284",
-      appId: "1:608371446284:web:5c15b701371d2390599429",
-      measurementId: "G-WJSVLG5HW5"
-    };
+      // Initialize Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyCXZOpejbtVBD01z6n_E0cVqRsATq1xTws",
+        authDomain: "nofwa-indonesia.firebaseapp.com",
+        projectId: "nofwa-indonesia",
+        storageBucket: "nofwa-indonesia.appspot.com",
+        messagingSenderId: "608371446284",
+        appId: "1:608371446284:web:5c15b701371d2390599429",
+        measurementId: "G-WJSVLG5HW5"
+      };
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const storage = firebase.storage();
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      const storage = firebase.storage();
 
-    db.collection("Katalis").onSnapshot(snapshot => {
-      snapshot.docChanges();
-      getData();
-    })
+      db.collection("Katalis").onSnapshot(snapshot => {
+        snapshot.docChanges();
+        getData();
+      })
 
-    async function getData() {
-      document.getElementById('data').innerHTML = '';
-      const Admin = await db.collection("Katalis").get();
-  
-      for (let i = 0; i < Admin.docs.length; i++) {
-          const kts = Admin.docs[i];
+      // Menampilkan Data Ke Dalam Tabel
+      async function getData() {
+        let counter = 1
+        document.getElementById('data').innerHTML = '';
+        const katalis = await db.collection("Katalis").get();  
+        for (let i = 0; i < katalis.docs.length; i++) {
+
+          const kts = katalis.docs[i];
           console.log(kts.id);
           var idHotel = getCookie('user_uid');
-          const image = await firebase.storage().ref(`Hotel_${idHotel}/${kts.data().img}`).getDownloadURL();
-          const harga = parseInt(kts.data().harga);
-          document.getElementById('data').innerHTML += `
+
+          console.log(`compare : ${kts.data().idHotel} with ${idHotel}`)
+          if (kts.data().idHotel == idHotel) {
+            console.log(`lolos seleksi`)
+            console.log(kts.data())
+            const image = await firebase.storage().ref(`Hotel_${idHotel}/${kts.data().img}`).getDownloadURL();
+            const harga = parseInt(kts.data().harga);
+            document.getElementById('data').innerHTML += `
               <tr> 
-                  <td>${i+1}</td>
-                  <td><img src="${image}" id="previewImage_update" width="80" height="80" onchange="previewImage()"></td>
-                  <td>${kts.data().namaKatalis}</td>
-                  <td>${kts.data().stok}</td> 
-                  <td>${kts.data().komposisi}</td> 
-                  <td>${kts.data().hargaAwal}</td>
-                  <td>${kts.data().gramPerPorsi}</td>
-                  <td class="button-container">
-                      <button class="btn btn-warning editData mb-2" data-id="${kts.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
-                      <button class="btn btn-danger hapusData" data-id="${kts.id}">Hapus</button>
-                  </td>
+                <td>${counter++}</td>
+                <td><img src="${image}" id="previewImage_update" width="100" height="100" onchange="previewImage()"></td>
+                <td>${kts.data().namaKatalis}</td>
+                <td>${kts.data().stok}</td> 
+                <td>${kts.data().komposisi}</td> 
+                <td>${kts.data().hargaPerPorsi}</td>
+                <td>${kts.data().statusKatalis}</td>
+                <td>${kts.data().kadaluarsa.toDate()}</td>
+                <td class="button-container">
+                  <button class="btn btn-warning editData mb-2" data-id="${kts.id}" data-bs-toggle="modal" data-bs-target="#modalUpdate">Edit</button>
+                  <button class="btn btn-danger hapusData mt-3" data-id="${kts.id}">Hapus</button>
+                </td>
               </tr>
-          `;
+            `;
+          }
+        }
       }
-    }
-    
-    function uploadImage(file) {
-        var idHotel = getCookie('user_uid');
-        return new Promise((resolve, reject) => {
-            const storageRef = storage.ref(`Hotel_${idHotel}/${file.name}`);
-            const uploadTask = storageRef.put(file);
-    
-            uploadTask.on('state_changed',
-                (snapshot) => {
-                    // Progress tracking
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
-                },
-                (error) => {
-                    // Handle unsuccessful uploads
-                    console.error('Error uploading image: ', error);
-                    reject(error);
-                },
-                () => {
-                    // Handle successful uploads on complete
-                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                        resolve(downloadURL);
-                    }).catch((error) => {
-                        console.error('Error getting download URL: ', error);
-                        reject(error);
-                    });
-                }
-            );
-        });
-    }
-    
-    document.getElementById('tambahData').addEventListener('click', async function(){ 
-      let hargaChecer;
-      let stokChecer;
       
-      if (isNaN(parseInt(document.getElementById('harga').value))) hargaChecer = 0;
-      else hargaChecer = parseInt(document.getElementById('harga').value);
-  
-      if (isNaN(parseInt(document.getElementById('stok').value))) stokChecer = 0;
-      else stokChecer = parseInt(document.getElementById('stok').value);
-      
-      var idHotel = getCookie('user_uid');
-  
+      // Tambah Data Ke DataBase
+      document.getElementById('tambahData').addEventListener('click', async function(){
+        // Mendapatkan nilai dari setiap input
+      const namaKatalis = document.getElementById('namaKatalis').value;
+      const stok = document.getElementById('stok').value;
+      const komposisi = document.getElementById('komposisi').value;
+      const hargaPerPorsi = document.getElementById('hargaPerPorsi').value;
+      const kadaluarsa = document.getElementById('kadaluarsa').value;
       const file = document.getElementById('katalisImageLink').files[0];
-  
-      if (file) {
+        // Mengubah Tipe Data 
+        let hargaPerPorsiChecer;
+        if (isNaN(parseInt(document.getElementById('hargaPerPorsi').value))) hargaPerPorsiChecer = 0;
+        else hargaPerPorsiChecer = parseInt(document.getElementById('hargaPerPorsi').value);
+        let stokChecer;
+        if (isNaN(parseInt(document.getElementById('stok').value))) stokChecer = 0;
+        else stokChecer = parseInt(document.getElementById('stok').value);
+        
+        var idHotel = getCookie('user_uid');
+    
+        if (file) {
           try {
-              const imgUrl = await uploadImage(file); // tunggu sampai gambar diunggah
-              await db.collection("Katalis").add({
-                  idHotel: idHotel,
-                  img: file.name,
-                  namaKatalis: document.getElementById('namaKatalis').value,
-                  stok: stokChecer,
-                  komposisi: document.getElementById('komposisi').value,
-                  hargaAwal: hargaChecer,
-                  gramPerPorsi: document.getElementById('gramPerPorsi').value
-              });
+            const imgUrl = await uploadImage(file); // tunggu sampai gambar diunggah
+            await db.collection('Katalis').add({
+              idHotel: idHotel,
+              img: file.name,
+              namaKatalis: namaKatalis,
+              stok: stokChecer,
+              statusKatalis:"MENUNGGU",
+              komposisi: document.getElementById('komposisi').value,
+              hargaPerPorsi: hargaPerPorsiChecer,
+              kadaluarsa: firebase.firestore.Timestamp.fromDate(new Date(document.getElementById('kadaluarsa').value))
+            });
               console.log("Data added successfully");
               // Clear input values
               document.getElementById('katalisImageLink').value = '';
               document.getElementById('namaKatalis').value = '';
               document.getElementById('stok').value = '';
               document.getElementById('komposisi').value = '';
-              document.getElementById('harga').value = '';
-              document.getElementById('gramPerPorsi').value = '';
+              document.getElementById('hargaPerPorsi').value = '';
+              document.getElementById('kadaluarsa').value = '';
               // Hide modal after successful addition
               var modal = document.getElementById('modalTambah');
               var modalInstance = bootstrap.Modal.getInstance(modal);
               modalInstance.hide();
           } catch (error) {
-              console.error("Error adding document: ", error);
-              // Handle error
+            console.error("Error adding document: ", error);
+            // Jika ada checkbox yang belum dicentang, tampilkan pesan kesalahan
+            alert("M.");
           }
-      } else {
+        } else {
+          alert("Anda harus Mengisi Semua Form.");
           console.error("Error: No image selected");
-          // Handle error
-      }
-    });
+        }
+      });
 
-    document.getElementById('updateData').addEventListener('click', async function () {
-      let harga_updateChecker;
-      let stok_updateChecker;
-  
-      if (isNaN(parseInt(document.getElementById('harga_update').value))) harga_updateChecker = 0;
-      else harga_updateChecker = parseInt(document.getElementById('harga_update').value);
-  
-      if (isNaN(parseInt(document.getElementById('stok_update').value))) stok_updateChecker = 0;
-      else stok_updateChecker = parseInt(document.getElementById('stok_update').value);
-  
-      const file = document.getElementById('katalisImageLink_update').files[0];
-  
-      if (file) {
+      // Edit Data Ke Database
+      document.getElementById('updateData').addEventListener('click', async function () {
+        // Mengubah Tipe Data
+        let hargaPerPorsi_updateChecker;
+        if (isNaN(parseInt(document.getElementById('hargaPerPorsi_update').value))) hargaPerPorsi_updateChecker = 0;
+        else hargaPerPorsi_updateChecker = parseInt(document.getElementById('hargaPerPorsi_update').value);
+        let stok_updateChecker;  
+        if (isNaN(parseInt(document.getElementById('stok_update').value))) stok_updateChecker = 0;
+        else stok_updateChecker = parseInt(document.getElementById('stok_update').value);
+    
+        const file = document.getElementById('katalisImageLink_update').files[0];
+    
+        if (file) {
           try {
-              const imgUrl = await uploadImage(file); // Upload gambar baru
-              // Update data dengan URL gambar yang baru
-              db.collection("Katalis").doc(document.getElementById('id').value).update({
-                  namaKatalis: document.getElementById('namaKatalis_update').value,
-                  stok: stok_updateChecker,
-                  komposisi: document.getElementById('komposisi_update').value,
-                  hargaAwal: harga_updateChecker,
-                  gramPerPorsi: document.getElementById('gramPerPorsi_update').value,
-                  img: file.name
-              }).then(() => {
-                  console.log("Document successfully updated!");
-                  var modal = document.getElementById('modalUpdate');
-                  var modalInstance = bootstrap.Modal.getInstance(modal);
-                  modalInstance.hide();
-              }).catch((error) => {
-                  console.error("Error updating document: ", error);
-              });
-          } catch (error) {
-              console.error("Error uploading image: ", error);
-          }
-      } else {
-          // Jika tidak ada gambar yang dipilih, update data tanpa mengubah gambar
-          db.collection("Katalis").doc(document.getElementById('id').value).update({
+            const imgUrl = await uploadImage(file);
+            db.collection("Katalis").doc(document.getElementById('id').value).update({
+              img: file.name,
               namaKatalis: document.getElementById('namaKatalis_update').value,
               stok: stok_updateChecker,
               komposisi: document.getElementById('komposisi_update').value,
-              hargaAwal: harga_updateChecker,
-              gramPerPorsi: document.getElementById('gramPerPorsi_update').value
-          }).then(() => {
+              hargaPerPorsi: hargaPerPorsi_updateChecker,
+              kadaluarsa: document.getElementById('kadaluarsa_update').value
+            }).then(() => {
               console.log("Document successfully updated!");
               var modal = document.getElementById('modalUpdate');
               var modalInstance = bootstrap.Modal.getInstance(modal);
               modalInstance.hide();
-          }).catch((error) => {
+            }).catch((error) => {
               console.error("Error updating document: ", error);
+            });
+          } catch (error) {
+              console.error("Error uploading image: ", error);
+          }
+        } else {
+          db.collection("Katalis").doc(document.getElementById('id').value).update({
+            namaKatalis: document.getElementById('namaKatalis_update').value,
+            stok: stok_updateChecker,
+            komposisi: document.getElementById('komposisi_update').value,
+            hargaPerPorsi: hargaPerPorsi_updateChecker,
+            kadaluarsa: firebase.firestore.Timestamp.fromDate(new Date(document.getElementById('kadaluarsa_update').value))
+          }).then(() => {
+            console.log("Document successfully updated!");
+            var modal = document.getElementById('modalUpdate');
+            var modalInstance = bootstrap.Modal.getInstance(modal);
+            modalInstance.hide();
+          }).catch((error) => {
+            console.error("Error updating document: ", error);
           });
-      }
-    });
-  
-    document.getElementById('data').addEventListener('click', function (e) {
-      const id = e.target.dataset.id;
-      const idHotel = getCookie('user_uid');
+        }
+      });
 
-      if (e.target.classList.contains('hapusData')) {
-        db.collection("Katalis").doc(id).delete().then((doc) => {
-        console.log("Dokumen berhasil dihapus!");
-        }).catch((error) => {
-          console.error("Error menghapus gambar: ", error);
-        });
-      }
-  
-      if (e.target.classList.contains('editData')) {
-          db.collection("Katalis").doc(id).get().then(async (doc) => {
-              if (doc.exists) {
-                  console.log(doc.data());
-                  document.getElementById('id').value = doc.id;
-                  document.getElementById('namaKatalis_update').value = doc.data().namaKatalis;
-                  document.getElementById('stok_update').value = doc.data().stok;
-                  document.getElementById('komposisi_update').value = doc.data().komposisi;
-                  document.getElementById('harga_update').value = doc.data().hargaAwal;
-                  document.getElementById('gramPerPorsi_update').value = doc.data().gramPerPorsi;
-  
-                  // Set the src attribute for the image preview element in the edit modal
-                  const imageUrl = await firebase.storage().ref(`Hotel_${idHotel}/${doc.data().img}`).getDownloadURL();
-                  document.getElementById('previewImage_update').setAttribute('src', imageUrl);
-                  document.getElementById('previewImage_update').setAttribute('data-id', id); // Optionally set data-id attribute
-              } else {
-                  console.log("No such document!");
-              }
-          })
-      }
-    });
-    
-    </script>
-  
-    <script>
-        function getCookie(name) {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
+      // Button Edit Dan Button Delete
+      document.getElementById('data').addEventListener('click', function (e) {
+        const id = e.target.dataset.id;
+        const idHotel = getCookie('user_uid');
+
+        if (e.target.classList.contains('hapusData')) {
+          db.collection("Katalis").doc(id).delete().then((doc) => {
+          console.log("Dokumen berhasil dihapus!");
+          }).catch((error) => {
+            console.error("Error menghapus gambar: ", error);
+          });
         }
     
-        window.onload = function() {
-            // Mendapatkan nama pengguna dari cookie
-            var userName = getCookie('user_name');
-            // Mendapatkan URL foto pengguna dari cookie
-            var userPhoto = getCookie('user_photoURl');
-            
-            // Cek apakah nama pengguna dan URL foto pengguna ditemukan
-            if (userName && userPhoto) {
-                // Jika ditemukan, ubah teks "Nama admin" menjadi nama pengguna
-                var namaAdminElements = document.getElementsByClassName('namaAdmin');
-                for (var i = 0; i < namaAdminElements.length; i++) {
-                    namaAdminElements[i].innerText = userName;
-                }
-                // Setel gambar pengguna
-                document.getElementById('userPhoto1').src = userPhoto;
-                document.getElementById('userPhoto2').src = userPhoto;
+        if (e.target.classList.contains('editData')) {
+          db.collection("Katalis").doc(id).get().then(async (doc) => {
+            if (doc.exists) {
+              console.log(doc.data());
+              document.getElementById('id').value = doc.id;
+              document.getElementById('namaKatalis_update').value = doc.data().namaKatalis;
+              document.getElementById('stok_update').value = doc.data().stok;
+              document.getElementById('komposisi_update').value = doc.data().komposisi;
+              document.getElementById('hargaPerPorsi_update').value = doc.data().hargaPerPorsi;
+              document.getElementById('kadaluarsa_update').value = doc.data().kadaluarsa;
+              // Set the src attribute for the image preview element in the edit modal
+              const imageUrl = await firebase.storage().ref(`Hotel_${idHotel}/${doc.data().img}`).getDownloadURL();
+              document.getElementById('previewImage_update').setAttribute('src', imageUrl);
+              document.getElementById('previewImage_update').setAttribute('data-id', id);
             } else {
-                // Jika nama pengguna atau URL foto pengguna tidak ditemukan, arahkan kembali ke halaman login
-                window.location.href = "index.html";
+                console.log("No such document!");
             }
-        };
+          })
+        }
+      });
+    </script>
+
+    <Script>
+      // Upload Image
+      function uploadImage(file) {
+        var idHotel = getCookie('user_uid');
+        return new Promise((resolve, reject) => {
+          const storageRef = storage.ref(`Hotel_${idHotel}/${file.name}`);
+          const uploadTask = storageRef.put(file);
+          uploadTask.on('state_changed',
+            (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log('Upload is ' + progress + '% done');
+            },(error) => {
+              console.error('Error uploading image: ', error);
+              reject(error);
+            },() => {
+              uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                resolve(downloadURL);
+              }).catch((error) => {
+                console.error('Error getting download URL: ', error);
+                reject(error);
+              });
+            }
+          );
+        });
+      }
+      // Fungsi untuk mendapatkan nilai cookie berdasarkan namanya
+      function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+      }
+      // Menampilkan Cookie
+      window.onload = function() {
+        var userPhoto = getCookie('user_photoURl');
+
+        if (userPhoto) {
+          document.getElementById('userPhoto1').src = userPhoto;
+          document.getElementById('userPhoto2').src = userPhoto;
+        } else {
+          window.location.href = "index.html";
+        }
+      };
+
+      var idHotel = getCookie('user_uid');
+      // Mengambil referensi elemen input
+      var inputName = document.getElementsByClassName("nameInput");
+      db.collection('Hotel').doc(idHotel).get().then(function(doc) {
+        if (doc.exists) {
+          var fullName = doc.data().name;
+          var abbreviatedName = getFirstTwoWords(fullName);
+          for (var i = 0; i < inputName.length; i++) {
+            inputName[i].textContent = abbreviatedName;
+          }
+        } else {
+          console.error("Dokumen tidak ditemukan!");
+        }
+      }).catch(function(error) {
+        console.error("Gagal mengambil data:", error);
+      });
+
+      // Fungsi untuk mendapatkan dua kata pertama dari sebuah string
+      function getFirstTwoWords(fullName) {
+        var nameArray = fullName.split(" ");
+        var firstTwoWords = nameArray.slice(0, 2).join(" ");
+        return firstTwoWords;
+      }
+    </Script>
+
+    <script>
+      var idHotel = getCookie('user_uid');
+      // Star Rating
+      db.collection(`Hotel`).doc(idHotel).get().then((doc) => {
+        if (doc.exists) {
+          const bintang = doc.data().bintangHotel;
+          const starRating = document.getElementById("star-rating");
+  
+          for (let i = 0; i < bintang; i++) {
+            const icon = document.createElement("i");
+            icon.classList.add("bi", "bi-star-fill", "ms-3", "custom-star");
+            starRating.appendChild(icon);
+          }
+        } else {
+          console.log("No such document!");
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+      });
     </script>
 
   <script src="boostrap/js/bootstrap.js"></script>

@@ -24,6 +24,15 @@
   z-index: 5;
 }
 
+.nama{
+  text-align: center;
+}
+
+.custom-star{
+  font-size: 35px;
+  color: #FFF9C9;
+}
+
 .sidebar ul li a{
   font-size: 23;
 }
@@ -117,12 +126,8 @@
   height: auto;
   border-radius: 10px;
   background-color: #CDC899;
-  display: flex;
+  display: grid;
   justify-content: center;
-  padding: 2px;
-}
-.col {
-  margin: 0px 0; /* Mengurangi margin vertikal */
 }
 
 .kotak h2{
@@ -191,19 +196,15 @@
 
 .btn-custom {
   background-color: #faf5f3;
-  color: #bd0d0d;
+  color: #0087f5;
   padding: 10px 20px; /* Sesuaikan dengan kebutuhan Anda */
   border-radius: 15px;
-  border-color: black;
+  border-color: transparent;
   font-size: 17px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
-/* .btn-custom:hover {
-  background-color: #ffca2c;
-} */
 
 .btn-search {
   background-color: #FFF9C9;
@@ -242,22 +243,21 @@
   border-radius: 10px;
 }
 
-.kotak-persetujuan h2{
-  padding: 30px;
-}
-
-
-.update {
-  background-color: #862B0D;
-  color: #ffffff;
-}
-
-.content .circle{
-  width: 100px;
-  height: 100px;
+.content .circle {
+  width: 150px; /* Sudah disesuaikan dengan HTML */
+  height: 150px; /* Sudah disesuaikan dengan HTML */
   background-color: #fff;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
+}
+
+.content .circle img {
+  width: 100%; /* Memastikan gambar memenuhi lebar lingkaran */
+  height: 100%; /* Memastikan gambar memenuhi tinggi lingkaran */
+  object-fit: cover; /* Memastikan gambar memenuhi dan dipotong jika perlu */
 }
 
 .box {
@@ -278,6 +278,7 @@
   display: flex;
   justify-content: flex-end; /* Meletakkan tombol di sebelah kanan */
 }
+
 .tombol-tambah {
   background-color: #4CAF50; /* Warna hijau */
   color: white;
