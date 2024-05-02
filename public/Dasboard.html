@@ -16,7 +16,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md fixed-top d-flex justify-content-between">
     <a class="nav-item nav-link ms-2" style="font-size: 30px;" href="#">
-      Nama Hotel
+      Hotel Dahsyat
     </a>
     <div class="containe me-3">
       <div class="row">
@@ -62,10 +62,53 @@
   
   <!-- Content -->
     <div class="content">
-      <div class="kotak" style="height: 750px;">
-        <h2 id="greeting" class="">Welcome</h2>
+      <div class="kotak d-flex flex-column" style="height: 750px;">
+        <h2 id="greeting" class="text-center" style="margin-bottom: 0px;">Selamat Datang</h2>
+        <h5 class="text-center" style="margin-top: 10px; margin-bottom: 0px;">Daftarkan Hotel Anda terlebih Dahulu</h5>
+        <div class="container">
+          <div class="d-flex justify-content-center pt-5">
+              <button class="btn btn-success btn-sm btn-block col-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Daftar</button>
+            </div>
+        </div>
       </div>
     </div>
+
+    <!-- Modal Persetujuan -->
+    
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Berkas Hotel Anda</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Surat Ijin Operasional:</label>
+              <input type="file" class="form-control" id="ijin" accept="berkas/*">
+            </div>
+            <div class="form-group">
+              <label>Surat Pernyataan kerjasama:</label>
+              <input type="file" class="form-control" id="ijin" accept="berkas/*">
+            </div>
+            <div class="form-group">
+              <label>Tahun Awal Hotel Beroperasi:</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Masukan Bintang Hotel:</label>
+              <input type="text" class="form-control"">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
       
   <script>
 
@@ -96,7 +139,7 @@
               }
               // Jika ditemukan, ubah teks "Halo" menjadi "Halo [Nama Pengguna]"
               var greetingElement = document.getElementById('greeting');
-              greetingElement.innerText = "Welcome, " + userName;
+              greetingElement.innerText = "Selamat Datang   " + userName;
               // Setel gambar pengguna
               document.getElementById('userPhoto1').src = userPhoto;
               document.getElementById('userPhoto2').src = userPhoto;

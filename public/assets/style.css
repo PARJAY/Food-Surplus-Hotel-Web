@@ -7,7 +7,7 @@
 .navbar {
   background-color: #34BE82;
   color: #FFF9C9;
-  height: 80px;
+  height: 100px;
 }
 
 .sidebar {
@@ -119,6 +119,10 @@
   background-color: #CDC899;
   display: flex;
   justify-content: center;
+  padding: 2px;
+}
+.col {
+  margin: 0px 0; /* Mengurangi margin vertikal */
 }
 
 .kotak h2{
@@ -187,10 +191,10 @@
 
 .btn-custom {
   background-color: #faf5f3;
-  color: #0087f5;
+  color: #bd0d0d;
   padding: 10px 20px; /* Sesuaikan dengan kebutuhan Anda */
   border-radius: 15px;
-  border-color: transparent;
+  border-color: black;
   font-size: 17px;
   font-weight: bold;
   cursor: pointer;

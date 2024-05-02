@@ -70,7 +70,7 @@
         </div>
       </div>
       <div class="col-auto pb-3">
-        <button class="tombol-tambah">
+        <button class="tombol-tambah" data-bs-toggle="modal" data-bs-target="#modalPersetujuan">
           Tambah <span class="icon">+</span>
         </button>
       </div>
@@ -94,6 +94,61 @@
                 
             </tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- Modal Persetujuan -->
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal fade" id="modalPersetujuan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Syarat Katalis Pesanan</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="card-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Higernis, yakni tidak mengandung kuman sumber penyakit.
+                  </label>
+                </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check2">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Bergizi, mengandung karbohirat, lemak, protein, mineral dan vitamin yang cukup.
+                  </label>
+                </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check3">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Berkecukupan, memenuhi kebutuhan tubuh di usia dan kondisi tertentu.
+                  </label>
+                </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check4">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Mudah dicerna
+                  </label>
+                </div>
+                <hr>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="Check5">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Tidak mengandung bahan pengawet atau pewarna buatan.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="tambah" onclick="saveChanges()">Save changes</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     
