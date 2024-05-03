@@ -118,10 +118,14 @@
             const psn = pesanan.docs[i].data();
             var idHotel = getCookie('user_uid');
 
-            console.log(`compare : ${psn.id_Hotel} with ${idHotel}`)
+            console.log(`compare : ${psn.id_hotel} with ${idHotel}`)
             if (psn.id_hotel == idHotel){
               const customer = await db.collection("Customer").doc(psn.id_customer).get();
-              const kurir = await db.collection("Kurir").doc(psn.id_kurir).get();
+              let kurir
+              
+              if (psn.id_kurir != "") {
+                kurir = await db.collection("Kurir").doc(psn.id_kurir).get();
+              }
 
               let rowData = `
                 <tr> 

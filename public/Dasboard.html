@@ -301,6 +301,11 @@
             // Menghapus tombol "Berkas" jika status hotel sudah terverifikasi
             var berkasButton = document.querySelector('.berkas');
             berkasButton.parentNode.removeChild(berkasButton);
+
+            var bars = document.querySelectorAll('.sidebar-item');
+            bars.forEach(function(bar) {
+              bar.classList.remove('disabled');
+            });
           } else {
             var bars = document.querySelectorAll('.sidebar-item');
             bars.forEach(function(bar) {
