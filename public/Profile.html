@@ -317,6 +317,33 @@
       });
     </script>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var idHotel = getCookie('user_uid');
+        var hotelRef = db.collection('Hotel').doc(idHotel);
+        hotelRef.get().then(function(doc) {
+          if (doc.exists) {
+            var data = doc.data();
+            if (data.statusHotel === 'TERVERIFIKASI') {
+              console.log("Status hotel sudah terverifikasi.");
+              // Menghapus tombol "Berkas" jika status hotel sudah terverifikasi
+              var berkasButton = document.querySelector('.berkas');
+              berkasButton.parentNode.removeChild(berkasButton);
+            } else {
+              var bars = document.querySelectorAll('.bar');
+              bars.forEach(function(bar) {
+                bar.querySelector('.nav-link').innerText = '';
+              });
+            }
+          } else {
+            console.log("Dokumen tidak ditemukan!");
+          }
+        }).catch(function(error) {
+          console.log("Error getting document:", error);
+        });
+      });
+    </script>
+
     <script src="boostrap/js/bootstrap.js"></script>
 
   </body>
