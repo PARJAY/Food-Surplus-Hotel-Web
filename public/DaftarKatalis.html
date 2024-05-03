@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="col-auto pb-3">
-        <button class="tombol-tambah" data-bs-toggle="modal" data-bs-target="#modalPersetujuan">Tambah <span class="icon">+</span></button>
+        <button class="tombol-tambah" data-bs-toggle="modal" data-bs-target="#modalTambah">Tambah <span class="icon">+</span></button>
       </div>
       <div class="table-responsive">
         <table id="tabelData" class="table table-bordered table-hover" style="border: 2px solid #000000">
@@ -104,44 +104,51 @@
             <div class="modal-body">
               <div class="card-body">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check1">
-                  <label class="form-check-label" for="defaultCheck1">
+                  <input class="form-check-input check-item" type="checkbox" value="" id="Check1">
+                  <label class="form-check-label" for="Check1">
                     Higernis, yakni tidak mengandung kuman sumber penyakit.
                   </label>
                 </div>
                 <hr>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check2">
-                  <label class="form-check-label" for="defaultCheck1">
+                  <input class="form-check-input check-item" type="checkbox" value="" id="Check2">
+                  <label class="form-check-label" for="Check2">
                     Bergizi, mengandung karbohirat, lemak, protein, mineral dan vitamin yang cukup.
                   </label>
                 </div>
                 <hr>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check3">
-                  <label class="form-check-label" for="defaultCheck1">
+                  <input class="form-check-input check-item" type="checkbox" value="" id="Check3">
+                  <label class="form-check-label" for="Check3">
                     Berkecukupan, memenuhi kebutuhan tubuh di usia dan kondisi tertentu.
                   </label>
                 </div>
                 <hr>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check4">
-                  <label class="form-check-label" for="defaultCheck1">
+                  <input class="form-check-input check-item" type="checkbox" value="" id="Check4">
+                  <label class="form-check-label" for="Check4">
                     Mudah dicerna
                   </label>
                 </div>
                 <hr>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Check5">
-                  <label class="form-check-label" for="defaultCheck1">
+                  <input class="form-check-input check-item" type="checkbox" value="" id="Check5">
+                  <label class="form-check-label" for="Check5">
                     Tidak mengandung bahan pengawet atau pewarna buatan.
                   </label>
                 </div>
                 <hr>
+                <div class="form-check">
+                  <input class="form-check-input check-item" type="checkbox" value="" id="Check6">
+                  <label class="form-check-label" for="Check6">
+                    Bersedia bertanggung jawab jika makanan yang didaftarkan tidak sesuai dengan kriteria yang disebutkan diatas
+                  </label>
+                </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#modalTambah" data-bs-toggle="modal">Selanjutnya</button>
+              <button type="button" class="btn btn-danger" data-bs-target="#modalTambah" data-bs-toggle="modal" >Back</button>
+              <button class="btn btn-primary" id="tambahData">Save changes</button>
             </div>
           </div>
         </div>
@@ -186,7 +193,7 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="tambahData">Save changes</button>
+              <button type="button" class="btn btn-primary" data-bs-target="#modalPersetujuan" data-bs-toggle="modal">Save changes</button>
             </div>
           </div>
         </div>
@@ -300,24 +307,37 @@
       
       // Tambah Data Ke DataBase
       document.getElementById('tambahData').addEventListener('click', async function(){
-        // Mendapatkan nilai dari setiap input
+
+      // Mengambil semua checkbox dengan kelas check-item
+      const checkboxes = document.getElementsByClassName('check-item');
+      let isChecked = false;
+
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          isChecked = true;
+          break;
+        }
+      }
+
+      // Mendapatkan nilai dari setiap input
       const namaKatalis = document.getElementById('namaKatalis').value;
-      const stok = document.getElementById('stok').value;
       const komposisi = document.getElementById('komposisi').value;
+      const stok = document.getElementById('stok').value;
       const hargaPerPorsi = document.getElementById('hargaPerPorsi').value;
       const kadaluarsa = document.getElementById('kadaluarsa').value;
       const file = document.getElementById('katalisImageLink').files[0];
-        // Mengubah Tipe Data 
-        let hargaPerPorsiChecer;
-        if (isNaN(parseInt(document.getElementById('hargaPerPorsi').value))) hargaPerPorsiChecer = 0;
-        else hargaPerPorsiChecer = parseInt(document.getElementById('hargaPerPorsi').value);
-        let stokChecer;
-        if (isNaN(parseInt(document.getElementById('stok').value))) stokChecer = 0;
-        else stokChecer = parseInt(document.getElementById('stok').value);
+
+      // Mengubah Tipe Data 
+      let hargaPerPorsiChecer;
+      if (isNaN(parseInt(hargaPerPorsi))) hargaPerPorsiChecer = 0;
+      else hargaPerPorsiChecer = parseInt(hargaPerPorsi);
+      let stokChecer;
+      if (isNaN(parseInt(stok))) stokChecer = 0;
+      else stokChecer = parseInt(stok);  
         
-        var idHotel = getCookie('user_uid');
+      var idHotel = getCookie('user_uid');
     
-        if (file) {
+        if (file && isChecked) {
           try {
             const imgUrl = await uploadImage(file); // tunggu sampai gambar diunggah
             await db.collection('Katalis').add({
@@ -326,26 +346,22 @@
               namaKatalis: namaKatalis,
               stok: stokChecer,
               statusKatalis:"MENUNGGU",
-              komposisi: document.getElementById('komposisi').value,
+              komposisi: komposisi,
               hargaPerPorsi: hargaPerPorsiChecer,
-              kadaluarsa: firebase.firestore.Timestamp.fromDate(new Date(document.getElementById('kadaluarsa').value))
+              kadaluarsa: firebase.firestore.Timestamp.fromDate(new Date(kadaluarsa))
             });
               console.log("Data added successfully");
-              // Clear input values
               document.getElementById('katalisImageLink').value = '';
               document.getElementById('namaKatalis').value = '';
               document.getElementById('stok').value = '';
               document.getElementById('komposisi').value = '';
               document.getElementById('hargaPerPorsi').value = '';
               document.getElementById('kadaluarsa').value = '';
-              // Hide modal after successful addition
-              var modal = document.getElementById('modalTambah');
+              var modal = document.getElementById('modalPersetujuan');
               var modalInstance = bootstrap.Modal.getInstance(modal);
               modalInstance.hide();
           } catch (error) {
             console.error("Error adding document: ", error);
-            // Jika ada checkbox yang belum dicentang, tampilkan pesan kesalahan
-            alert("M.");
           }
         } else {
           alert("Anda harus Mengisi Semua Form.");
@@ -374,7 +390,7 @@
               stok: stok_updateChecker,
               komposisi: document.getElementById('komposisi_update').value,
               hargaPerPorsi: hargaPerPorsi_updateChecker,
-              kadaluarsa: document.getElementById('kadaluarsa_update').value
+              kadaluarsa: firebase.firestore.Timestamp.fromDate(new Date(document.getElementById('kadaluarsa_update').value))
             }).then(() => {
               console.log("Document successfully updated!");
               var modal = document.getElementById('modalUpdate');
@@ -420,13 +436,21 @@
         if (e.target.classList.contains('editData')) {
           db.collection("Katalis").doc(id).get().then(async (doc) => {
             if (doc.exists) {
+              
+              // Assuming doc.data().kadaluarsa is a Firestore Timestamp
+              const timestamp = doc.data().kadaluarsa;
+              const date = timestamp.toDate();
+
+              // Format the date as yyyy-MM-ddThh:mm:ss
+              const formattedDate = date.toISOString().slice(0, 16);
+
               console.log(doc.data());
               document.getElementById('id').value = doc.id;
               document.getElementById('namaKatalis_update').value = doc.data().namaKatalis;
               document.getElementById('stok_update').value = doc.data().stok;
               document.getElementById('komposisi_update').value = doc.data().komposisi;
               document.getElementById('hargaPerPorsi_update').value = doc.data().hargaPerPorsi;
-              document.getElementById('kadaluarsa_update').value = doc.data().kadaluarsa;
+              document.getElementById('kadaluarsa_update').value = formattedDate;
               // Set the src attribute for the image preview element in the edit modal
               const imageUrl = await firebase.storage().ref(`Hotel_${idHotel}/${doc.data().img}`).getDownloadURL();
               document.getElementById('previewImage_update').setAttribute('src', imageUrl);
